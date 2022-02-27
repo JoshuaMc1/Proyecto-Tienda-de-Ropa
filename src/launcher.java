@@ -2,11 +2,11 @@
 import Modulos.login;
 
 
-public class main {
+public class launcher {
 
 
     public static void main(String[] args) {
-        new Modulos.login();
+        new login().setVisible(true);
     }
     
 }
