@@ -2,7 +2,7 @@
 Proyecto de Ingenieria de Software II, aplicación de escritorio desarrollada con Java y IDE Netbeans.
 
 * Lista de deberes
-+ [ ] Crear login de la aplicación {Joshua}
++ [X] Crear login de la aplicación {Joshua}
 + [ ] Crear menu principal de la aplicación {Carlos}
 + [ ] Crear interfaz grafica del modulo de ventas {Yosary}
 + [ ] Crear interfez grafica del modulo de inventario {Joshua}
