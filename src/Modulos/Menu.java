@@ -1,6 +1,9 @@
 package Modulos;
 
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JButton;
 
 public class Menu extends javax.swing.JFrame {
@@ -8,7 +11,12 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         setLocationRelativeTo(null);
-        //lblRol.setVisible(false);
+        //Contenedor.setSize(Contenedor.getMaximumSize());
+        /*Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+        System.out.println("w: " + width + " h: " + height);
+        this.setSize((int)width, (int)height);*/
     }
 
     @SuppressWarnings("unchecked")
@@ -28,12 +36,25 @@ public class Menu extends javax.swing.JFrame {
         btnSale = new javax.swing.JButton();
         btnInv = new javax.swing.JButton();
         PPrincipal = new javax.swing.JPanel();
+        pnlUser = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        pnlRepo = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        pnlVentas = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        pnlInv = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        pnlCompras = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1300, 720));
+        setMinimumSize(new java.awt.Dimension(1200, 700));
+        setPreferredSize(new java.awt.Dimension(1200, 700));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(143, 6, 22));
         jPanel1.setName("PP"); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(1200, 700));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Contenedor.setBackground(new java.awt.Color(75, 69, 255));
@@ -46,7 +67,7 @@ public class Menu extends javax.swing.JFrame {
         lblRol.setText("Administrador");
         lblRol.setFocusable(false);
         lblRol.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Contenedor.add(lblRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 160, -1));
+        Contenedor.add(lblRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 160, -1));
 
         jPanel4.setBackground(new java.awt.Color(29, 110, 186));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,7 +86,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("V0.1");
-        Contenedor.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 630, -1, -1));
+        Contenedor.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 620, -1, -1));
 
         btnBuy.setBackground(new java.awt.Color(255, 255, 255));
         btnBuy.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
@@ -78,6 +99,11 @@ public class Menu extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnBuyMouseExited(evt);
+            }
+        });
+        btnBuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuyActionPerformed(evt);
             }
         });
         Contenedor.add(btnBuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 220, 50));
@@ -95,6 +121,11 @@ public class Menu extends javax.swing.JFrame {
                 btnUserMouseExited(evt);
             }
         });
+        btnUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserActionPerformed(evt);
+            }
+        });
         Contenedor.add(btnUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 220, 50));
 
         btnRepo.setBackground(new java.awt.Color(255, 255, 255));
@@ -108,6 +139,11 @@ public class Menu extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnRepoMouseExited(evt);
+            }
+        });
+        btnRepo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRepoActionPerformed(evt);
             }
         });
         Contenedor.add(btnRepo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 220, 50));
@@ -125,6 +161,11 @@ public class Menu extends javax.swing.JFrame {
                 btnSaleMouseExited(evt);
             }
         });
+        btnSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaleActionPerformed(evt);
+            }
+        });
         Contenedor.add(btnSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 220, 50));
 
         btnInv.setBackground(new java.awt.Color(255, 255, 255));
@@ -140,27 +181,132 @@ public class Menu extends javax.swing.JFrame {
                 btnInvMouseExited(evt);
             }
         });
+        btnInv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInvActionPerformed(evt);
+            }
+        });
         Contenedor.add(btnInv, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 220, 50));
 
-        jPanel1.add(Contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 240, -1));
+        jPanel1.add(Contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 240, 640));
 
         PPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         PPrincipal.setName(""); // NOI18N
+        PPrincipal.setPreferredSize(new java.awt.Dimension(900, 660));
         PPrincipal.setLayout(new java.awt.CardLayout());
-        jPanel1.add(PPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 1020, 660));
+
+        jLabel2.setText("jLabel2");
+
+        javax.swing.GroupLayout pnlUserLayout = new javax.swing.GroupLayout(pnlUser);
+        pnlUser.setLayout(pnlUserLayout);
+        pnlUserLayout.setHorizontalGroup(
+            pnlUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlUserLayout.createSequentialGroup()
+                .addContainerGap(558, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(333, 333, 333))
+        );
+        pnlUserLayout.setVerticalGroup(
+            pnlUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlUserLayout.createSequentialGroup()
+                .addGap(192, 192, 192)
+                .addComponent(jLabel2)
+                .addContainerGap(434, Short.MAX_VALUE))
+        );
+
+        PPrincipal.add(pnlUser, "crdUser");
+
+        jLabel3.setText("report");
+
+        javax.swing.GroupLayout pnlRepoLayout = new javax.swing.GroupLayout(pnlRepo);
+        pnlRepo.setLayout(pnlRepoLayout);
+        pnlRepoLayout.setHorizontalGroup(
+            pnlRepoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRepoLayout.createSequentialGroup()
+                .addGap(488, 488, 488)
+                .addComponent(jLabel3)
+                .addContainerGap(407, Short.MAX_VALUE))
+        );
+        pnlRepoLayout.setVerticalGroup(
+            pnlRepoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRepoLayout.createSequentialGroup()
+                .addGap(232, 232, 232)
+                .addComponent(jLabel3)
+                .addContainerGap(394, Short.MAX_VALUE))
+        );
+
+        PPrincipal.add(pnlRepo, "crdRepo");
+
+        jLabel4.setText("sales");
+
+        javax.swing.GroupLayout pnlVentasLayout = new javax.swing.GroupLayout(pnlVentas);
+        pnlVentas.setLayout(pnlVentasLayout);
+        pnlVentasLayout.setHorizontalGroup(
+            pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVentasLayout.createSequentialGroup()
+                .addContainerGap(546, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(355, 355, 355))
+        );
+        pnlVentasLayout.setVerticalGroup(
+            pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlVentasLayout.createSequentialGroup()
+                .addGap(247, 247, 247)
+                .addComponent(jLabel4)
+                .addContainerGap(379, Short.MAX_VALUE))
+        );
+
+        PPrincipal.add(pnlVentas, "crdVentas");
+
+        pnlInv.setPreferredSize(new java.awt.Dimension(1020, 600));
+
+        jLabel5.setText("inv");
+
+        javax.swing.GroupLayout pnlInvLayout = new javax.swing.GroupLayout(pnlInv);
+        pnlInv.setLayout(pnlInvLayout);
+        pnlInvLayout.setHorizontalGroup(
+            pnlInvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInvLayout.createSequentialGroup()
+                .addContainerGap(521, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(390, 390, 390))
+        );
+        pnlInvLayout.setVerticalGroup(
+            pnlInvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInvLayout.createSequentialGroup()
+                .addGap(231, 231, 231)
+                .addComponent(jLabel5)
+                .addContainerGap(395, Short.MAX_VALUE))
+        );
+
+        PPrincipal.add(pnlInv, "crdInv");
+
+        jLabel6.setText("buy");
+
+        javax.swing.GroupLayout pnlComprasLayout = new javax.swing.GroupLayout(pnlCompras);
+        pnlCompras.setLayout(pnlComprasLayout);
+        pnlComprasLayout.setHorizontalGroup(
+            pnlComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlComprasLayout.createSequentialGroup()
+                .addGap(432, 432, 432)
+                .addComponent(jLabel6)
+                .addContainerGap(475, Short.MAX_VALUE))
+        );
+        pnlComprasLayout.setVerticalGroup(
+            pnlComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlComprasLayout.createSequentialGroup()
+                .addGap(270, 270, 270)
+                .addComponent(jLabel6)
+                .addContainerGap(356, Short.MAX_VALUE))
+        );
+
+        PPrincipal.add(pnlCompras, "crdComp");
+
+        jPanel1.add(PPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 925, 640));
         PPrincipal.getAccessibleContext().setAccessibleName("");
         PPrincipal.getAccessibleContext().setAccessibleDescription("");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -170,16 +316,17 @@ public class Menu extends javax.swing.JFrame {
         btn.setForeground(new Color(r2, g2, b2));
     }
     
+    private void newCard(String _card){
+        CardLayout card = (CardLayout)PPrincipal.getLayout();
+        card.show(PPrincipal, _card);
+    }
+    
     private void btnUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseEntered
         Hover(btnUser, 75, 112, 243, 255, 255, 255);
-        /*btnUser.setBackground(new Color(75,112,243));
-        btnUser.setForeground(Color.white);*/
     }//GEN-LAST:event_btnUserMouseEntered
 
     private void btnUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUserMouseExited
         Hover(btnUser, 255, 255, 255, 75, 69, 255);
-        /*btnUser.setBackground(Color.white);
-        btnUser.setForeground(new Color(75,69,255));*/
     }//GEN-LAST:event_btnUserMouseExited
 
     private void btnSaleMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaleMouseEntered
@@ -214,6 +361,26 @@ public class Menu extends javax.swing.JFrame {
         Hover(btnRepo, 255, 255, 255, 75, 69, 255);
     }//GEN-LAST:event_btnRepoMouseExited
 
+    private void btnUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserActionPerformed
+        newCard("crdUser");
+    }//GEN-LAST:event_btnUserActionPerformed
+
+    private void btnSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaleActionPerformed
+        newCard("crdVentas");
+    }//GEN-LAST:event_btnSaleActionPerformed
+
+    private void btnBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuyActionPerformed
+        newCard("crdComp");
+    }//GEN-LAST:event_btnBuyActionPerformed
+
+    private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvActionPerformed
+        newCard("crdInv");
+    }//GEN-LAST:event_btnInvActionPerformed
+
+    private void btnRepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepoActionPerformed
+        newCard("crdRepo");
+    }//GEN-LAST:event_btnRepoActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -231,10 +398,20 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnSale;
     private javax.swing.JButton btnUser;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblUser;
     private javax.swing.JLabel lblUserImg;
+    private javax.swing.JPanel pnlCompras;
+    private javax.swing.JPanel pnlInv;
+    private javax.swing.JPanel pnlRepo;
+    private javax.swing.JPanel pnlUser;
+    private javax.swing.JPanel pnlVentas;
     // End of variables declaration//GEN-END:variables
 }
