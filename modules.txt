@@ -1,0 +1,5 @@
+usuario
+reporte
+ventas
+inventario
+compra
