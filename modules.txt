@@ -3,3 +3,17 @@ reporte
 ventas
 inventario
 compra
+
+anchura pp = 1190
+anchura pt = 925
+anchura ci = 240
+
+resto pp - ct = 265/2 = 132.5 pixeles por lado
+resto pp - ci = 950/2 = 475 pixeles por lado
+
+
+altura ambos = 20 pixeles
+anchura tarjeta = 
+
+/**area = a * b
+areaP = 660 * 1190 = 785400**/
