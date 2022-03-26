@@ -1,0 +1,9 @@
+.btnIS{
+    -fx-background-color: white;
+}
+
+.txtLog{
+    -fx-border-style: solid solid none solid;
+    -fx-border-width: 5px;
+    -fx-border-color: white;
+}

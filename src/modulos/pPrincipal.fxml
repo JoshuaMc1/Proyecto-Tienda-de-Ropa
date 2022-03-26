@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modulos.PPrincipalController">
+   <center>
+      <Pane prefHeight="660.0" prefWidth="1200.0" styleClass="bg" stylesheets="@pprincipal.css" BorderPane.alignment="CENTER">
+         <children>
+            <Pane layoutX="14.0" layoutY="10.0" prefHeight="640.0" prefWidth="240.0" styleClass="Cont" stylesheets="@pprincipal.css">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="240.0" styleClass="usimg" stylesheets="@pprincipal.css">
+                     <children>
+                        <Label layoutX="64.0" layoutY="170.0" text="Juanito Alcachofas" textFill="WHITE">
+                           <font>
+                              <Font name="Times New Roman Bold Italic" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblUsImg" accessibleRole="IMAGE_VIEW" layoutX="65.0" layoutY="45.0" prefHeight="110.0" prefWidth="110.0">
+                           <graphic>
+                              <ImageView fitHeight="110.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imagenes/man.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Button fx:id="btnUsu" layoutX="10.0" layoutY="207.0" mnemonicParsing="false" onAction="#uPane" onMouseEntered="#mouseU" onMouseExited="#mouseUe" prefHeight="50.0" prefWidth="220.0" styleClass="btn" stylesheets="@pprincipal.css" text="Usuarios" textFill="#4b45ff">
+                     <font>
+                        <Font name="Times New Roman Bold Italic" size="14.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Modulo para gestionar los  Usuarios" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnVentas" layoutX="10.0" layoutY="270.0" mnemonicParsing="false" onAction="#vePane" onMouseEntered="#mouseV" onMouseExited="#mouseVe" prefHeight="50.0" prefWidth="220.0" styleClass="btn" stylesheets="@pprincipal.css" text="Ventas" textFill="#4b45ff">
+                     <font>
+                        <Font name="Times New Roman Bold Italic" size="14.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Modulo para realizar ventas" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnCompra" layoutX="10.0" layoutY="330.0" mnemonicParsing="false" onAction="#coPane" onMouseEntered="#mouseC" onMouseExited="#mouseCe" prefHeight="50.0" prefWidth="220.0" styleClass="btn" stylesheets="@pprincipal.css" text="Compras" textFill="#4b45ff">
+                     <font>
+                        <Font name="Times New Roman Bold Italic" size="14.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="modulo para registrar compras de producto" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnInv" layoutX="10.0" layoutY="388.0" mnemonicParsing="false" onAction="#inPane" onMouseEntered="#mouseI" onMouseExited="#mouseIe" prefHeight="50.0" prefWidth="220.0" styleClass="btn" stylesheets="@pprincipal.css" text="Inventario" textFill="#4b45ff">
+                     <font>
+                        <Font name="Times New Roman Bold Italic" size="14.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="modulo para gestionar el inventario" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnRepo" layoutX="10.0" layoutY="448.0" mnemonicParsing="false" onAction="#rePane" onMouseEntered="#mouseR" onMouseExited="#mouseRe" prefHeight="50.0" prefWidth="220.0" styleClass="btn" stylesheets="@pprincipal.css" text="Reportes" textFill="#4b45ff">
+                     <font>
+                        <Font name="Times New Roman Bold Italic" size="14.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="modulo para generar reportes" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnMM" contentDisplay="CENTER" layoutX="14.0" layoutY="543.0" mnemonicParsing="false" onAction="#maPane" onMouseEntered="#mouseP" onMouseExited="#mousePe" prefHeight="64.0" prefWidth="64.0" styleClass="btn" stylesheets="@pprincipal.css">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" x="64.0" y="64.0">
+                           <viewport>
+                              <Rectangle2D height="64.0" width="64.0" />
+                           </viewport>
+                           <image>
+                              <Image url="@../imagenes/inicio.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Ir a pantalla de inicio" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnCUsu" layoutX="88.0" layoutY="543.0" mnemonicParsing="false" onAction="#chUsu" onMouseEntered="#mouseCU" onMouseExited="#mouseCUe" prefHeight="64.0" prefWidth="64.0" styleClass="btn" stylesheets="@pprincipal.css">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/cambio.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Cambiar Usuario" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnSalir" layoutX="162.0" layoutY="543.0" mnemonicParsing="false" onAction="#exBtn" onMouseEntered="#mouseS" onMouseExited="#mouseSe" prefHeight="64.0" prefWidth="64.0" styleClass="btn" stylesheets="@pprincipal.css">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/exit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Salir" />
+                     </tooltip>
+                  </Button>
+                  <Label layoutX="5.0" layoutY="622.0" text="Administrador" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman Bold Italic" size="14.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Rol del Usuario" />
+                     </tooltip>
+                  </Label>
+                  <Label layoutX="206.0" layoutY="621.0" text="V 0.2" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman Bold Italic" size="14.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Version del sistema" />
+                     </tooltip>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="borderTop" layoutX="254.0" layoutY="10.0" prefHeight="20.0" prefWidth="925.0" styleClass="borderTop" stylesheets="@pprincipal.css">
+               <children>
+                  <Label layoutX="693.0" layoutY="1.0" text="Hora:" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="734.0" layoutY="1.0" prefHeight="17.0" prefWidth="102.0" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <StackPane fx:id="paneCont" layoutX="254.0" layoutY="30.0" prefHeight="620.0" prefWidth="925.0" styleClass="wrkSpace" stylesheets="@pprincipal.css">
+               <children>
+                  <Pane fx:id="prPane" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="387.0" layoutY="76.0" text="Principal" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="usPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <Label layoutX="324.0" layoutY="111.0" text="Uusarios" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="saPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <Label layoutX="280.0" layoutY="106.0" text="Ventas" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="buPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <Label layoutX="338.0" layoutY="93.0" text="Compras" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="invPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <Label layoutX="308.0" layoutY="77.0" text="Inventario" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="repPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+                     <children>
+                        <Label layoutX="307.0" layoutY="80.0" text="Reportes" />
+                     </children>
+                  </Pane>
+               </children>
+            </StackPane>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

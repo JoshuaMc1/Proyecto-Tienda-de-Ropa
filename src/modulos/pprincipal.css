@@ -1,0 +1,29 @@
+/* 
+    Created on : 03-22-2022, 05:31:02 PM
+    Author     : carlo
+*/
+
+.bg{
+    -fx-background-color: rgb(143,6,22);
+}
+
+.Cont{
+    -fx-background-color: rgb(75,69,255);
+}   
+
+.usimg{
+    -fx-background-color: rgb(29,110,186);
+}
+
+.btn{
+    -fx-background-color: rgb(255,255,255);
+}
+
+.borderTop{
+    -fx-background-color: rgb(29,110,186);
+}
+
+.wrkSpace{
+    -fx-background-color: rgb(255,255,255);
+}
+
