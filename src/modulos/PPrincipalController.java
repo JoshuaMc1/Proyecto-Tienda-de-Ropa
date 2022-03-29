@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javax.swing.JOptionPane;
@@ -26,6 +27,16 @@ public class PPrincipalController implements Initializable {
     private StackPane paneCont;
     @FXML
     private Button btnUsu, btnVentas, btnCompra, btnInv, btnRepo, btnMM, btnCUsu, btnSalir;
+    @FXML
+    private Button btnUF, btnSU, btnMU, btnDU, btnCU;
+    @FXML
+    private ComboBox cmbPriv;
+    
+    private void fillCBox(){
+        cmbPriv.getItems().removeAll(cmbPriv.getItems());
+        cmbPriv.getItems().addAll("Seleccione una opcion","Ventas","Inventario");
+        cmbPriv.getSelectionModel().select("Seleccione una opcion");
+    }
     
     @FXML
     private void maPane(javafx.event.ActionEvent evt){
@@ -69,6 +80,31 @@ public class PPrincipalController implements Initializable {
             //state = 1;
             System.exit(0);
         }
+    }
+    
+    @FXML
+    private void opFoto(javafx.event.ActionEvent evt){
+        fun.Msg("Work in progress");
+    }
+    
+    @FXML
+    private void saveU(javafx.event.ActionEvent evt){
+        fun.Msg("Work in progress");
+    }
+    
+    @FXML
+    private void modU(javafx.event.Event evt){
+        fun.Msg("Work in progress");
+    }
+    
+    @FXML
+    private void cleanU(javafx.event.Event evt){
+        fun.Msg("Work in progress");
+    }
+    
+    @FXML
+    private void delU(javafx.event.Event evt){
+        fun.Msg("Work in progress");
     }
     
     @FXML
@@ -151,9 +187,60 @@ public class PPrincipalController implements Initializable {
         fun.Hover(btnSalir, 255, 255, 255, 75, 69, 255);
     }
     
+    @FXML
+    private void afMoEn(javafx.event.Event evt){
+        fun.Hover(btnUF, 143,6,22, 255, 255, 255);
+    }
+    
+    @FXML
+    private void afMoEx(javafx.event.Event evt){
+        fun.Hover(btnUF, 255, 255, 255, 75, 69, 255);
+    }
+    
+    
+    @FXML
+    private void saveUMEn(javafx.event.Event evt){
+        fun.Hover(btnSU, 143,6,22, 255, 255, 255);
+    }
+    
+    @FXML
+    private void saveUMex(javafx.event.Event evt){
+        fun.Hover(btnSU, 255, 255, 255, 75, 69, 255);
+    }
+    
+    @FXML
+    private void modUMen(javafx.event.Event evt){
+        fun.Hover(btnMU, 143,6,22, 255, 255, 255);
+    }
+    
+    @FXML
+    private void modUMex(javafx.event.Event evt){
+        fun.Hover(btnMU, 255, 255, 255, 75, 69, 255);
+    }
+    
+    @FXML
+    private void cleUMen(javafx.event.Event evt){
+        fun.Hover(btnCU, 143,6,22, 255, 255, 255);
+    }
+    
+    @FXML
+    private void cleUMex(javafx.event.Event evt){
+        fun.Hover(btnCU, 255, 255, 255, 75, 69, 255);
+    }
+    
+    @FXML
+    private void delUMen(javafx.event.Event evt){
+        fun.Hover(btnDU, 143,6,22, 255, 255, 255);
+    }
+    
+    @FXML
+    private void delUMex(javafx.event.Event evt){
+        fun.Hover(btnDU, 255, 255, 255, 75, 69, 255);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        fillCBox();
     }    
     
 }

@@ -27,3 +27,21 @@
     -fx-background-color: rgb(255,255,255);
 }
 
+.subBg{
+    -fx-background-color: rgb(75,69,255);
+}
+
+.userFoto{
+    -fx-border-color: white;
+    -fx-border-style: solid;
+}
+
+.cBox{
+    -fx-background: white;
+    -fx-background-color: white;
+    -fx-text-fill: rgb(75,69,255);
+}
+
+.text{
+    -fx-text-fill: rgb(75,69,255);
+}
