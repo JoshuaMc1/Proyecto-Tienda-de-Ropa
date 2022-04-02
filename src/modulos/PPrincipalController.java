@@ -254,12 +254,12 @@ public class PPrincipalController implements Initializable {
     
     @FXML
     private void txtNomkpr(KeyEvent evt){
-        fun.validaTexto(txtName, 10);
+        fun.validaTexto(txtName);
     }
     
     @FXML
     private void txtApelkpr(KeyEvent evt){
-        fun.validaTexto(txtApel, 10);
+        fun.validaTexto(txtApel);
     }
     
     @FXML
