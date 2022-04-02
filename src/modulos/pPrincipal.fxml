@@ -152,18 +152,18 @@
             </Pane>
             <StackPane fx:id="paneCont" layoutX="254.0" layoutY="30.0" prefHeight="620.0" prefWidth="925.0" styleClass="wrkSpace" stylesheets="@pprincipal.css">
                <children>
-                  <Pane fx:id="prPane" prefHeight="200.0" prefWidth="200.0">
+                  <Pane fx:id="prPane" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
                         <Label layoutX="387.0" layoutY="76.0" text="Principal" />
                      </children>
                   </Pane>
-                  <Pane fx:id="usPane" prefHeight="200.0" prefWidth="200.0" stylesheets="@pprincipal.css" visible="false">
+                  <Pane fx:id="usPane" prefHeight="200.0" prefWidth="200.0" stylesheets="@pprincipal.css">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" prefHeight="28.0" prefWidth="925.0" text="Gestion de Uusarios" textAlignment="CENTER" textFill="#4b45ff">
                            <font>
                               <Font name="Times New Roman" size="24.0" />
                            </font></Label>
-                        <Pane layoutX="20.0" layoutY="55.0" prefHeight="330.0" prefWidth="531.0" styleClass="subBg">
+                        <Pane fx:id="pnlDaP" layoutX="20.0" layoutY="55.0" prefHeight="330.0" prefWidth="531.0" styleClass="subBg">
                            <children>
                               <Label layoutX="193.0" layoutY="7.0" text="Datos Personales" textFill="WHITE">
                                  <font>
@@ -215,19 +215,19 @@
                                     <Font name="Times New Roman Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="txtDni" layoutX="254.0" layoutY="46.0" prefHeight="25.0" prefWidth="250.0" styleClass="text" stylesheets="@pprincipal.css">
+                              <TextField fx:id="txtDni" layoutX="254.0" layoutY="46.0" onKeyPressed="#txtDnikpr" prefHeight="25.0" prefWidth="250.0" styleClass="text" stylesheets="@pprincipal.css">
                                  <font>
                                     <Font name="Times New Roman Bold" size="14.0" />
                                  </font></TextField>
-                              <TextField fx:id="txtName" layoutX="254.0" layoutY="87.0" prefHeight="25.0" prefWidth="250.0" styleClass="text" stylesheets="@pprincipal.css">
+                              <TextField fx:id="txtName" layoutX="254.0" layoutY="87.0" onKeyPressed="#txtNomkpr" prefHeight="25.0" prefWidth="250.0" styleClass="text" stylesheets="@pprincipal.css">
                                  <font>
                                     <Font name="Times New Roman Bold" size="14.0" />
                                  </font></TextField>
-                              <TextField fx:id="txtApel" layoutX="254.0" layoutY="123.0" prefHeight="25.0" prefWidth="250.0" styleClass="text" stylesheets="@pprincipal.css">
+                              <TextField fx:id="txtApel" layoutX="254.0" layoutY="123.0" onKeyPressed="#txtApelkpr" prefHeight="25.0" prefWidth="250.0" styleClass="text" stylesheets="@pprincipal.css">
                                  <font>
                                     <Font name="Times New Roman Bold" size="14.0" />
                                  </font></TextField>
-                              <TextField fx:id="txtTel" layoutX="254.0" layoutY="162.0" prefHeight="25.0" prefWidth="250.0" styleClass="text" stylesheets="@pprincipal.css">
+                              <TextField fx:id="txtTel" layoutX="254.0" layoutY="162.0" onKeyPressed="#txtTelkpr" prefHeight="25.0" prefWidth="250.0" styleClass="text" stylesheets="@pprincipal.css">
                                  <font>
                                     <Font name="Times New Roman Bold" size="14.0" />
                                  </font></TextField>
@@ -245,7 +245,7 @@
                                  </font></TextField>
                            </children>
                         </Pane>
-                        <Pane layoutX="556.0" layoutY="55.0" prefHeight="200.0" prefWidth="355.0" styleClass="subBg">
+                        <Pane fx:id="pnlDU" layoutX="556.0" layoutY="55.0" prefHeight="200.0" prefWidth="355.0" styleClass="subBg">
                            <children>
                               <Label layoutX="105.0" layoutY="14.0" text="Datos de Usuario" textFill="WHITE">
                                  <font>
@@ -305,8 +305,9 @@
                            <children>
                               <TableView layoutX="10.0" layoutY="9.0" prefHeight="183.0" prefWidth="872.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
+                                  <TableColumn prefWidth="242.0" text="ID" />
+                                  <TableColumn prefWidth="340.0" text="Usuario" />
+                                    <TableColumn minWidth="0.0" prefWidth="289.0" text="Rol" />
                                 </columns>
                               </TableView>
                            </children>

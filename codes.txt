@@ -1,0 +1,99 @@
+private String formatNumber(String numbers) {
+        numbers = numbers.replaceAll("[^\\d]", "");
+        numbers = numbers.substring(0, Math.min(10, numbers.length()));
+        if (numbers.length() == 0) {
+            return "";
+        }
+        if (numbers.length() < 4) {
+            return "(" + numbers;
+        }
+        if (numbers.length() < 7) {
+            return numbers.replaceFirst("(\\d{3})(\\d+)", "($1)$2");
+        }
+        return numbers.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1)$2-$3");
+    }private String formatNumber(String numbers) { //metodo para darle formato a la caja de texto de telefono
+        numbers = numbers.replaceAll("[^\\d]", ""); //Reemplaza cualquier valor que no sea un numero por un espacio en blanco
+        numbers = numbers.substring(0, Math.min(8, numbers.length())); //Esto controla la cantidad de numeros que se pueden ingresar
+        if (numbers.length() == 0) return "";
+        
+        if(numbers.length() < 5) return numbers + "-";
+        
+        return numbers.replaceFirst("(\\d{4})(\\d+)", "$1-$2");
+        //si no hay coincidencias con los if statement
+        //(\\d{4}) = valores que sean digitos y esten agrupados en un grupo de 4
+        //(\\d+) = valores que sean digitos y se signa tecleando
+        //$1 = el primer grupo definido dentro de los parentesis
+        //- = el separador
+        //$2 = el segundo grupo definido dentro de parentesis
+    }
+
+/*public TextFormatter.Change apply(TextFormatter.Change change) {
+        if (change.isContentChange()) {
+            handleBackspaceOverSpecialCharacter(change);
+            if (change.getText().matches("[0-9]*")) {
+                int originalNewTextLength = change.getControlNewText().length();
+                change.setText(formatNumber(change.getControlNewText()));
+                change.setRange(0, change.getControlText().length());
+                int caretOffset = change.getControlNewText().length() - originalNewTextLength;
+                change.setCaretPosition(change.getCaretPosition() + caretOffset);
+                change.setAnchor(change.getAnchor() + caretOffset);
+                return change;
+            } else {
+                return null;
+            }
+        }
+        return change;
+    }*/	
+//metodo para verificar que solo se ingresen numeros y ciertos digitos
+    public void keyPressed(KeyEvent e, int type){ // metodo para verificar que solo se ingresen numeros
+        KeyCode key = e.getCode(); // se almacena el valor tecleado
+        /*if(key.equals(KeyCode.DIGIT0) || key.equals(KeyCode.DIGIT1) || key.equals(KeyCode.DIGIT2) || key.equals(KeyCode.DIGIT3) || key.equals(KeyCode.DIGIT4) || key.equals(KeyCode.DIGIT5) || key.equals(KeyCode.DIGIT6) ||
+           key.equals(KeyCode.DIGIT7) || key.equals(KeyCode.DIGIT8) || key.equals(KeyCode.DIGIT9) || key.equals(KeyCode.BACK_SPACE) || key.equals(KeyCode.PERIOD) || key.equals(KeyCode.TAB) ||
+           key.equals(KeyCode.ENTER) || key.equals(KeyCode.MINUS) || key.equals(KeyCode.CONTROL) && type == 2){ // si el valor tecleado es igual a cualquier valor numerico
+            //if(type == 2) 
+            //e.consume();
+            JOptionPane.showMessageDialog(null, key.getName());
+        } else { // si no es igual a los valores de arriba
+            //JOptionPane.showMessageDialog(null,"Solo se permiten numeros en este campo");
+            if(type==1)e.consume(); // para que no se muestre el texto en la caja de texto
+        }*/
+    }
+
+public void prueba(TextField tf){
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            if(change.getCaretPosition() == 5) System.out.println("heck");
+        /*if (change.getControlNewText().startsWith("$")) {
+            return change ;
+        } else {
+            return null ;
+        }*/
+        return change;
+        };
+        TextFormatter<String> formatter = new TextFormatter<>(filter);
+        tf.setTextFormatter(formatter);
+    }
+
+public void addNumericValidation(TextField field) {
+    field.setTextFormatter(new TextFormatter<>(c -> {
+        if (!c.getControlNewText().matches("\\d*")) 
+            return null;
+        else
+            return c;
+        }
+        ));
+    }
+
+public void validaTexto(TextField tf, int longitud){ //Metodo para validar que solo se ingresen letras y espacios
+        UnaryOperator<TextFormatter.Change> filter = change ->{ 
+            String txt = change.getControlNewText();
+            txt = txt.substring(0, Math.min(longitud, txt.length()));
+            if (txt.matches("[a-zA-Z ]*")){ /*si el texto que se encuentra en la caja de texto es una letra o 
+                un espacio devuelve ese texto*/
+                change.setText(txt);
+                return change; 
+            }
+            return null; //si no no devuelve nada o sea no permite que se ingrese el valor tecleado
+        };
+        TextFormatter<String> formatter = new TextFormatter<>(filter);
+          tf.setTextFormatter(formatter);
+    }

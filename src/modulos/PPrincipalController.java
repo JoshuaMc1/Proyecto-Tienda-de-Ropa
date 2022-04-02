@@ -6,6 +6,7 @@
 package modulos;
 
 import clases.funciones;
+//import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.css.PseudoClass;
@@ -15,6 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javax.swing.JOptionPane;
 
@@ -26,11 +30,15 @@ public class PPrincipalController implements Initializable {
     @FXML
     private StackPane paneCont;
     @FXML
+    private Pane pnlDaP, pnlDU;
+    @FXML
     private Button btnUsu, btnVentas, btnCompra, btnInv, btnRepo, btnMM, btnCUsu, btnSalir;
     @FXML
     private Button btnUF, btnSU, btnMU, btnDU, btnCU;
     @FXML
     private ComboBox cmbPriv;
+    @FXML
+    private TextField txtDni, txtTel, txtName, txtApel;
     
     private void fillCBox(){
         cmbPriv.getItems().removeAll(cmbPriv.getItems());
@@ -99,7 +107,8 @@ public class PPrincipalController implements Initializable {
     
     @FXML
     private void cleanU(javafx.event.Event evt){
-        fun.Msg("Work in progress");
+        fun.Clean(pnlDaP);
+        fun.Clean(pnlDU);
     }
     
     @FXML
@@ -236,6 +245,26 @@ public class PPrincipalController implements Initializable {
     @FXML
     private void delUMex(javafx.event.Event evt){
         fun.Hover(btnDU, 255, 255, 255, 75, 69, 255);
+    }
+    
+    @FXML
+    private void txtDnikpr(KeyEvent evt){
+        fun.formatTD(txtDni,2);
+    }
+    
+    @FXML
+    private void txtNomkpr(KeyEvent evt){
+        fun.validaTexto(txtName, 10);
+    }
+    
+    @FXML
+    private void txtApelkpr(KeyEvent evt){
+        fun.validaTexto(txtApel, 10);
+    }
+    
+    @FXML
+    private void txtTelkpr(KeyEvent evt){
+        fun.formatTD(txtTel,1);
     }
     
     @Override

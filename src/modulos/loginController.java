@@ -58,18 +58,22 @@ public class loginController implements Initializable {
         stage.close();
     }
     
-    @FXML
-    private void iSesion(javafx.event.ActionEvent evt){
+    private void cargarPP(){
         try{
         Stage nStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("pPrincipal.fxml"));
         Scene scene = new Scene(root);
         nStage.setScene(scene);
         nStage.show();
-        logout();
-        }catch(Exception e){
+        }catch (Exception e){
             e.printStackTrace();
         }
+    }
+    
+    @FXML
+    private void iSesion(javafx.event.ActionEvent evt){
+        cargarPP();
+        logout();
     }
     
     @FXML
