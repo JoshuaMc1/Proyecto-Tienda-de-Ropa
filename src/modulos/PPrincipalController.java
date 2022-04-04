@@ -5,10 +5,12 @@
  */
 package modulos;
 
-import clases.funciones;
+import Clases.funciones;
 //import java.awt.event.KeyEvent;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,12 +23,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
-public class PPrincipalController implements Initializable {
+public class PPrincipalController implements Initializable, Runnable {
 
+    private Stage stage;
     private funciones fun = new funciones();
-    private String opc []={"Si", "No"};//
+    private String opc []={"Si", "No"}, hora="";
+    private Thread t1 = new Thread(this);
+    private boolean state=true;
     
     @FXML
     private StackPane paneCont;
@@ -42,10 +48,36 @@ public class PPrincipalController implements Initializable {
     private TextField txtDni, txtTel, txtName, txtApel;
     @FXML
     private ImageView lblFotoU;
+    @FXML
+    private Label lblHora;
+    
+    @Override
+    public void run() {
+        while(state != fun.getIsStopped()){
+            fun.setHour();
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    fillLblHour();
+                }
+            });
+            //System.out.println(hor + " : " + min + " : " + ap);   
+            try{
+            Thread.sleep(1000);
+        }catch(Exception e){}
+            fun.setSeg(fun.getSeg() + 1);
+        }
+    }
+    
+    private void fillLblHour(){
+        lblHora.setText("");
+        hora = " " + fun.getHor() + " : " + fun.getMin() + "  " + fun.getAp();
+        lblHora.setText("hora: " + hora);
+    }
     
     private void fillCBox(){
         cmbPriv.getItems().removeAll(cmbPriv.getItems());
-        cmbPriv.getItems().addAll("Seleccione una opcion","Ventas","Inventario");
+        cmbPriv.getItems().addAll("Seleccione una opcion","Administrador","Ventas","Inventario");
         cmbPriv.getSelectionModel().select("Seleccione una opcion");
     }
     
@@ -191,7 +223,7 @@ public class PPrincipalController implements Initializable {
     
     @FXML
     private void mouseS(javafx.event.Event evt){
-        fun.Hover(btnSalir, 75, 112, 243, 255, 255, 255);
+       fun.Hover(btnSalir, 75, 112, 243, 255, 255, 255);
     }
     
     @FXML
@@ -272,6 +304,7 @@ public class PPrincipalController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        t1.start();
         fillCBox();
     }    
     

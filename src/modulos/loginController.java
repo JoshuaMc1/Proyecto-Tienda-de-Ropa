@@ -6,7 +6,7 @@
 package modulos;
 
 //import java.awt.Image;
-import clases.funciones;
+import Clases.funciones;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
@@ -65,6 +65,11 @@ public class loginController implements Initializable {
         Scene scene = new Scene(root);
         nStage.setScene(scene);
         nStage.show();
+        
+        nStage.setOnCloseRequest(event -> {
+        fun.setIsStopped(true);
+        });
+        
         }catch (Exception e){
             e.printStackTrace();
         }

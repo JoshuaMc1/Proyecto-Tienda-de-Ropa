@@ -1,4 +1,4 @@
-package clases;
+package Clases;
 
 import Conexion.ConexionMySQL;
 import java.awt.Color;
@@ -11,6 +11,7 @@ import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.function.UnaryOperator;
 //import java.awt.event.KeyEvent;
 import javafx.scene.Node;
@@ -34,7 +35,30 @@ import javax.swing.table.DefaultTableModel;
 public class funciones {
     
     ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
-    private String bd = "supermercado"; //nombre de la bd
+    private String bd = "tienda_de_ropa"; //nombre de la bd
+    private static String ap=""; //variable que maneja el am y pm
+    private static boolean isStopped=false;
+    private Calendar cal = Calendar.getInstance();
+    private int seg = cal.get(cal.SECOND);
+    private int min = cal.get(cal.MINUTE);
+    private int hor = cal.get(cal.HOUR_OF_DAY);
+    
+    public void setHour(){
+        if(seg==60){
+                seg=0;
+                min++;
+            }
+            if(min==60){
+                min=0;
+                hor++;
+            }
+            if(hor==0) hor=12;
+            if(hor <= 12) ap = "am";
+            if(hor > 12){
+                ap = "pm";
+                hor = hor - 12;
+            }
+    }
     
     //metodo para navegar a traves de los paneles
     public void GroupController(StackPane skp, String paneName){ // El stackpane es un panel que agrupa todos los paneles del sistema
@@ -214,7 +238,7 @@ public class funciones {
     
     public void validaTexto(TextField tf){ //Metodo para validar que solo se ingresen letras y espacios
         UnaryOperator<TextFormatter.Change> filter = change ->{ 
-            if (change.getControlNewText().matches("[a-zA-Z ]*")){ /*si el texto que se encuentra en la caja de texto es una letra o 
+            if (change.getControlNewText().matches("[a-zA-Z ]*") && change.getControlNewText().length() <= 10){ /*si el texto que se encuentra en la caja de texto es una letra o 
                 un espacio devuelve ese texto*/
                 return change; 
             }
@@ -270,6 +294,46 @@ public class funciones {
             nFmt = nFmt.replaceFirst("(\\d{4})(\\d{4})(\\d+)", "$1-$2-$3");
         }
         return nFmt;
+    }
+    
+    public int getSeg(){
+        return seg;
+    }
+    
+    public int getMin(){
+        return min;
+    }
+    
+    public int getHor(){
+        return hor;
+    }
+    
+    public String getAp(){
+        return ap;
+    }
+    
+    public boolean getIsStopped(){
+        return isStopped;
+    }
+    
+    public void setSeg(int _seg){
+        seg = _seg;
+    }
+    
+    public void setMin(int _min){
+        min = _min;
+    }
+    
+    public void setHor(int _hor){
+        hor = _hor;
+    }
+    
+    public void setAp(String _ap){
+        ap = _ap;
+    }
+    
+    public void setIsStopped(boolean _isStopped){
+        isStopped = _isStopped;
     }
 }
 

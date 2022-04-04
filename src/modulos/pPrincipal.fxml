@@ -4,12 +4,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -17,7 +20,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modulos.PPrincipalController">
    <center>
-      <Pane prefHeight="660.0" prefWidth="1200.0" styleClass="bg" stylesheets="@pprincipal.css" BorderPane.alignment="CENTER">
+      <Pane fx:id="pPrinc" prefHeight="660.0" prefWidth="1200.0" styleClass="bg" stylesheets="@pprincipal.css" BorderPane.alignment="CENTER">
          <children>
             <Pane layoutX="14.0" layoutY="10.0" prefHeight="640.0" prefWidth="240.0" styleClass="Cont" stylesheets="@pprincipal.css">
                <children>
@@ -138,7 +141,7 @@
             </Pane>
             <Pane fx:id="borderTop" layoutX="254.0" layoutY="10.0" prefHeight="20.0" prefWidth="925.0" styleClass="borderTop" stylesheets="@pprincipal.css">
                <children>
-                  <Label layoutX="693.0" layoutY="1.0" text="Hora:" textFill="WHITE">
+                  <Label fx:id="lblHora" layoutX="693.0" layoutY="1.0" text="Hora:" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman Bold Italic" size="14.0" />
                      </font>
@@ -326,7 +329,28 @@
                   </Pane>
                   <Pane fx:id="invPane" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
-                        <Label layoutX="308.0" layoutY="77.0" text="Inventario" />
+                        <TabPane prefHeight="620.0" prefWidth="925.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="Untitled Tab 1">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Label layoutX="108.0" layoutY="65.0" text="Inventario" />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Untitled Tab 2">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Label layoutX="91.0" layoutY="37.0" text="Proveedores" />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
                      </children>
                   </Pane>
                   <Pane fx:id="repPane" prefHeight="200.0" prefWidth="200.0" visible="false">
