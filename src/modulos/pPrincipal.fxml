@@ -172,7 +172,7 @@
                               </Label>
                               <Pane layoutX="30.0" layoutY="41.0" prefHeight="210.0" prefWidth="155.0" styleClass="userFoto" stylesheets="@pprincipal.css">
                                  <children>
-                                    <ImageView fitHeight="210.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="lblFotoU" fitHeight="210.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Button fx:id="btnUF" layoutX="30.0" layoutY="263.0" mnemonicParsing="false" onAction="#opFoto" onMouseEntered="#afMoEn" onMouseExited="#afMoEx" prefHeight="25.0" prefWidth="155.0" styleClass="btn" stylesheets="@pprincipal.css" text="Abrir Foto" textFill="#4b45ff">

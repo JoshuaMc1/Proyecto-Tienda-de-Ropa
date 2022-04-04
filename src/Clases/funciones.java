@@ -1,17 +1,30 @@
 package clases;
 
+import Conexion.ConexionMySQL;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics2D;
+import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.function.UnaryOperator;
 //import java.awt.event.KeyEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -19,6 +32,9 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class funciones {
+    
+    ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
+    private String bd = "supermercado"; //nombre de la bd
     
     //metodo para navegar a traves de los paneles
     public void GroupController(StackPane skp, String paneName){ // El stackpane es un panel que agrupa todos los paneles del sistema
@@ -81,6 +97,94 @@ public class funciones {
             }
         }
         return vacio;
+    }
+    
+    //metodo para cambiar de estado los datos en la base de datos
+    public void eliminar(String sentencia){
+        try {
+            con.ConectarBasedeDatos(bd);
+            con.sentencia.execute(sentencia);
+            JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO CORRECTAMENTE", "ATENCION!", 1);
+            con.DesconectarBasedeDatos();
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR EL REGISTRO\nERROR: "+e.getMessage(), "ATENCION!", 0);
+        }
+    }
+    
+    //metodo para modificar los datos en la base de datos
+    public void modificar(String sentencia){
+        try{
+            con.ConectarBasedeDatos(bd);
+            con.sentencia.execute(sentencia);
+            //JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO CORRECTAMENTE", "ATENCION!", 1);
+            con.DesconectarBasedeDatos();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "NO SE PUDO MODIFICAR EL REGISTRO\nERROR: "+ex.getMessage(), "ATENCION!", 0);
+        }
+    }
+    
+    //metodo para buscar en la base de datos
+    public ResultSet buscar(String sql, ConexionMySQL con){
+        try{
+            con = new ConexionMySQL();
+            con.ConectarBasedeDatos("supermercado");
+            PreparedStatement ps = con.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            return rs;
+        }catch(Exception e){
+            return null;
+        }
+    }
+    
+    //metodo para guardar el la base de datos
+    public void guardar(String sentencia){
+        try{
+            con.ConectarBasedeDatos(bd);
+            PreparedStatement ps = con.getConnection().prepareStatement(sentencia);
+            ps.execute();
+            con.DesconectarBasedeDatos();
+            //JOptionPane.showMessageDialog(null, "REGISTRO GUARDADO CORRECTAMENTE", "ATENCION!", 1);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "NO SE PUDO GUARDAR EL REGISTRO\nError: "+ex.getMessage(), "ATENCION!", 0);
+        }
+    }
+    
+    public String EscogerArchivo(ImageView lblImagen){
+        String path="";
+        try{
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File f = chooser.getSelectedFile();
+            //String filename = f.getAbsolutePath();
+            //System.out.println("agarro imagen");
+            //path = filename;
+            javafx.scene.image.Image img = new javafx.scene.image.Image(f.toURI().toString(), lblImagen.getFitWidth(), lblImagen.getFitHeight(), false, false);
+            lblImagen.setImage(img);
+            /*ImageIcon icon1 = new ImageIcon(filename);
+            Image img = icon1.getImage();
+            //System.out.println("creo imagen");
+            Image newimg = img.getScaledInstance(160 ,180 , java.awt.Image.SCALE_SMOOTH);
+            //System.out.println("escale image");
+            BufferedImage bi = imgBI(newimg);
+            //System.out.println("icon");
+            //ImageIcon icon = new ImageIcon(filename);
+            Image image = SwingFXUtils.toFXImage(capture, null);*/
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return path;
+    }
+    
+    public BufferedImage imgBI(Image img) { //metodo para convertir una imagen awt en bufferedImage
+        if (img instanceof BufferedImage) return (BufferedImage) img;
+
+        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);  //Se crea un nuevo BI
+
+        Graphics2D bGr = bimage.createGraphics(); //Se dibuja la imagen en el BI
+        bGr.drawImage(img, 0, 0, null);
+        bGr.dispose();
+
+        return bimage;
     }
     
     public void formatTD(TextField tf, int bt){ //metodo para validar la caja de texto telefono y DNI

@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -39,6 +40,8 @@ public class PPrincipalController implements Initializable {
     private ComboBox cmbPriv;
     @FXML
     private TextField txtDni, txtTel, txtName, txtApel;
+    @FXML
+    private ImageView lblFotoU;
     
     private void fillCBox(){
         cmbPriv.getItems().removeAll(cmbPriv.getItems());
@@ -92,7 +95,7 @@ public class PPrincipalController implements Initializable {
     
     @FXML
     private void opFoto(javafx.event.ActionEvent evt){
-        fun.Msg("Work in progress");
+        fun.EscogerArchivo(lblFotoU);
     }
     
     @FXML
