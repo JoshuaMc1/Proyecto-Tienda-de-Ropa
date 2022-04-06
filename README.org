@@ -3,10 +3,10 @@ Proyecto de Ingenieria de Software II, aplicación de escritorio desarrollada co
 
 * Lista de deberes
 + [X] Crear login de la aplicación {Joshua}
-+ [ ] Crear menu principal de la aplicación {Carlos}
-+ [ ] Crear interfaz grafica del modulo de ventas {Yosary}
++ [X] Crear menu principal de la aplicación {Carlos}
++ [X] Crear interfaz grafica del modulo de ventas {Yosary}
 + [ ] Crear interfez grafica del modulo de inventario {Joshua}
-+ [ ] Crear interfez grafica del modulo de administración y permisos de usuarios {Carlos}
++ [X] Crear interfez grafica del modulo de administración y permisos de usuarios {Carlos}
 + [ ] Crear interfez grafica del modulo de compras {Yosary}
-+ [ ] Crear primera versión de la base de datos del proyecto {Joshua}
++ [X] Crear primera versión de la base de datos del proyecto {Joshua}
 + [ ] Programar y validar Login {Joshua}
