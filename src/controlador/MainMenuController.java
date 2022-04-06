@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import controlador.clases.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,8 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import modelo.funciones.funciones;
 
 /**
  * FXML Controller class
@@ -53,8 +54,14 @@ public class MainMenuController implements Initializable {
     @FXML
     private Button btnReportes;
     @FXML
+    
+    //Variables extras
     private StackPane pnlPrincipal;
-
+    private int idUser;
+    
+    //Objetos
+    funciones fun = new funciones();
+    
     /**
      * Initializes the controller class.
      */
@@ -117,7 +124,16 @@ public class MainMenuController implements Initializable {
             System.out.println(e.getStackTrace());
         }
     }
-
+    
+    @FXML
+    public void recibirId(int id){
+        this.idUser = id;
+    }
+    
+    private void cargarObjeto(int id){
+        
+    }
+    
     @FXML
     private void openShoppin(ActionEvent event) {
     }

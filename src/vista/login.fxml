@@ -30,13 +30,13 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtUsuario" layoutX="13.0" layoutY="158.0" prefHeight="45.0" prefWidth="275.0" styleClass="textField" />
+            <TextField fx:id="txtUsuario" layoutX="13.0" layoutY="158.0" onKeyPressed="#keyEnterUser" prefHeight="45.0" prefWidth="275.0" styleClass="textField" />
             <Label layoutX="13.0" layoutY="268.0" text="CONTRASEÑA" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <PasswordField fx:id="txtClave" layoutX="13.0" layoutY="307.0" prefHeight="45.0" prefWidth="275.0" styleClass="textField" />
+            <PasswordField fx:id="txtClave" layoutX="13.0" layoutY="307.0" onKeyPressed="#keyEnterClave" prefHeight="45.0" prefWidth="275.0" styleClass="textField" />
             <Button fx:id="btnIniciar" layoutX="14.0" layoutY="433.0" mnemonicParsing="false" onAction="#click" prefHeight="45.0" prefWidth="275.0" styleClass="btn" text="Iniciar sesión">
                <font>
                   <Font name="System Bold" size="18.0" />
