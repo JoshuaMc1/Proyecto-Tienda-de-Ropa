@@ -5,7 +5,6 @@
  */
 package controlador;
 
-import controlador.clases.ConexionMySQL;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +19,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import modelo.ConexionMySQL;
 
 /**
  * FXML Controller class

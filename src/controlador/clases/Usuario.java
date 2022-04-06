@@ -1,4 +1,4 @@
-package Clases;
+package controlador.clases;
 
 import java.io.InputStream;
 
