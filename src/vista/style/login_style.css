@@ -1,0 +1,21 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.textField{
+    -fx-background-color: none;
+    -fx-border-color: white;
+    -fx-border-width: 0px 0px 1.5px 0px;
+    -fx-border-radius: 5px;
+    -fx-text-fill: white;
+}
+
+.btn{
+    -fx-background-color: white;
+    -fx-text-fill: #444DF2;
+}
+
+.btn:hover{
+    -fx-background-color: #EBEBEB;
+    
+}

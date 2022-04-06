@@ -1,0 +1,62 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.pnl{
+    -fx-background-color: white;
+}
+
+.pnl-title{
+    -fx-background-color: #E1E1E1;
+}
+
+.profile-image{
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+}
+
+.btn-foto{
+    -fx-background-color: #444DF2;
+    -fx-text-fill: white;
+}
+
+.btn-foto:hover{
+    -fx-background-color: #2A83A3;
+}
+
+.btn-save{
+    -fx-background-color: #188E22;
+    -fx-text-fill: white;
+}
+
+.btn-save:hover{
+    -fx-background-color: #2C9628;
+}
+
+.btn-edit{
+    -fx-background-color: #BEBB13;
+    -fx-text-fill: white;
+}
+
+.btn-edit:hover{
+    -fx-background-color: #D1CD17;
+}
+
+.btn-delete{
+    -fx-background-color: #B11919;
+    -fx-text-fill: white;
+}
+
+.btn-delete:hover{
+    -fx-background-color: #DC3535;
+}
+
+.btn-clean-up{
+    -fx-background-color: #444DF2;
+    -fx-text-fill: white;
+}
+
+.btn-clean-up:hover{
+    -fx-background-color: #5057DB;
+}

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="955.0" prefWidth="1300.0" styleClass="pnl" stylesheets="@style/users.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.UsersController">
+   <children>
+      <Pane prefHeight="55.0" prefWidth="900.0" styleClass="pnl-title" stylesheets="@style/users.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Control de usuarios">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <TabPane layoutY="55.0" prefHeight="644.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+        <tabs>
+          <Tab text="Agregar usuarios">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="904.0" prefWidth="1300.0">
+                     <children>
+                        <BorderPane layoutY="-1.0" prefHeight="858.0" prefWidth="1300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <center>
+                              <BorderPane prefHeight="413.0" prefWidth="880.0" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets left="5.0" right="5.0" top="10.0" />
+                                 </BorderPane.margin>
+                                 <top>
+                                    <Pane prefHeight="55.0" prefWidth="880.0" styleClass="pnl-title" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="15.0" text="Datos personales">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children></Pane>
+                                 </top>
+                                 <center>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <left>
+                                          <AnchorPane prefHeight="363.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <ImageView fitHeight="280.0" fitWidth="180.0" layoutX="36.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="profile-image" />
+                                                <Button layoutX="36.0" layoutY="314.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="btn-foto" text="Buscar foto">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@img/galeria.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                       </left>
+                                       <center>
+                                          <AnchorPane prefHeight="363.0" prefWidth="667.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label layoutX="53.0" layoutY="238.0" text="Dirección:" />
+                                                <TextArea layoutX="129.0" layoutY="238.0" prefHeight="105.0" prefWidth="455.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="46.0" />
+                                                <Label layoutX="253.0" layoutY="196.0" text="Genero:" />
+                                                <ComboBox layoutX="315.0" layoutY="191.0" prefHeight="30.0" prefWidth="269.0" AnchorPane.leftAnchor="315.0" AnchorPane.rightAnchor="46.0" />
+                                                <Label layoutX="80.0" layoutY="196.0" text="Edad:" />
+                                                <TextField layoutX="129.0" layoutY="191.0" prefHeight="30.0" prefWidth="110.0" AnchorPane.leftAnchor="129.0" />
+                                                <Label layoutX="56.0" layoutY="154.0" text="Telefono:" />
+                                                <TextField layoutX="129.0" layoutY="149.0" prefHeight="30.0" prefWidth="455.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="46.0" />
+                                                <Label layoutX="58.0" layoutY="113.0" text="Apellido:" />
+                                                <TextField layoutX="129.0" layoutY="108.0" prefHeight="30.0" prefWidth="455.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="46.0" />
+                                                <Label layoutX="58.0" layoutY="72.0" text="Nombre:" />
+                                                <TextField layoutX="130.0" layoutY="67.0" prefHeight="30.0" prefWidth="454.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="46.0" />
+                                                <Label layoutX="84.0" layoutY="25.0" text="DNI:" />
+                                                <TextField layoutX="130.0" layoutY="20.0" prefHeight="30.0" prefWidth="453.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="46.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </center>
+                                    </BorderPane>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <right>
+                              <BorderPane prefHeight="418.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets left="5.0" right="5.0" top="10.0" />
+                                 </BorderPane.margin>
+                                 <center>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets />
+                                       </BorderPane.margin>
+                                       <top>
+                                          <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label layoutX="14.0" layoutY="15.0" text="Datos de ususario">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </top>
+                                       <center>
+                                          <AnchorPane prefHeight="203.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label layoutX="33.0" layoutY="26.0" text="Usuario:" />
+                                                <Label layoutX="11.0" layoutY="70.0" text="Contraseña:" />
+                                                <Label layoutX="25.0" layoutY="115.0" text="Permisos:" />
+                                                <TextField layoutX="95.0" layoutY="21.0" prefHeight="30.0" prefWidth="290.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="15.0" />
+                                                <PasswordField layoutX="95.0" layoutY="65.0" prefHeight="30.0" prefWidth="290.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="15.0" />
+                                                <CheckBox layoutX="33.0" layoutY="142.0" mnemonicParsing="false" text="Permiso 1" />
+                                                <CheckBox layoutX="33.0" layoutY="175.0" mnemonicParsing="false" text="Permiso 2" />
+                                                <CheckBox layoutX="137.0" layoutY="142.0" mnemonicParsing="false" text="Permiso 3" />
+                                                <CheckBox layoutX="137.0" layoutY="175.0" mnemonicParsing="false" text="Permiso 4" />
+                                                <CheckBox layoutX="248.0" layoutY="142.0" mnemonicParsing="false" text="Permiso 5" />
+                                                <CheckBox layoutX="248.0" layoutY="175.0" mnemonicParsing="false" text="Permiso 6" />
+                                             </children>
+                                          </AnchorPane>
+                                       </center>
+                                    </BorderPane>
+                                 </center>
+                                 <bottom>
+                                    <BorderPane prefHeight="145.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets top="5.0" />
+                                       </BorderPane.margin>
+                                       <top>
+                                          <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label layoutX="14.0" layoutY="15.0" text="Acciones">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                       </top>
+                                       <center>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button fx:id="btnGuardar" layoutX="44.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#clickGuardar" prefHeight="35.0" prefWidth="150.0" styleClass="btn-save" text="Guardar">
+                                                   <graphic>
+                                                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@img/diskette.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="btnEliminar" layoutX="44.0" layoutY="48.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" styleClass="btn-delete" text="Eliminar">
+                                                   <graphic>
+                                                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@img/borrar.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="btnEditar" layoutX="206.0" layoutY="7.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" styleClass="btn-edit" text="Editar">
+                                                   <graphic>
+                                                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@img/editar.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="btnLimpiar" layoutX="206.0" layoutY="48.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" styleClass="btn-clean-up" text="Limpiar">
+                                                   <graphic>
+                                                      <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@img/limpiar.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                       </center>
+                                    </BorderPane>
+                                 </bottom>
+                              </BorderPane>
+                           </right>
+                           <bottom>
+                              <BorderPane prefHeight="389.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets top="40.0" />
+                                 </BorderPane.margin>
+                                 <top>
+                                    <Pane prefHeight="55.0" prefWidth="1300.0" styleClass="pnl-title" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="15.0" text="Tabla de usuarios">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <BorderPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </BorderPane.margin>
+                                    </Pane>
+                                 </top>
+                                 <center>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets left="5.0" right="5.0" top="5.0" />
+                                       </BorderPane.margin>
+                                       <children>
+                                          <TableView prefHeight="328.0" prefWidth="1292.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </center>
+                              </BorderPane>
+                           </bottom>
+                        </BorderPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Activar ususarios">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane prefHeight="904.0" prefWidth="1300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <center>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <top>
+                                    <Pane prefHeight="55.0" prefWidth="1300.0" styleClass="pnl-title" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="15.0" text="Datos del usuario">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </top>
+                                 <BorderPane.margin>
+                                    <Insets left="5.0" right="5.0" top="10.0" />
+                                 </BorderPane.margin>
+                                 <center>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets left="5.0" right="5.0" top="5.0" />
+                                       </BorderPane.margin>
+                                       <children>
+                                          <Label layoutX="126.0" layoutY="38.0" text="ID:" />
+                                          <Label layoutX="275.0" layoutY="38.0" text="DNI:" />
+                                          <Label layoutX="88.0" layoutY="90.0" text="Nombre:" />
+                                          <Label layoutX="473.0" layoutY="90.0" text="Apellido:" />
+                                          <Label layoutX="85.0" layoutY="141.0" text="Telefono:" />
+                                          <Label layoutX="302.0" layoutY="141.0" text="Edad:" />
+                                          <Label layoutX="479.0" layoutY="141.0" text="Genero:" />
+                                          <Label layoutX="82.0" layoutY="189.0" text="Dirección:" />
+                                          <TextField editable="false" layoutX="154.0" layoutY="33.0" prefHeight="30.0" prefWidth="110.0" />
+                                          <TextField editable="false" layoutX="318.0" layoutY="33.0" prefHeight="30.0" prefWidth="520.0" AnchorPane.leftAnchor="318.0" AnchorPane.rightAnchor="82.0" />
+                                          <TextField editable="false" layoutX="154.0" layoutY="85.0" prefHeight="30.0" prefWidth="295.0" />
+                                          <TextField editable="false" layoutX="543.0" layoutY="85.0" prefHeight="30.0" prefWidth="295.0" AnchorPane.leftAnchor="543.0" AnchorPane.rightAnchor="82.0" />
+                                          <TextField editable="false" layoutX="154.0" layoutY="136.0" prefHeight="30.0" prefWidth="135.0" />
+                                          <TextField editable="false" layoutX="350.0" layoutY="136.0" prefHeight="30.0" prefWidth="98.0" />
+                                          <ComboBox layoutX="543.0" layoutY="136.0" prefHeight="30.0" prefWidth="296.0" AnchorPane.leftAnchor="543.0" AnchorPane.rightAnchor="81.0" />
+                                          <TextArea editable="false" layoutX="158.0" layoutY="189.0" prefHeight="113.0" prefWidth="680.0" AnchorPane.leftAnchor="158.0" AnchorPane.rightAnchor="82.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </center>
+                                 <right>
+                                    <AnchorPane prefHeight="334.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets left="5.0" right="5.0" top="5.0" />
+                                       </BorderPane.margin>
+                                       <children>
+                                          <Button layoutX="28.0" layoutY="140.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="325.0" styleClass="btn-clean-up" text="Activar" AnchorPane.bottomAnchor="139.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="140.0">
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@img/boton-de-encendido.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                 </right>
+                              </BorderPane>
+                           </center>
+                           <bottom>
+                              <BorderPane prefHeight="500.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
+                                 <top>
+                                    <Pane prefHeight="55.0" prefWidth="1300.0" styleClass="pnl-title" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets left="5.0" right="5.0" top="10.0" />
+                                       </BorderPane.margin>
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="15.0" text="Tabla de usuarios">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </top>
+                                 <center>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets top="5.0" />
+                                       </BorderPane.margin>
+                                       <children>
+                                          <TableView prefHeight="434.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                             <padding>
+                                                <Insets left="5.0" right="5.0" />
+                                             </padding>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </center>
+                              </BorderPane>
+                           </bottom>
+                        </BorderPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Editar permisos">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane prefHeight="900.0" prefWidth="1300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <center>
+                              <BorderPane prefHeight="377.0" prefWidth="1290.0" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets left="5.0" right="5.0" top="10.0" />
+                                 </BorderPane.margin>
+                                 <top>
+                                    <Pane prefHeight="55.0" prefWidth="1290.0" styleClass="pnl-title" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="15.0" text="Usuario y permisos">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </top>
+                                 <center>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <center>
+                                          <AnchorPane prefHeight="285.0" prefWidth="790.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label layoutX="127.0" layoutY="61.0" text="ID:" />
+                                                <Label layoutX="93.0" layoutY="134.0" text="Usuario:" />
+                                                <Label layoutX="89.0" layoutY="169.0" text="Nombre:" />
+                                                <Label layoutX="89.0" layoutY="204.0" text="Apellido:" />
+                                                <Label layoutX="116.0" layoutY="98.0" text="DNI:" />
+                                                <TextField editable="false" layoutX="156.0" layoutY="56.0" prefHeight="30.0" prefWidth="100.0" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="462.0" />
+                                                <TextField editable="false" layoutX="156.0" layoutY="164.0" prefHeight="30.0" prefWidth="420.0" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="220.0" />
+                                                <TextField editable="false" layoutX="156.0" layoutY="199.0" prefHeight="30.0" prefWidth="420.0" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="220.0" />
+                                                <TextField editable="false" layoutX="156.0" layoutY="93.0" prefHeight="30.0" prefWidth="420.0" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="220.0" />
+                                                <TextField editable="false" layoutX="156.0" layoutY="129.0" prefHeight="30.0" prefWidth="420.0" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="220.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </center>
+                                       <right>
+                                          <AnchorPane prefHeight="285.0" prefWidth="572.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <CheckBox layoutX="152.0" layoutY="58.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="121.0" text="Permiso 1" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="299.0" />
+                                                <CheckBox layoutX="152.0" layoutY="90.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" text="Permiso 2" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="300.0" />
+                                                <CheckBox layoutX="152.0" layoutY="123.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" text="Permiso 3" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="300.0" />
+                                                <CheckBox layoutX="301.0" layoutY="58.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" text="Permiso 4" AnchorPane.leftAnchor="301.0" AnchorPane.rightAnchor="151.0" />
+                                                <CheckBox layoutX="301.0" layoutY="90.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" text="Permiso 5" AnchorPane.leftAnchor="301.0" AnchorPane.rightAnchor="151.0" />
+                                                <CheckBox layoutX="301.0" layoutY="123.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" text="Permiso 6" AnchorPane.leftAnchor="301.0" AnchorPane.rightAnchor="151.0" />
+                                                <Button layoutX="86.0" layoutY="193.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="400.0" styleClass="btn-edit" text="Editar" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="86.0" AnchorPane.topAnchor="193.0">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@img/editar.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                       </right>
+                                    </BorderPane>
+                                 </center>
+                              </BorderPane>
+                           </center>
+                           <bottom>
+                              <BorderPane prefHeight="550.0" prefWidth="1290.0" BorderPane.alignment="CENTER">
+                                 <top>
+                                    <Pane prefHeight="55.0" prefWidth="1300.0" styleClass="pnl-title" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="15.0" text="Tabla de usuarios">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </top>
+                                 <BorderPane.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </BorderPane.margin>
+                                 <center>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets bottom="10.0" top="5.0" />
+                                       </BorderPane.margin>
+                                       <children>
+                                          <TableView prefHeight="484.0" prefWidth="1280.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </center>
+                              </BorderPane>
+                           </bottom>
+                        </BorderPane>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

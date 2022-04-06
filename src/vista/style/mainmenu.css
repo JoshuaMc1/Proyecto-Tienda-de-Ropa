@@ -1,0 +1,28 @@
+/*
+ * Empty Stylesheet file.
+ */
+.principal-pane{
+    -fx-background-color: #444DF2;
+}
+
+.barra{
+    -fx-background-color: #EBEBEB;
+}
+
+.btn-exit{
+    -fx-background-color: #EA3636;
+}
+
+.btn-exit:hover{
+    -fx-background-color: #DC3535;
+}
+
+.btn-menu{
+    -fx-background-color: #35B0DC;
+    -fx-text-fill: white;
+}
+
+.btn-menu:hover{
+    -fx-background-color: #2A83A3;
+    -fx-text-fill: white;
+}

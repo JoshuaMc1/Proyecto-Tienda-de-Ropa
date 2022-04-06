@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="mainMenu" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.MainMenuController">
+    <stylesheets>
+        <URL value="@/vista/style/mainmenu.css" />
+    </stylesheets>
+   <children>
+      <BorderPane fx:id="panelMenu" prefHeight="700.0" prefWidth="290.0" styleClass="principal-pane" stylesheets="@style/mainmenu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <Pane prefHeight="103.0" prefWidth="290.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="imgFoto" fitHeight="93.0" fitWidth="88.0" layoutX="10.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/businessman.png" />
+                     </image></ImageView>
+                  <Label fx:id="txtUsuario" layoutX="112.0" layoutY="27.0" prefHeight="25.0" prefWidth="178.0" text="Joshua Mclean" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="txtRol" layoutX="114.0" layoutY="52.0" prefHeight="20.0" prefWidth="173.0" text="Administrador" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnDasboard" alignment="CENTER" layoutY="93.0" mnemonicParsing="false" onAction="#openDashboard" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Dasboard">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnInventario" alignment="CENTER" layoutY="151.0" mnemonicParsing="false" onAction="#openInventory" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Inventario">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnVentas" alignment="CENTER" layoutY="210.0" mnemonicParsing="false" onAction="#openSales" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Ventas">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnUsuarios" alignment="CENTER" layoutY="328.0" mnemonicParsing="false" onAction="#openUsers" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Usuarios">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnCompras" alignment="CENTER" layoutY="270.0" mnemonicParsing="false" onAction="#openShoppin" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Compras">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnReportes" alignment="CENTER" layoutY="389.0" mnemonicParsing="false" onAction="#openReports" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Reportes">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </center>
+         <bottom>
+            <Button fx:id="btnCerrar" mnemonicParsing="false" onAction="#btnExit" prefHeight="40.0" prefWidth="260.0" styleClass="btn-exit" stylesheets="@style/mainmenu.css" text="Cerrar Sesión" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="15.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
+      </BorderPane>
+      <StackPane fx:id="pnlPrincipal" layoutX="290.0" prefHeight="700.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>

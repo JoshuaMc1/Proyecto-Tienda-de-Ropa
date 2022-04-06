@@ -1,0 +1,29 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.pnl{
+    -fx-background-color: white;
+}
+
+.pnl-title{
+    -fx-background-color: #E1E1E1;
+}
+
+.card-ventas{
+    -fx-border-color: #444DF2;
+    -fx-border-width: 6px 0px 6px 0px;
+    -fx-border-radius: 15px;
+}
+
+.card-clientes{
+    -fx-border-color: #2C9628;
+    -fx-border-width: 6px 0px 6px 0px;
+    -fx-border-radius: 15px;
+}
+
+.card-procuto-vendido{
+    -fx-border-color: #552896;
+    -fx-border-width: 6px 0px 6px 0px;
+    -fx-border-radius: 15px;
+}
