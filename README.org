@@ -9,4 +9,4 @@ Proyecto de Ingenieria de Software II, aplicación de escritorio desarrollada co
 + [X] Crear interfez grafica del modulo de administración y permisos de usuarios {Carlos}
 + [ ] Crear interfez grafica del modulo de compras {Yosary}
 + [X] Crear primera versión de la base de datos del proyecto {Joshua}
-+ [ ] Programar y validar Login {Joshua}
++ [X] Programar y validar Login {Joshua}
