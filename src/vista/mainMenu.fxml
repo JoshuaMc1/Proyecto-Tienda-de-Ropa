@@ -41,32 +41,27 @@
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnDasboard" alignment="CENTER" layoutY="93.0" mnemonicParsing="false" onAction="#openDashboard" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Dasboard">
+                  <Button fx:id="btnDasboard" alignment="CENTER" layoutY="137.0" mnemonicParsing="false" onAction="#openDashboard" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Dasboard">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnInventario" alignment="CENTER" layoutY="151.0" mnemonicParsing="false" onAction="#openInventory" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Inventario">
+                  <Button fx:id="btnInventario" alignment="CENTER" layoutY="195.0" mnemonicParsing="false" onAction="#openInventory" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Inventario">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnVentas" alignment="CENTER" layoutY="210.0" mnemonicParsing="false" onAction="#openSales" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Ventas">
+                  <Button fx:id="btnVentas" alignment="CENTER" layoutY="254.0" mnemonicParsing="false" onAction="#openSales" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Ventas">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnUsuarios" alignment="CENTER" layoutY="328.0" mnemonicParsing="false" onAction="#openUsers" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Usuarios">
+                  <Button fx:id="btnUsuarios" alignment="CENTER" layoutY="314.0" mnemonicParsing="false" onAction="#openUsers" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Usuarios">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnCompras" alignment="CENTER" layoutY="270.0" mnemonicParsing="false" onAction="#openShoppin" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Compras">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="btnReportes" alignment="CENTER" layoutY="389.0" mnemonicParsing="false" onAction="#openReports" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Reportes">
+                  <Button fx:id="btnReportes" alignment="CENTER" layoutY="375.0" mnemonicParsing="false" onAction="#openReports" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Reportes">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

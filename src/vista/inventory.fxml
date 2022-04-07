@@ -1,10 +1,262 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="910.0" style="-fx-background-color: blue;" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="controlador.InventoryController">
-    <stylesheets>
-        <URL value="@/vista/style/inventory.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" stylesheets="@style/inventory.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InventoryController">
+   <children>
+      <Pane prefHeight="55.0" prefWidth="1100.0" styleClass="pnl-title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="14.0" layoutY="15.0" text="Inventario">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <BorderPane layoutY="55.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <padding>
+            <Insets bottom="5.0" />
+         </padding>
+         <center>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab text="Home">
+                  <content>
+                    <AnchorPane maxWidth="1100.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1055.0">
+                                       <children>
+                                          <HBox prefHeight="280.0" prefWidth="1055.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane prefHeight="200.0" prefWidth="355.0" styleClass="card-producto">
+                                                   <HBox.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </HBox.margin>
+                                                   <children>
+                                                      <Pane prefHeight="55.0" prefWidth="340.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" layoutX="17.0" layoutY="15.0" prefHeight="20.0" prefWidth="300.0" text="INVENTARIO TOTAL">
+                                                               <font>
+                                                                  <Font name="System Bold" size="16.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children></Pane>
+                                                      <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="14.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@img/estante.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label alignment="CENTER" layoutX="134.0" layoutY="123.0" prefHeight="20.0" prefWidth="200.0" text="Nombre del producto" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" layoutX="134.0" layoutY="162.0" prefHeight="20.0" prefWidth="200.0" text="0" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="355.0" styleClass="card-ventas">
+                                                   <HBox.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </HBox.margin>
+                                                   <children>
+                                                      <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                                         <children>
+                                                            <Label layoutX="5.0" layoutY="15.0" prefHeight="25.0" prefWidth="330.0" text="CANTIDAD DE INVENTARIO ACTUAL (Unidades)">
+                                                               <font>
+                                                                  <Font name="System Bold" size="16.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </Pane>
+                                                      <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="14.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@img/inventario.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label alignment="CENTER" layoutX="134.0" layoutY="122.0" prefHeight="20.0" prefWidth="200.0" text="Cantidad" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" layoutX="134.0" layoutY="161.0" prefHeight="20.0" prefWidth="200.0" text="0" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="355.0" styleClass="card-producto-bajo">
+                                                   <HBox.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </HBox.margin>
+                                                   <children>
+                                                      <Pane layoutY="-7.0" prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                                         <children>
+                                                            <Label alignment="CENTER" layoutX="17.0" layoutY="15.0" prefHeight="20.0" prefWidth="300.0" text="PRODUCTO CON INVENTARIO BAJO">
+                                                               <font>
+                                                                  <Font name="System Bold" size="16.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </Pane>
+                                                      <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="11.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@img/inventario-bajo.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label alignment="CENTER" layoutX="131.0" layoutY="124.0" prefHeight="20.0" prefWidth="200.0" text="Cantidad de productos" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER" layoutX="131.0" layoutY="163.0" prefHeight="20.0" prefWidth="200.0" text="0" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                          <HBox layoutY="280.0" prefHeight="500.0" prefWidth="1055.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="280.0">
+                                             <children>
+                                                <AnchorPane prefHeight="200.0" prefWidth="525.0" styleClass="card-producto-bajo">
+                                                   <HBox.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </HBox.margin>
+                                                   <children>
+                                                      <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                                         <children>
+                                                            <Label layoutX="14.0" layoutY="15.0" text="CANTIDAD TOTAL DE INVENTARIO">
+                                                               <font>
+                                                                  <Font name="System Bold" size="16.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </Pane>
+                                                      <BorderPane layoutX="14.0" layoutY="59.0" prefHeight="200.0" prefWidth="497.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="60.0">
+                                                         <center>
+                                                            <BarChart BorderPane.alignment="CENTER">
+                                                              <xAxis>
+                                                                <CategoryAxis side="BOTTOM" />
+                                                              </xAxis>
+                                                              <yAxis>
+                                                                <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+                                                              </yAxis>
+                                                            </BarChart>
+                                                         </center>
+                                                      </BorderPane>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="515.0">
+                                                   <children>
+                                                      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <children>
+                                                            <AnchorPane prefHeight="250.0" prefWidth="200.0" styleClass="card-producto">
+                                                               <VBox.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </VBox.margin>
+                                                               <children>
+                                                                  <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                                                     <children>
+                                                                        <Label alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="20.0" prefWidth="475.0" text="ENTRADAS">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </Pane>
+                                                                  <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="14.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@img/dos-flechas-hacia-abajo.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                                  <Label layoutX="172.0" layoutY="81.0" prefHeight="130.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="36.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="250.0" prefWidth="200.0" styleClass="card-ventas">
+                                                               <VBox.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </VBox.margin>
+                                                               <children>
+                                                                  <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                                                     <children>
+                                                                        <Label alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="20.0" prefWidth="475.0" text="SALIDAS">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </Pane>
+                                                                  <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="14.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@img/dos-flechas-apuntando-hacia-arriba.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                                  <Label layoutX="168.0" layoutY="82.0" prefHeight="130.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="36.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Productos">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                  <Tab text="Compra">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab text="Registrar proveedor/categoria">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </center>
+      </BorderPane>
+   </children>
 </AnchorPane>

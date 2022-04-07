@@ -1,7 +1,25 @@
 /*
  * Empty Stylesheet file.
  */
+.pnl{
+    -fx-background-color: white;
+}
 
-.mainFxmlClass {
+.pnl-title{
+    -fx-background-color: #E1E1E1;
+}
 
+.card-producto{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #188E22, #188E78);
+}
+
+.card-ventas{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #188E78, #184B8E);
+}
+
+.card-producto-bajo{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #184B8E, #39188E);
 }
