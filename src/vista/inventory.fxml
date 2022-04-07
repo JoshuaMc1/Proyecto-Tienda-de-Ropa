@@ -315,7 +315,7 @@
                                                       <TextField layoutX="161.0" layoutY="219.0" prefHeight="30.0" prefWidth="270.0" />
                                                       <TextField layoutX="161.0" layoutY="257.0" prefHeight="30.0" prefWidth="270.0" />
                                                       <TextField layoutX="161.0" layoutY="144.0" prefHeight="30.0" prefWidth="270.0" />
-                                                      <Button fx:id="btnAgregarTipoProducto" layoutX="442.0" layoutY="109.0" mnemonicParsing="false" styleClass="btn-save">
+                                                      <Button fx:id="btnAgregarTipoProducto" layoutX="442.0" layoutY="109.0" mnemonicParsing="false" onAction="#abrirTipoProducto" styleClass="btn-save">
                                                          <graphic>
                                                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -326,7 +326,7 @@
                                                       </Button>
                                                       <Label layoutX="20.0" layoutY="300.0" text="Genero del producto:" />
                                                       <ComboBox layoutX="161.0" layoutY="295.0" prefHeight="30.0" prefWidth="270.0" />
-                                                      <Button fx:id="btnAgregarGenero" layoutX="442.0" layoutY="295.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="26.0" styleClass="btn-save">
+                                                      <Button fx:id="btnAgregarGenero" layoutX="442.0" layoutY="295.0" mnemonicParsing="false" onAction="#abrirGeneroProducto" prefHeight="30.0" prefWidth="26.0" styleClass="btn-save">
                                                          <graphic>
                                                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -348,7 +348,7 @@
                                                       <Label layoutX="28.0" layoutY="120.0" text="Descuento:" />
                                                       <ComboBox layoutX="110.0" layoutY="76.0" prefHeight="30.0" prefWidth="290.0" />
                                                       <ComboBox layoutX="110.0" layoutY="115.0" prefHeight="30.0" prefWidth="290.0" />
-                                                      <Button fx:id="btnAgregarProveedor" layoutX="413.0" layoutY="76.0" mnemonicParsing="false" styleClass="btn-save">
+                                                      <Button fx:id="btnAgregarProveedor" layoutX="413.0" layoutY="76.0" mnemonicParsing="false" onAction="#abrirProveedor" styleClass="btn-save">
                                                          <graphic>
                                                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -357,7 +357,7 @@
                                                             </ImageView>
                                                          </graphic>
                                                       </Button>
-                                                      <Button fx:id="btnAgregarDescuento" layoutX="413.0" layoutY="115.0" mnemonicParsing="false" styleClass="btn-save">
+                                                      <Button fx:id="btnAgregarDescuento" layoutX="413.0" layoutY="115.0" mnemonicParsing="false" onAction="#abrirDescuento" styleClass="btn-save">
                                                          <graphic>
                                                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
