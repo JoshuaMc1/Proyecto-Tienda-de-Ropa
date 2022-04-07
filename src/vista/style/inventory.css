@@ -23,3 +23,39 @@
     -fx-opacity: 0.8;
     -fx-background-color: linear-gradient(to bottom right, #184B8E, #39188E);
 }
+
+.btn-save{
+    -fx-background-color: #188E22;
+    -fx-text-fill: white;
+}
+
+.btn-save:hover{
+    -fx-background-color: #2C9628;
+}
+
+.btn-edit{
+    -fx-background-color: #BEBB13;
+    -fx-text-fill: white;
+}
+
+.btn-edit:hover{
+    -fx-background-color: #D1CD17;
+}
+
+.btn-delete{
+    -fx-background-color: #B11919;
+    -fx-text-fill: white;
+}
+
+.btn-delete:hover{
+    -fx-background-color: #DC3535;
+}
+
+.btn-clean-up{
+    -fx-background-color: #444DF2;
+    -fx-text-fill: white;
+}
+
+.btn-clean-up:hover{
+    -fx-background-color: #5057DB;
+}
