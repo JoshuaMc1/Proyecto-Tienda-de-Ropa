@@ -10,20 +10,32 @@
     -fx-background-color: #E1E1E1;
 }
 
-.card-ventas{
-    -fx-border-color: #444DF2;
-    -fx-border-width: 6px 0px 6px 0px;
-    -fx-border-radius: 15px;
+.card-1{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #188E22, #188E78);
 }
 
-.card-clientes{
-    -fx-border-color: #2C9628;
-    -fx-border-width: 6px 0px 6px 0px;
-    -fx-border-radius: 15px;
+.card-2{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #188E78, #184B8E);
 }
 
-.card-procuto-vendido{
-    -fx-border-color: #552896;
-    -fx-border-width: 6px 0px 6px 0px;
-    -fx-border-radius: 15px;
+.card-3{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #184B8E, #39188E);
+}
+
+.card-4{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #39188E, #8B188E);
+}
+
+.card-5{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #8B188E, #8E1843);
+}
+
+.card-6{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #8E1843, #C57210);
 }

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" stylesheets="@style/sales.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SalesController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" stylesheets="@style/sales.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SalesController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -47,29 +47,29 @@
                   </Pane>
                </top>
                <center>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <AnchorPane fx:id="pnlPrinc" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
                         <Label layoutX="124.0" layoutY="34.0" text="ID Producto:" />
                         <Label layoutX="63.0" layoutY="110.0" text="Nombre del producto:" />
                         <Label layoutX="159.0" layoutY="153.0" text="Precio:" />
                         <Label layoutX="365.0" layoutY="153.0" text="Cantidad:" />
                         <Label layoutX="371.0" layoutY="34.0" text="Usuario:" />
-                        <TextField layoutX="210.0" layoutY="29.0" prefHeight="30.0" prefWidth="150.0" AnchorPane.leftAnchor="210.0" />
-                        <TextField layoutX="210.0" layoutY="105.0" prefHeight="30.0" prefWidth="410.0" AnchorPane.leftAnchor="210.0" />
-                        <TextField layoutX="430.0" layoutY="29.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.leftAnchor="430.0" />
-                        <TextField layoutX="210.0" layoutY="148.0" prefHeight="30.0" prefWidth="150.0" AnchorPane.leftAnchor="210.0" />
-                        <TextField layoutX="430.0" layoutY="148.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.leftAnchor="430.0" />
+                        <TextField fx:id="txtIDProd" layoutX="210.0" layoutY="29.0" onKeyPressed="#IDProdkpr" prefHeight="30.0" prefWidth="150.0" AnchorPane.leftAnchor="210.0" />
+                        <TextField fx:id="txtProdName" editable="false" layoutX="210.0" layoutY="105.0" prefHeight="30.0" prefWidth="410.0" AnchorPane.leftAnchor="210.0" />
+                        <TextField fx:id="txtUser" editable="false" layoutX="430.0" layoutY="29.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.leftAnchor="430.0" />
+                        <TextField fx:id="txtPrice" editable="false" layoutX="210.0" layoutY="148.0" prefHeight="30.0" prefWidth="150.0" AnchorPane.leftAnchor="210.0" />
+                        <TextField fx:id="txtCant" layoutX="430.0" layoutY="148.0" onKeyPressed="#Cantkpr" prefHeight="30.0" prefWidth="190.0" AnchorPane.leftAnchor="430.0" />
                         <Label layoutX="347.0" layoutY="73.0" text="DNI Cliente:" />
-                        <TextField layoutX="430.0" layoutY="68.0" prefHeight="30.0" prefWidth="190.0" />
+                        <TextField fx:id="txtDniCli" layoutX="430.0" layoutY="68.0" onKeyPressed="#dniCkpr" prefHeight="30.0" prefWidth="190.0" />
                         <Label layoutX="126.0" layoutY="73.0" text="Tipo cliente:" />
-                        <ComboBox layoutX="210.0" layoutY="68.0" prefHeight="30.0" prefWidth="130.0" />
+                        <ComboBox fx:id="cmbCli" layoutX="210.0" layoutY="68.0" prefHeight="30.0" prefWidth="130.0" />
                      </children>
                   </AnchorPane>
                </center>
                <bottom>
                   <AnchorPane prefHeight="60.0" prefWidth="730.0" styleClass="pnl-title" BorderPane.alignment="CENTER">
                      <children>
-                        <Button layoutX="220.0" layoutY="13.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="290.0" styleClass="btn-add" text="Agregar producto" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0">
+                        <Button fx:id="btnAgrProd" layoutX="220.0" layoutY="13.0" mnemonicParsing="false" onAction="#AgrProd" prefHeight="30.0" prefWidth="290.0" styleClass="btn-add" text="Agregar producto" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -118,7 +118,7 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label layoutX="14.0" layoutY="20.0" prefHeight="30.0" prefWidth="150.0" text="L.0" textFill="WHITE">
+                                          <Label fx:id="lblSTot" layoutX="14.0" layoutY="20.0" prefHeight="30.0" prefWidth="150.0" text="L.0" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
@@ -140,7 +140,7 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label layoutX="13.0" layoutY="20.0" prefHeight="30.0" prefWidth="150.0" text="L.0" textFill="WHITE">
+                                          <Label fx:id="lblDesc" layoutX="13.0" layoutY="20.0" prefHeight="30.0" prefWidth="150.0" text="L.0" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
@@ -162,7 +162,7 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <Label layoutX="13.0" layoutY="20.0" prefHeight="30.0" prefWidth="150.0" text="L.0" textFill="WHITE">
+                                          <Label fx:id="lblTotal" layoutX="13.0" layoutY="20.0" prefHeight="30.0" prefWidth="150.0" text="L.0" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
@@ -205,10 +205,15 @@
                      <center>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tblDet" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
+                                  <TableColumn text="ID Producto" />
+                                  <TableColumn prefWidth="194.0" text="Descripcion" />
+                                    <TableColumn prefWidth="78.0" text="Cantidad" />
+                                    <TableColumn prefWidth="86.0" text="Precio" />
+                                    <TableColumn prefWidth="98.0" text="Impuesto" />
+                                    <TableColumn prefWidth="112.0" text="Descuento" />
+                                    <TableColumn prefWidth="81.0" text="Lote" />
                                 </columns>
                               </TableView>
                            </children>
@@ -222,7 +227,7 @@
                         <Insets bottom="5.0" left="5.0" top="5.0" />
                      </BorderPane.margin>
                      <children>
-                        <Button alignment="CENTER" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="320.0" styleClass="btn-save" text="GUARDAR">
+                        <Button fx:id="btnSaveBill" alignment="CENTER" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#SaveBill" prefHeight="60.0" prefWidth="320.0" styleClass="btn-save" text="GUARDAR">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -234,7 +239,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button alignment="CENTER" layoutX="15.0" layoutY="88.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="320.0" styleClass="btn-remove" text="REMOVER PRODUCTO">
+                        <Button fx:id="RemProd" alignment="CENTER" layoutX="15.0" layoutY="88.0" mnemonicParsing="false" onAction="#RemProd" prefHeight="60.0" prefWidth="320.0" styleClass="btn-remove" text="REMOVER PRODUCTO">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -246,7 +251,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button alignment="CENTER" layoutX="15.0" layoutY="161.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="320.0" styleClass="btn-clean-up" text="LIMPIAR">
+                        <Button fx:id="cleanTxt" alignment="CENTER" layoutX="15.0" layoutY="161.0" mnemonicParsing="false" onAction="#clean" prefHeight="60.0" prefWidth="320.0" styleClass="btn-clean-up" text="LIMPIAR">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>

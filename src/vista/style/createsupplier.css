@@ -1,0 +1,52 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.pnl-title{
+    -fx-background-color: #E1E1E1;
+}
+
+.btn-add{
+    -fx-background-color: #188E22;
+    -fx-text-fill: white;
+}
+
+.btn-add:hover{
+    -fx-background-color: #2C9628;
+}
+
+.btn-save{
+    -fx-background-color: #188E22;
+    -fx-text-fill: white;
+}
+
+.btn-save:hover{
+    -fx-background-color: #2C9628;
+}
+
+.btn-clean-up{
+    -fx-background-color: #444DF2;
+    -fx-text-fill: white;
+}
+
+.btn-clean-up:hover{
+    -fx-background-color: #5057DB;
+}
+
+.btn-remove{
+    -fx-background-color: #B11919;
+    -fx-text-fill: white;
+}
+
+.btn-remove:hover{
+    -fx-background-color: #DC3535;
+}
+
+.btn-edit{
+    -fx-background-color: #BEBB13;
+    -fx-text-fill: white;
+}
+
+.btn-edit:hover{
+    -fx-background-color: #D1CD17;
+}

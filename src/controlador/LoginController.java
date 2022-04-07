@@ -69,6 +69,7 @@ public class LoginController implements Initializable {
             MainMenuController controlador = loader.getController();
             controlador.recibirId(id);
             Scene scene = new Scene(root);
+            stage.setFullScreen(true);
             stage.setResizable(true);
             stage.setMaximized(true);
             stage.setTitle("Dashboard");

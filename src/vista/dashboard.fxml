@@ -3,103 +3,189 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="900.0" styleClass="pnl" stylesheets="@style/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.DashboardController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" styleClass="pnl" stylesheets="@style/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.DashboardController">
    <children>
-      <Pane prefHeight="55.0" prefWidth="910.0" styleClass="pnl-title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Dashboard">
+            <Label layoutX="14.0" layoutY="15.0" text="Dashboard">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <FlowPane layoutY="55.0" prefHeight="200.0" prefWidth="910.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
-         <children>
-            <Pane prefHeight="150.0" prefWidth="390.0" styleClass="card-ventas">
-               <FlowPane.margin>
-                  <Insets left="15.0" right="5.0" top="15.0" />
-               </FlowPane.margin>
+      <BorderPane layoutY="55.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <center>
+            <AnchorPane maxWidth="1100.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/crecimiento.png" />
-                     </image>
-                  </ImageView>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1200.0" prefWidth="1055.0">
+                           <children>
+                              <BorderPane prefHeight="300.0" prefWidth="1055.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <center>
+                                    <HBox prefHeight="300.0" prefWidth="1055.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="365.0" styleClass="card-1">
+                                             <children>
+                                                <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" layoutX="15.0" layoutY="15.0" prefHeight="20.0" prefWidth="320.0" text="TOTAL VENTAS HOY">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Label alignment="CENTER" layoutX="16.0" layoutY="110.0" prefHeight="70.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="48.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="365.0" styleClass="card-2">
+                                             <children>
+                                                <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" layoutX="15.0" layoutY="15.0" prefHeight="20.0" prefWidth="320.0" text="TOTAL VENTAS DE LA SEMANA">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Label alignment="CENTER" layoutX="17.0" layoutY="110.0" prefHeight="70.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="48.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </AnchorPane>
+                                          <AnchorPane prefHeight="200.0" prefWidth="365.0" styleClass="card-3">
+                                             <children>
+                                                <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                                   <children>
+                                                      <Label alignment="CENTER" layoutX="15.0" layoutY="15.0" prefHeight="20.0" prefWidth="320.0" text="TOTAL VENTAS DEL MES">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Label alignment="CENTER" layoutX="16.0" layoutY="110.0" prefHeight="70.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="48.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </AnchorPane>
+                                       </children>
+                                    </HBox>
+                                 </center>
+                              </BorderPane>
+                              <BorderPane layoutY="300.0" prefHeight="450.0" prefWidth="1055.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <center>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="card-4" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </BorderPane.margin>
+                                       <children>
+                                          <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                             <children>
+                                                <Label alignment="CENTER" layoutX="14.0" layoutY="15.0" prefHeight="25.0" prefWidth="1010.0" text="VENTAS DE LA SEMANA">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                          <LineChart layoutX="5.0" layoutY="65.0" prefHeight="400.0" prefWidth="1034.0">
+                                            <xAxis>
+                                              <CategoryAxis prefHeight="30.0" prefWidth="975.0" side="BOTTOM" tickLabelFill="WHITE" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+                                            </yAxis>
+                                          </LineChart>
+                                       </children>
+                                    </AnchorPane>
+                                 </center>
+                              </BorderPane>
+                              <BorderPane layoutY="775.0" prefHeight="400.0" prefWidth="1055.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <center>
+                                    <AnchorPane prefHeight="400.0" prefWidth="878.0" styleClass="card-5" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </BorderPane.margin>
+                                       <children>
+                                          <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                             <children>
+                                                <Label alignment="CENTER" layoutX="14.0" layoutY="15.0" prefHeight="20.0" prefWidth="625.0" text="TOP USUARIOS CON MAS VENTAS">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                          <BarChart layoutX="4.0" layoutY="59.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="59.0">
+                                            <xAxis>
+                                              <CategoryAxis prefHeight="25.0" prefWidth="598.0" side="BOTTOM" tickLabelFill="WHITE" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+                                            </yAxis>
+                                          </BarChart>
+                                       </children>
+                                    </AnchorPane>
+                                 </center>
+                                 <right>
+                                    <AnchorPane prefHeight="400.0" prefWidth="370.0" styleClass="card-6" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </BorderPane.margin>
+                                       <children>
+                                          <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                             <children>
+                                                <Label alignment="CENTER" layoutX="14.0" layoutY="15.0" prefHeight="20.0" prefWidth="335.0" text="TOTAL DE VENTAS POR USUARIOS">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </Pane>
+                                          <PieChart layoutX="4.0" layoutY="59.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="65.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </right>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
                </children>
-            </Pane>
-            <Pane prefHeight="150.0" prefWidth="390.0" styleClass="card-clientes">
-               <FlowPane.margin>
-                  <Insets left="5.0" right="5.0" top="15.0" />
-               </FlowPane.margin>
-               <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/kyc.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-            <Pane prefHeight="150.0" prefWidth="390.0" styleClass="card-procuto-vendido">
-               <FlowPane.margin>
-                  <Insets left="5.0" right="5.0" top="15.0" />
-               </FlowPane.margin>
-               <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/productos-lacteos.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-            <Pane prefHeight="150.0" prefWidth="390.0" styleClass="card-procuto-vendido">
-               <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/productos-lacteos.png" />
-                     </image>
-                  </ImageView>
-               </children>
-               <FlowPane.margin>
-                  <Insets right="10.0" top="15.0" />
-               </FlowPane.margin>
-            </Pane>
-         </children>
-      </FlowPane>
-      <AnchorPane layoutY="397.0" prefHeight="304.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="396.0">
-         <children>
-            <Pane layoutY="6.0" prefHeight="55.0" prefWidth="900.0" styleClass="pnl-title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
-               <children>
-                  <Label layoutX="14.0" layoutY="14.0" text="Ventas totales del año">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <BorderPane layoutY="61.0" prefHeight="243.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="61.0">
-               <center>
-                  <BarChart BorderPane.alignment="CENTER">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </BarChart>
-               </center>
-            </BorderPane>
-         </children>
-      </AnchorPane>
+            </AnchorPane>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>
