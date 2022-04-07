@@ -48,3 +48,11 @@
 .btn-remove:hover{
     -fx-background-color: #DC3535;
 }
+
+.btn-search{
+    -fx-background-color: #cccccc;
+}
+
+.btn-search:hover{
+    -fx-background-color: white;
+}

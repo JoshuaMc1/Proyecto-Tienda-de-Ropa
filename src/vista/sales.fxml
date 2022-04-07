@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" stylesheets="@style/sales.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SalesController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" stylesheets="@style/sales.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SalesController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -53,16 +53,25 @@
                         <Label layoutX="63.0" layoutY="110.0" text="Nombre del producto:" />
                         <Label layoutX="159.0" layoutY="153.0" text="Precio:" />
                         <Label layoutX="365.0" layoutY="153.0" text="Cantidad:" />
-                        <Label layoutX="371.0" layoutY="34.0" text="Usuario:" />
-                        <TextField fx:id="txtIDProd" layoutX="210.0" layoutY="29.0" onKeyPressed="#IDProdkpr" prefHeight="30.0" prefWidth="150.0" AnchorPane.leftAnchor="210.0" />
+                        <Label layoutX="430.0" layoutY="34.0" text="Usuario:" />
+                        <TextField fx:id="txtIDProd" layoutX="210.0" layoutY="29.0" onKeyPressed="#IDProdkpr" prefHeight="30.0" prefWidth="160.0" AnchorPane.leftAnchor="210.0" />
                         <TextField fx:id="txtProdName" editable="false" layoutX="210.0" layoutY="105.0" prefHeight="30.0" prefWidth="410.0" AnchorPane.leftAnchor="210.0" />
-                        <TextField fx:id="txtUser" editable="false" layoutX="430.0" layoutY="29.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.leftAnchor="430.0" />
+                        <TextField fx:id="txtUser" editable="false" layoutX="489.0" layoutY="29.0" prefHeight="30.0" prefWidth="130.0" AnchorPane.leftAnchor="489.0" />
                         <TextField fx:id="txtPrice" editable="false" layoutX="210.0" layoutY="148.0" prefHeight="30.0" prefWidth="150.0" AnchorPane.leftAnchor="210.0" />
                         <TextField fx:id="txtCant" layoutX="430.0" layoutY="148.0" onKeyPressed="#Cantkpr" prefHeight="30.0" prefWidth="190.0" AnchorPane.leftAnchor="430.0" />
                         <Label layoutX="347.0" layoutY="73.0" text="DNI Cliente:" />
                         <TextField fx:id="txtDniCli" layoutX="430.0" layoutY="68.0" onKeyPressed="#dniCkpr" prefHeight="30.0" prefWidth="190.0" />
                         <Label layoutX="126.0" layoutY="73.0" text="Tipo cliente:" />
                         <ComboBox fx:id="cmbCli" layoutX="210.0" layoutY="68.0" prefHeight="30.0" prefWidth="130.0" />
+                        <Button layoutX="379.0" layoutY="29.0" mnemonicParsing="false" styleClass="btn-search">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/buscando.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
                </center>
