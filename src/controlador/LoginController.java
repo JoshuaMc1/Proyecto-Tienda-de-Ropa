@@ -41,7 +41,7 @@ public class LoginController implements Initializable {
     private Stage stage;
     @FXML
     private AnchorPane loginWindow;
-    
+    //Objetos
     funciones fun = new funciones();
     
     @Override
@@ -70,7 +70,6 @@ public class LoginController implements Initializable {
             controlador.recibirId(id);
             Scene scene = new Scene(root);
             stage.setResizable(true);
-            stage.setFullScreen(true);
             stage.setMaximized(true);
             stage.setTitle("Dashboard");
             stage.setScene(scene);

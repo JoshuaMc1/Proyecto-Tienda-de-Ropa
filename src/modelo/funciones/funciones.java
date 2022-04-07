@@ -43,4 +43,16 @@ public class funciones {
         }
         return datos;
     }
+    
+    public String crud(String sql){
+        String msg = "";
+        try{
+            con.ConectarBasedeDatos();
+            con.sentencia.executeQuery(sql);
+            msg = "Datos registrados exitosamente";
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+        return msg;
+    }
 }
