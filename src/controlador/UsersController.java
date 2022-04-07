@@ -7,12 +7,7 @@ package controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -22,22 +17,6 @@ import javafx.scene.input.MouseEvent;
  */
 public class UsersController implements Initializable {
 
-    @FXML
-    private Button btnGuardar;
-    @FXML
-    private Button btnEliminar;
-    @FXML
-    private Button btnEditar;
-    @FXML
-    private Button btnLimpiar;
-    @FXML
-    private TableView<?> tblDataUserAdd;
-    @FXML
-    private ImageView txtImgUser;
-    @FXML
-    private Button btnSearchPhoto;
-    @FXML
-    private TextField txtDNI;
 
     /**
      * Initializes the controller class.
@@ -47,9 +26,7 @@ public class UsersController implements Initializable {
         // TODO
     }    
 
-    @FXML
     private void clickGuardar(MouseEvent event) {
         System.out.print("Guardado");
     }
-    
 }
