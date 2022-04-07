@@ -1,6 +1,5 @@
 package controlador;
 
-import Conexion.ConexionMySQL;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -10,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import modelo.ConexionMySQL;
 import modelo.funciones.funciones;
 
 public class SalesController implements Initializable {
