@@ -1,6 +1,7 @@
 package controlador.clases;
 
 import java.io.InputStream;
+import java.sql.Blob;
 
 public class Usuario {
     public String idEmp;
@@ -12,13 +13,13 @@ public class Usuario {
     public String Genero;
     public String Direccion;
     public String Telefono;
-    public String Correo;
     public String Cargo;
-    public InputStream entradaFoto;
+    public String Edad;
+    public Blob entradaFoto;
 
-
-    public Usuario(String id, String Nombres, String Apellidos, String Usuario, String DNI, String Genero, String Direccion, String Telefono, String Correo, String Cargo, InputStream entradaFoto) {
-        this.idEmp = id;
+    public Usuario(String idEmp, String idUsuario, String Nombres, String Apellidos, String Usuario, String DNI, String Genero, String Direccion, String Telefono, String Cargo, String Edad, Blob entradaFoto) {
+        this.idEmp = idEmp;
+        this.idUsuario = idUsuario;
         this.Nombres = Nombres;
         this.Apellidos = Apellidos;
         this.Usuario = Usuario;
@@ -26,9 +27,20 @@ public class Usuario {
         this.Genero = Genero;
         this.Direccion = Direccion;
         this.Telefono = Telefono;
-        this.Correo = Correo;
         this.Cargo = Cargo;
+        this.Edad = Edad;
         this.entradaFoto = entradaFoto;
+    }
+
+    public Usuario() {
+    }
+
+    public String getEdad() {
+        return Edad;
+    }
+
+    public void setEdad(String Edad) {
+        this.Edad = Edad;
     }
     
     public String getNombres() {
@@ -79,14 +91,6 @@ public class Usuario {
         this.Telefono = Telefono;
     }
 
-    public String getCorreo() {
-        return Correo;
-    }
-
-    public void setCorreo(String Correo) {
-        this.Correo = Correo;
-    }
-
     public String getCargo() {
         return Cargo;
     }
@@ -95,11 +99,11 @@ public class Usuario {
         this.Cargo = Cargo;
     }
 
-    public InputStream getEntradaFoto() {
+    public Blob getEntradaFoto() {
         return entradaFoto;
     }
 
-    public void setEntradaFoto(InputStream entradaFoto) {
+    public void setEntradaFoto(Blob entradaFoto) {
         this.entradaFoto = entradaFoto;
     }
 

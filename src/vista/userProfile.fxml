@@ -41,7 +41,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </BorderPane.margin>
                                  <children>
-                                    <ImageView fitHeight="350.0" fitWidth="230.0" layoutX="14.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="txtProfile" fitHeight="350.0" fitWidth="230.0" layoutX="14.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
                                     <Button layoutX="14.0" layoutY="392.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="230.0" styleClass="btn" text="Editar foto" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -61,13 +61,13 @@
                                     <Label layoutX="305.0" layoutY="267.0" text="Telefono" />
                                     <Label layoutX="416.0" layoutY="212.0" text="Genero" />
                                     <Label layoutX="305.0" layoutY="324.0" text="Dirección" />
-                                    <TextField disable="true" layoutX="305.0" layoutY="57.0" prefHeight="30.0" prefWidth="295.0" />
-                                    <TextField disable="true" layoutX="305.0" layoutY="113.0" prefHeight="30.0" prefWidth="295.0" />
-                                    <TextField disable="true" layoutX="305.0" layoutY="170.0" prefHeight="30.0" prefWidth="295.0" />
-                                    <TextField disable="true" layoutX="305.0" layoutY="231.0" prefHeight="30.0" prefWidth="100.0" />
-                                    <ComboBox disable="true" layoutX="416.0" layoutY="231.0" prefHeight="30.0" prefWidth="184.0" />
-                                    <TextField disable="true" layoutX="305.0" layoutY="287.0" prefHeight="30.0" prefWidth="295.0" />
-                                    <TextField disable="true" layoutX="305.0" layoutY="344.0" prefHeight="30.0" prefWidth="295.0" />
+                                    <TextField fx:id="txtDNI" disable="true" layoutX="305.0" layoutY="57.0" prefHeight="30.0" prefWidth="295.0" />
+                                    <TextField fx:id="txtNombre" disable="true" layoutX="305.0" layoutY="113.0" prefHeight="30.0" prefWidth="295.0" />
+                                    <TextField fx:id="txtApellido" disable="true" layoutX="305.0" layoutY="170.0" prefHeight="30.0" prefWidth="295.0" />
+                                    <TextField fx:id="txtEdad" disable="true" layoutX="305.0" layoutY="231.0" prefHeight="30.0" prefWidth="100.0" />
+                                    <ComboBox fx:id="slcGenero" disable="true" layoutX="416.0" layoutY="231.0" prefHeight="30.0" prefWidth="184.0" />
+                                    <TextField fx:id="txtTelefono" disable="true" layoutX="305.0" layoutY="287.0" prefHeight="30.0" prefWidth="295.0" />
+                                    <TextField fx:id="txtDireccion" disable="true" layoutX="305.0" layoutY="344.0" prefHeight="30.0" prefWidth="295.0" />
                                     <Button layoutX="307.0" layoutY="392.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="140.0" styleClass="btn" text="Editar" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="16.0" />

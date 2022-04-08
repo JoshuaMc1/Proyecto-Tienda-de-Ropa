@@ -66,7 +66,7 @@ public class LoginController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/mainMenu.fxml"));
             Parent root = loader.load();
-            MainMenuController controlador = loader.getController();
+            MainMenuController controlador = loader.<MainMenuController>getController();
             controlador.recibirId(id);
             Scene scene = new Scene(root);
             stage.setFullScreen(true);

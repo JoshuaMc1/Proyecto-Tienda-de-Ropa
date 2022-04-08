@@ -19,18 +19,18 @@
    <children>
       <BorderPane fx:id="panelMenu" prefHeight="700.0" prefWidth="290.0" styleClass="principal-pane" stylesheets="@style/mainmenu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <Pane fx:id="pnlProfileUser" onMouseClicked="#openProfileModal" prefHeight="103.0" prefWidth="290.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="pnlProfileUser" onMouseClicked="#openProfileModal" prefHeight="148.0" prefWidth="290.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="imgFoto" fitHeight="93.0" fitWidth="88.0" layoutX="10.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgFoto" fitHeight="135.0" fitWidth="125.0" layoutX="5.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/businessman.png" />
                      </image></ImageView>
-                  <Label fx:id="txtUsuario" layoutX="112.0" layoutY="27.0" prefHeight="25.0" prefWidth="178.0" text="Joshua Mclean" textFill="WHITE">
+                  <Label fx:id="txtUsuario" alignment="CENTER" layoutX="116.0" layoutY="52.0" prefHeight="25.0" prefWidth="168.0" text="Joshua Mclean" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="txtRol" layoutX="114.0" layoutY="52.0" prefHeight="20.0" prefWidth="173.0" text="Administrador" textFill="WHITE">
+                  <Label fx:id="txtRol" alignment="CENTER" layoutX="115.0" layoutY="77.0" prefHeight="20.0" prefWidth="166.0" text="Administrador" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
                      </font>

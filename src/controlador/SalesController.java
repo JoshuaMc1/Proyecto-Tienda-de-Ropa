@@ -1,4 +1,4 @@
-package controlador;
+    package controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,7 +19,6 @@ public class SalesController implements Initializable {
 
     private funciones fun = new funciones();
     ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
-    private String bd = "tienda_de_ropa_2"; //nombre de la bd
     
     @FXML
     private Button btnAgProd;
