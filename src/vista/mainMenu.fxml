@@ -19,7 +19,7 @@
    <children>
       <BorderPane fx:id="panelMenu" prefHeight="700.0" prefWidth="290.0" styleClass="principal-pane" stylesheets="@style/mainmenu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <Pane prefHeight="103.0" prefWidth="290.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="pnlProfileUser" onMouseClicked="#openProfileModal" prefHeight="103.0" prefWidth="290.0" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fx:id="imgFoto" fitHeight="93.0" fitWidth="88.0" layoutX="10.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                      <image>

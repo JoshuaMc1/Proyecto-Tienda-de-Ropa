@@ -1,14 +1,286 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.UserProfileController">
-    <stylesheets>
-        <URL value="@/vista/style/userprofile.css"/>
-    </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="700.0" styleClass="mainFxmlClass" stylesheets="@style/userprofile.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.UserProfileController">
+   <children>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Perfil de usuario">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="color-1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <top>
+                              <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="15.0" text="Datos de usuario">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </top>
+                           <center>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="pnl" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </BorderPane.margin>
+                                 <children>
+                                    <ImageView fitHeight="350.0" fitWidth="230.0" layoutX="14.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button layoutX="14.0" layoutY="392.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="230.0" styleClass="btn" text="Editar foto" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/galeria.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Button>
+                                    <Label layoutX="305.0" layoutY="37.0" text="DNI" />
+                                    <Label layoutX="304.0" layoutY="93.0" text="Nombre" />
+                                    <Label layoutX="307.0" layoutY="150.0" text="Apellido" />
+                                    <Label layoutX="307.0" layoutY="212.0" text="Edad" />
+                                    <Label layoutX="305.0" layoutY="267.0" text="Telefono" />
+                                    <Label layoutX="416.0" layoutY="212.0" text="Genero" />
+                                    <Label layoutX="305.0" layoutY="324.0" text="Dirección" />
+                                    <TextField disable="true" layoutX="305.0" layoutY="57.0" prefHeight="30.0" prefWidth="295.0" />
+                                    <TextField disable="true" layoutX="305.0" layoutY="113.0" prefHeight="30.0" prefWidth="295.0" />
+                                    <TextField disable="true" layoutX="305.0" layoutY="170.0" prefHeight="30.0" prefWidth="295.0" />
+                                    <TextField disable="true" layoutX="305.0" layoutY="231.0" prefHeight="30.0" prefWidth="100.0" />
+                                    <ComboBox disable="true" layoutX="416.0" layoutY="231.0" prefHeight="30.0" prefWidth="184.0" />
+                                    <TextField disable="true" layoutX="305.0" layoutY="287.0" prefHeight="30.0" prefWidth="295.0" />
+                                    <TextField disable="true" layoutX="305.0" layoutY="344.0" prefHeight="30.0" prefWidth="295.0" />
+                                    <Button layoutX="307.0" layoutY="392.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="140.0" styleClass="btn" text="Editar" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/editar.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button layoutX="459.0" layoutY="392.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="140.0" styleClass="btn" text="Guardar" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/diskette.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </center>
+                        </BorderPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Información">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="pnl" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <center>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="color-3" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </BorderPane.margin>
+                                 <children>
+                                    <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="14.0" layoutY="15.0" prefHeight="25.0" prefWidth="295.0" text="Herramientas y tecnologias utilizadas">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="17.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/java.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="79.0" layoutY="105.0" text="JavaFX" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="17.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/icons8-logo-de-mysql-144.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="74.0" layoutY="168.0" text="MySQL" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="17.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/netbeans.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="78.0" layoutY="235.0" text="Netbeans 8.2" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="154.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/github.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="216.0" layoutY="108.0" text="GitHub" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="154.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/scene-builder.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="216.0" layoutY="171.0" text="SceneBuilder" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </center>
+                           <right>
+                              <AnchorPane prefHeight="300.0" prefWidth="350.0" styleClass="color-5" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </BorderPane.margin>
+                                 <children>
+                                    <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="24.0" layoutY="15.0" prefHeight="25.0" prefWidth="295.0" text="Integrantes del grupo">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/jefe.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/mujer.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/jefe.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="83.0" layoutY="92.0" text="Joshua David Mclean" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="83.0" layoutY="152.0" text="Yosary Betsabe Paz" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="83.0" layoutY="213.0" text="Carlos Wilberto Rodríguez" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </right>
+                           <bottom>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="color-2" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </BorderPane.margin>
+                                 <children>
+                                    <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="14.0" layoutY="15.0" prefHeight="25.0" prefWidth="650.0" text="Perfiles de GitHub">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                    <Hyperlink fx:id="txtGitJoshua" layoutX="47.0" layoutY="77.0" onAction="#openBrowser1" text="https://github.com/JoshuaMc1" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/github.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                    <Hyperlink fx:id="txtGitYosary" layoutX="208.0" layoutY="130.0" onAction="#openBrowser3" text="https://github.com/YosaryBb" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/github.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                    <Hyperlink fx:id="txtGitCarlos" layoutX="332.0" layoutY="77.0" onAction="#openBrowser2" text="https://github.com/AvailableNameWill" textFill="WHITE">
+                                       <graphic>
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/github.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Hyperlink>
+                                 </children>
+                              </AnchorPane>
+                           </bottom>
+                        </BorderPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
 </AnchorPane>

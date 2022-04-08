@@ -2,6 +2,48 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
+.pnl{
+    -fx-background-color: white;
+}
 
+.pnl-title{
+    -fx-background-color: #E1E1E1;
+}
+
+.color-1{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #188E22, #188E78);
+}
+
+.color-2{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #188E78, #184B8E);
+}
+
+.color-3{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #184B8E, #39188E);
+}
+
+.color-4{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #39188E, #8B188E);
+}
+
+.color-5{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #8B188E, #8E1843);
+}
+
+.color-6{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #8E1843, #C57210);
+}
+
+.btn{
+    -fx-background-color: linear-gradient(to bottom right, #188E22, #188E78);
+}
+
+.btn:hover{
+    -fx-background-color: linear-gradient(to bottom right, #8B188E, #8E1843);
 }

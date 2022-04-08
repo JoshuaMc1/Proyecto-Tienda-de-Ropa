@@ -9,17 +9,24 @@ import controlador.clases.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import modelo.funciones.funciones;
 
 /**
@@ -50,8 +57,6 @@ public class MainMenuController implements Initializable {
     @FXML
     private Button btnUsuarios;
     @FXML
-    private Button btnCompras;
-    @FXML
     private Button btnReportes;
     @FXML
     
@@ -61,6 +66,8 @@ public class MainMenuController implements Initializable {
     
     //Objetos
     funciones fun = new funciones();
+    @FXML
+    private Pane pnlProfileUser;
     
     /**
      * Initializes the controller class.
@@ -125,7 +132,6 @@ public class MainMenuController implements Initializable {
         }
     }
     
-    @FXML
     public void recibirId(int id){
         this.idUser = id;
     }
@@ -134,11 +140,24 @@ public class MainMenuController implements Initializable {
         
     }
     
-    @FXML
-    private void openShoppin(ActionEvent event) {
-    }
 
     @FXML
     private void openReports(ActionEvent event) {
+    }
+
+    @FXML
+    private void openProfileModal(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/userProfile.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
