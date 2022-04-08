@@ -39,3 +39,17 @@
     -fx-opacity: 0.8;
     -fx-background-color: linear-gradient(to bottom right, #8E1843, #C57210);
 }
+
+.btn-pdf{
+    -fx-background-color: white;
+    -fx-border-color: #B11919;
+    -fx-border-width: 1px;
+    -fx-text-fill: #B11919;
+}
+
+.btn-excel{
+    -fx-background-color: white;
+    -fx-border-color: #188E22;
+    -fx-border-width: 1px;
+    -fx-text-fill: #188E22;
+}

@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" stylesheets="@style/inventory.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InventoryController">
+<AnchorPane id="AnchorPane" prefHeight="1300.0" prefWidth="1100.0" stylesheets="@style/inventory.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InventoryController">
    <children>
       <Pane prefHeight="55.0" prefWidth="1100.0" styleClass="pnl-title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -58,7 +58,7 @@
                                                    <children>
                                                       <Pane prefHeight="55.0" prefWidth="340.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
                                                          <children>
-                                                            <Label alignment="CENTER" layoutX="17.0" layoutY="15.0" prefHeight="20.0" prefWidth="300.0" text="INVENTARIO TOTAL">
+                                                            <Label layoutX="17.0" layoutY="15.0" prefHeight="25.0" prefWidth="160.0" text="INVENTARIO TOTAL">
                                                                <font>
                                                                   <Font name="System Bold" size="16.0" />
                                                                </font>
@@ -69,14 +69,9 @@
                                                             <Image url="@img/estante.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <Label alignment="CENTER" layoutX="134.0" layoutY="123.0" prefHeight="20.0" prefWidth="200.0" text="Nombre del producto" textFill="WHITE">
+                                                      <Label alignment="CENTER" layoutX="128.0" layoutY="96.0" prefHeight="122.0" prefWidth="200.0" text="L. 0" textFill="WHITE">
                                                          <font>
-                                                            <Font name="System Bold" size="16.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label alignment="CENTER" layoutX="134.0" layoutY="162.0" prefHeight="20.0" prefWidth="200.0" text="0" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="System Bold" size="18.0" />
+                                                            <Font name="System Bold" size="20.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
@@ -88,7 +83,7 @@
                                                    <children>
                                                       <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
                                                          <children>
-                                                            <Label layoutX="5.0" layoutY="15.0" prefHeight="25.0" prefWidth="330.0" text="CANTIDAD DE INVENTARIO ACTUAL (Unidades)">
+                                                            <Label layoutX="5.0" layoutY="15.0" prefHeight="25.0" prefWidth="322.0" text="CANTIDAD DE INVENTARIO ACTUAL (Unidades)">
                                                                <font>
                                                                   <Font name="System Bold" size="16.0" />
                                                                </font>
@@ -119,7 +114,7 @@
                                                    <children>
                                                       <Pane layoutY="-7.0" prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
                                                          <children>
-                                                            <Label alignment="CENTER" layoutX="17.0" layoutY="15.0" prefHeight="20.0" prefWidth="300.0" text="PRODUCTO CON INVENTARIO BAJO">
+                                                            <Label layoutX="17.0" layoutY="15.0" prefHeight="25.0" prefWidth="296.0" text="PRODUCTOS CON INVENTARIO BAJO">
                                                                <font>
                                                                   <Font name="System Bold" size="16.0" />
                                                                </font>
@@ -159,6 +154,30 @@
                                                                   <Font name="System Bold" size="16.0" />
                                                                </font>
                                                             </Label>
+                                                            <Button layoutX="428.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0" styleClass="btn-pdf">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                               <graphic>
+                                                                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@img/archivo-pdf.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                            <Button layoutX="470.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0" styleClass="btn-excel">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                               <graphic>
+                                                                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@img/sobresalir.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
                                                          </children>
                                                       </Pane>
                                                       <BorderPane layoutX="14.0" layoutY="59.0" prefHeight="200.0" prefWidth="497.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="60.0">
@@ -186,11 +205,35 @@
                                                                <children>
                                                                   <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
                                                                      <children>
-                                                                        <Label alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="20.0" prefWidth="475.0" text="ENTRADAS">
+                                                                        <Label layoutX="11.0" layoutY="15.0" prefHeight="25.0" prefWidth="100.0" text="ENTRADAS">
                                                                            <font>
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
                                                                         </Label>
+                                                                        <Button layoutX="215.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" styleClass="btn-pdf" text="Exportar PDF">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                           <graphic>
+                                                                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                                                 <image>
+                                                                                    <Image url="@img/archivo-pdf.png" />
+                                                                                 </image>
+                                                                              </ImageView>
+                                                                           </graphic>
+                                                                        </Button>
+                                                                        <Button layoutX="364.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="124.0" styleClass="btn-excel" text="Exportar Excel">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                           <graphic>
+                                                                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                                                 <image>
+                                                                                    <Image url="@img/sobresalir.png" />
+                                                                                 </image>
+                                                                              </ImageView>
+                                                                           </graphic>
+                                                                        </Button>
                                                                      </children>
                                                                   </Pane>
                                                                   <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="14.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
@@ -212,11 +255,35 @@
                                                                <children>
                                                                   <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
                                                                      <children>
-                                                                        <Label alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="20.0" prefWidth="475.0" text="SALIDAS">
+                                                                        <Label layoutX="11.0" layoutY="15.0" prefHeight="25.0" prefWidth="90.0" text="SALIDAS">
                                                                            <font>
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
                                                                         </Label>
+                                                                        <Button layoutX="215.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" styleClass="btn-pdf" text="Exportar PDF">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                           <graphic>
+                                                                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                                                 <image>
+                                                                                    <Image url="@img/archivo-pdf.png" />
+                                                                                 </image>
+                                                                              </ImageView>
+                                                                           </graphic>
+                                                                        </Button>
+                                                                        <Button layoutX="364.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="124.0" styleClass="btn-excel" text="Exportar Excel">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="12.0" />
+                                                                           </font>
+                                                                           <graphic>
+                                                                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                                                 <image>
+                                                                                    <Image url="@img/sobresalir.png" />
+                                                                                 </image>
+                                                                              </ImageView>
+                                                                           </graphic>
+                                                                        </Button>
                                                                      </children>
                                                                   </Pane>
                                                                   <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="14.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
@@ -248,11 +315,35 @@
                                                          <children>
                                                             <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
                                                                <children>
-                                                                  <Label alignment="CENTER" layoutX="11.0" layoutY="15.0" prefHeight="20.0" prefWidth="1020.0" text="CANTIDAD DE PRODUCTOS POR TIPO DE PRODUCTO">
+                                                                  <Label layoutX="11.0" layoutY="15.0" prefHeight="25.0" prefWidth="420.0" text="CANTIDAD DE PRODUCTOS POR TIPO DE PRODUCTO">
                                                                      <font>
                                                                         <Font name="System Bold" size="16.0" />
                                                                      </font>
                                                                   </Label>
+                                                                  <Button layoutX="753.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" styleClass="btn-pdf" text="Exportar PDF">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                     <graphic>
+                                                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@img/archivo-pdf.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                     </graphic>
+                                                                  </Button>
+                                                                  <Button layoutX="899.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="124.0" styleClass="btn-excel" text="Exportar Excel">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="12.0" />
+                                                                     </font>
+                                                                     <graphic>
+                                                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                                           <image>
+                                                                              <Image url="@img/sobresalir.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                     </graphic>
+                                                                  </Button>
                                                                </children>
                                                             </Pane>
                                                             <PieChart layoutX="14.0" layoutY="66.0" prefHeight="400.0" prefWidth="1028.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="66.0" />
