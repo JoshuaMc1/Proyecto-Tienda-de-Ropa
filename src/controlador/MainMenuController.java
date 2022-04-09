@@ -122,7 +122,7 @@ public class MainMenuController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/sales.fxml"));
             Parent fxml = loader.load();
             SalesController sc = loader.<SalesController>getController();
-            sc.uID = usuario.getIdUsuario();
+            sc.recibirId(Integer.parseInt(usuario.getIdUsuario()));
             //Parent fxml = FXMLLoader.load(getClass().getResource("/vista/sales.fxml"));
             pnlPrincipal.getChildren().removeAll();
             pnlPrincipal.getChildren().setAll(fxml);
