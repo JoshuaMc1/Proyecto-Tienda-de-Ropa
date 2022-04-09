@@ -24,6 +24,11 @@
     -fx-background-color: linear-gradient(to bottom right, #184B8E, #39188E);
 }
 
+.color-6{
+    -fx-opacity: 0.8;
+    -fx-background-color: linear-gradient(to bottom right, #648BD0, #D9A6A6);
+}
+
 .btn-save{
     -fx-background-color: #188E22;
     -fx-text-fill: white;
