@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" stylesheets="@style/sales.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SalesController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" stylesheets="@style/sales.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SalesController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -216,13 +216,13 @@
                            <children>
                               <TableView fx:id="tblDet" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn text="ID Producto" />
-                                  <TableColumn prefWidth="194.0" text="Descripcion" />
-                                    <TableColumn prefWidth="78.0" text="Cantidad" />
-                                    <TableColumn prefWidth="86.0" text="Precio" />
-                                    <TableColumn prefWidth="98.0" text="Impuesto" />
-                                    <TableColumn prefWidth="112.0" text="Descuento" />
-                                    <TableColumn prefWidth="81.0" text="Lote" />
+                                  <TableColumn fx:id="col_IDProd" text="ID Producto" />
+                                  <TableColumn fx:id="colDescr" prefWidth="194.0" text="Descripcion" />
+                                    <TableColumn fx:id="colCant" prefWidth="78.0" text="Cantidad" />
+                                    <TableColumn fx:id="colPrice" prefWidth="86.0" text="Precio" />
+                                    <TableColumn fx:id="colImp" prefWidth="98.0" text="Impuesto" />
+                                    <TableColumn fx:id="colDesc" prefWidth="112.0" text="Descuento" />
+                                    <TableColumn fx:id="colLote" prefWidth="81.0" text="Lote" />
                                 </columns>
                               </TableView>
                            </children>
