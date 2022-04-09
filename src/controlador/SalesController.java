@@ -27,9 +27,12 @@ public class SalesController implements Initializable {
 
     private funciones fun = new funciones();
     ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
+<<<<<<< HEAD
     private String bd = "tienda_de_ropa_2"; //nombre de la bd
     private ResultSet rs = null;
     ObservableList<Fact_Model> ol = FXCollections.observableArrayList();
+=======
+>>>>>>> 69710d595baaa8b97ccfe2e32717fb3e679834a7
     
     @FXML
     private Button btnAgProd;
