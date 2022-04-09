@@ -3,7 +3,11 @@ package modelo.funciones;
 import controlador.clases.Usuario;
 import java.sql.SQLException;
 import java.util.function.UnaryOperator;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.Pane;
@@ -88,6 +92,80 @@ public class funciones {
             ex.printStackTrace();
         }
     }*/
+    public String totalInventario() {
+        String res = "";
+        try {
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("SELECT SUM(precio*existencias) total FROM producto, inventario WHERE inventario.status='1' AND producto.status='1'");
+            if (con.resultado.next()) {
+                res = "L. " + con.resultado.getDouble("total");
+            }
+            con.DesconectarBasedeDatos();
+        } catch (SQLException e) {
+            msg(e.getMessage());
+        }
+        return res;
+    }
+
+    public String catidadInventario() {
+        String res = "";
+        try {
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("SELECT SUM(existencias) AS total FROM inventario WHERE status='1'");
+            if (con.resultado.next()) {
+                res = String.valueOf(con.resultado.getInt("total"));
+            }
+            con.DesconectarBasedeDatos();
+        } catch (SQLException e) {
+            msg(e.getMessage());
+        }
+        return res;
+    }
+    
+    public String catidadInventarioBajo() {
+        String res = "";
+        try {
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("SELECT COUNT(id_inv) AS total FROM inventario WHERE status='1' AND existencias < 15");
+            if (con.resultado.next()) {
+                res = String.valueOf(con.resultado.getInt("total"));
+            }
+            con.DesconectarBasedeDatos();
+        } catch (SQLException e) {
+            msg(e.getMessage());
+        }
+        return res;
+    }
+    
+    public ObservableList<XYChart.Data<String, Number>> datosGrafico1(){
+        ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
+        try {
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("SELECT p.descripcion, inv.existencias FROM producto p INNER JOIN inventario inv ON inv.id_pdt = p.id_pdt WHERE inv.existencias < 15 AND inv.status='1'");
+            while(con.resultado.next()) {
+                data.add(new XYChart.Data<>(con.resultado.getString("descripcion"),con.resultado.getInt("existencias")));
+            }
+            con.DesconectarBasedeDatos();
+        } catch (SQLException e) {
+            msg(e.getMessage());
+        }
+        return data;
+    }
+    
+    public ObservableList<PieChart.Data> datosGrafico2(){
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+        try {
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("select sum(inv.existencias) as existencias, m.nombre from inventario inv INNER JOIN producto p on inv.id_pdt=p.id_pdt INNER JOIN marca m on p.id_marca=m.id_marca WHERE inv.status='1' GROUP by p.id_marca, m.nombre");
+            while(con.resultado.next()) {
+                data.add(new PieChart.Data(con.resultado.getString("nombre")+" - "+con.resultado.getInt("existencias"), con.resultado.getInt("existencias")));
+            }
+            con.DesconectarBasedeDatos();
+        } catch (SQLException e) {
+            msg(e.getMessage());
+        }
+        return data;
+    }
     
     public int validarInicio(String usuario, String clave) {
         int dato = 0;
@@ -130,24 +208,24 @@ public class funciones {
         return objeto;
     }
 
-    public int[] permisos(int id){
-        int permisos[] = {0,0,0,0};
-        try{
+    public int[] permisos(int id) {
+        int permisos[] = {0, 0, 0, 0};
+        try {
             con.ConectarBasedeDatos();
-            con.resultado = con.sentencia.executeQuery("SELECT * FROM permisos WHERE id_user='"+id+"' AND status='1'");
-            if(con.resultado.next()){
+            con.resultado = con.sentencia.executeQuery("SELECT * FROM permisos WHERE id_user='" + id + "' AND status='1'");
+            if (con.resultado.next()) {
                 permisos[0] = con.resultado.getInt("p_venta");
                 permisos[1] = con.resultado.getInt("p_compra");
                 permisos[2] = con.resultado.getInt("p_inventario");
                 permisos[3] = con.resultado.getInt("p_usuarios");
             }
             con.DesconectarBasedeDatos();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             msg(e.getMessage());
         }
         return permisos;
     }
-    
+
     public void formatTD(TextField tf, int bt) { //metodo para validar la caja de texto telefono y DNI
         UnaryOperator<TextFormatter.Change> filter = change -> {
             if (change.isContentChange()) { //si hay cambios en la caja de texto
