@@ -1,6 +1,7 @@
     package controlador;
 
 import controlador.clases.Fact_Model;
+import controlador.clases.Usuario;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,13 +27,11 @@ import modelo.funciones.funciones;
 public class SalesController implements Initializable {
 
     private funciones fun = new funciones();
+    private Usuario usr = new Usuario();
     ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
-<<<<<<< HEAD
     private String bd = "tienda_de_ropa_2"; //nombre de la bd
     private ResultSet rs = null;
     ObservableList<Fact_Model> ol = FXCollections.observableArrayList();
-=======
->>>>>>> 69710d595baaa8b97ccfe2e32717fb3e679834a7
     
     @FXML
     private Button btnAgProd;
@@ -120,9 +119,8 @@ public class SalesController implements Initializable {
             rs = buscar(sql, con);
             while(rs.next()){
                 System.out.println(rs.getString("descripcion") + " " + rs.getDouble("precio") + " " + rs.getDouble("porcentaje") + " " + rs.getInt("n_lote"));
-                //ol.add(new Fact_Model("1", rs.getString("descripcion"), "1", "10", "0.0", "0.0", "1111"));
+                ol.add(new Fact_Model("1", rs.getString("descripcion"), "1", "10", "0.0", "0.0", "1111"));
             }
-            ol.add(new Fact_Model("1", "test", "1", "10", "0.0", "0.0", "1111"));
             
             col_IDProd.setCellValueFactory(new PropertyValueFactory<>("_id"));
             colDescr.setCellValueFactory(new PropertyValueFactory<>("descr"));
@@ -151,6 +149,11 @@ public class SalesController implements Initializable {
     @FXML
     private void clean(ActionEvent evt){
         cleanTxt(pnlPrinc, "txtUser");
+    }
+    
+    @FXML
+    private void busc(ActionEvent evt){
+        
     }
     
     @FXML

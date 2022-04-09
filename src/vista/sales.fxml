@@ -63,7 +63,7 @@
                         <TextField fx:id="txtDniCli" layoutX="430.0" layoutY="68.0" onKeyPressed="#dniCkpr" prefHeight="30.0" prefWidth="190.0" />
                         <Label layoutX="126.0" layoutY="73.0" text="Tipo cliente:" />
                         <ComboBox fx:id="cmbCli" layoutX="210.0" layoutY="68.0" prefHeight="30.0" prefWidth="130.0" />
-                        <Button layoutX="379.0" layoutY="29.0" mnemonicParsing="false" styleClass="btn-search">
+                        <Button fx:id="btnSear" layoutX="379.0" layoutY="29.0" mnemonicParsing="false" onAction="#busc" styleClass="btn-search">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
