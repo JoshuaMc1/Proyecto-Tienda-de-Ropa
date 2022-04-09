@@ -5,6 +5,7 @@ import controlador.clases.Usuario;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,12 +27,16 @@ import modelo.funciones.funciones;
 
 public class SalesController implements Initializable {
 
+    public static String uID="";    
+    
     private funciones fun = new funciones();
     private Usuario usr = new Usuario();
     ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
     private String bd = "tienda_de_ropa_2"; //nombre de la bd
     private ResultSet rs = null;
     ObservableList<Fact_Model> ol = FXCollections.observableArrayList();
+    private double precio= 0.0, subt=0.0,imp=0.0,tot=0.0,s_TotG=0.0, totG =0.0, impG=0.0, vImp=0.0, txt_price=0.0;
+    private int id;
     
     @FXML
     private Button btnAgProd;
@@ -58,9 +63,6 @@ public class SalesController implements Initializable {
     @FXML
     private TableColumn<Fact_Model, String> colLote;
     
-
-    
-    
     private void fillCBox(){
         try{
             //String arr[] = {"1","2","3","4","5"};
@@ -72,6 +74,27 @@ public class SalesController implements Initializable {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    public double giveFormat(double val){
+        String formt = String.format("%.2f", val);
+        double finalD = Double.parseDouble(formt);
+        return finalD;
+    }
+    
+    private void verifyEnter(KeyEvent evt){
+        if(evt.getCode() == KeyCode.ENTER){
+            int n = 0;
+            buscartxt(n);
+        } 
+    }
+    
+    private void calCant(KeyEvent evt){
+        double _price=Double.parseDouble(txtPrice.getText());
+       if(evt.getCode() == KeyCode.ENTER){
+            _price += txt_price * Double.parseDouble(txtCant.getText());
+            txtPrice.setText(Double.toString(_price));
+        } 
     }
     
     private void request(KeyEvent evt, Node n1){
@@ -97,6 +120,45 @@ public class SalesController implements Initializable {
         }
     }    
     
+    private void setCellValue(){
+        col_IDProd.setCellValueFactory(new PropertyValueFactory<>("_id"));
+        colDescr.setCellValueFactory(new PropertyValueFactory<>("descr"));
+        colCant.setCellValueFactory(new PropertyValueFactory<>("cant"));
+        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colImp.setCellValueFactory(new PropertyValueFactory<>("isv"));
+        colDesc.setCellValueFactory(new PropertyValueFactory<>("desc"));
+        colLote.setCellValueFactory(new PropertyValueFactory<>("lote"));
+    }
+    
+    private void agrProd(String sql){
+        try{
+            rs = buscar(sql, con);
+            while(rs.next())
+                if(rs.getInt("Existencias") > Integer.parseInt(txtCant.getText())){
+                    System.out.println("mayo");
+                }
+                ol.add(new Fact_Model("1", rs.getString("descripcion"), "1", "10", "0.0", "0.0", "1111"));
+            
+            setCellValue();
+            tblDet.setItems(ol);
+            rs = null;
+            con.DesconectarBasedeDatos();
+        }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
+    }
+    
+    public void buscartxt(int _id){
+        _id = Integer.parseInt(txtIDProd.getText()); 
+        String sql = "select p.descripcion, p.precio from producto p where p.id_pdt = '" + _id + "' && status = 1";
+        try{
+            rs = buscar(sql, con);
+            if(rs.next()){
+                txtProdName.setText(rs.getString("descripcion"));
+                txtPrice.setText(Double.toString(rs.getDouble("precio")));
+                txt_price = Double.parseDouble(txtPrice.getText());
+            }
+        }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
+    }
+    
     public ResultSet buscar(String sql, ConexionMySQL con){
         try{
             con = new ConexionMySQL();
@@ -112,28 +174,10 @@ public class SalesController implements Initializable {
     
     @FXML
     private void AgrProd(ActionEvent evt){
-        try{
-            String sql = "SELECT pr.descripcion, pr.precio, de.porcentaje, iv.n_lote from producto pr " +
+        String sql = "SELECT pr.descripcion, pr.precio, de.porcentaje, iv.n_lote, iv.existencias from producto pr " +
                          " INNER JOIN inventario iv on 1 = iv.id_pdt " +
                          " INNER JOIN descuentos de on 1 = de.id_desc";
-            rs = buscar(sql, con);
-            while(rs.next()){
-                System.out.println(rs.getString("descripcion") + " " + rs.getDouble("precio") + " " + rs.getDouble("porcentaje") + " " + rs.getInt("n_lote"));
-                ol.add(new Fact_Model("1", rs.getString("descripcion"), "1", "10", "0.0", "0.0", "1111"));
-            }
-            
-            col_IDProd.setCellValueFactory(new PropertyValueFactory<>("_id"));
-            colDescr.setCellValueFactory(new PropertyValueFactory<>("descr"));
-            colCant.setCellValueFactory(new PropertyValueFactory<>("cant"));
-            colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-            colImp.setCellValueFactory(new PropertyValueFactory<>("isv"));
-            colDesc.setCellValueFactory(new PropertyValueFactory<>("desc"));
-            colLote.setCellValueFactory(new PropertyValueFactory<>("lote"));
-            tblDet.setItems(ol);
-            System.out.println(colCant.getCellData(0));
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        agrProd(sql);
     }
     
     @FXML
@@ -153,18 +197,23 @@ public class SalesController implements Initializable {
     
     @FXML
     private void busc(ActionEvent evt){
-        
+        int id=0;
+        if(!txtIDProd.getText().isEmpty()){
+            buscartxt(id);
+        }
     }
     
     @FXML
     private void IDProdkpr(KeyEvent evt){
         fun.validaNumeros(txtIDProd, 100);
+        verifyEnter(evt);
         request(evt, txtDniCli);
     }
     
     @FXML
     private void Cantkpr(KeyEvent evt){
         fun.validaNumeros(txtCant, 20);
+        calCant(evt);
         request(evt, txtPrice);
     }
     
@@ -176,5 +225,6 @@ public class SalesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         fillCBox();
+        txtUser.setText(uID);
     }    
 }
