@@ -44,7 +44,7 @@ public class SalesController implements Initializable {
     private ObservableList<Fact_Model> ol = FXCollections.observableArrayList(); //lista de tipo Fact_Model(clase) para llenar y manejar la tabla
     private double precio= 0.0, subt=0.0,imp=0.0,tot=0.0,s_TotG=0.0, totG =0.0, impG=0.0, vImp=0.0, txt_price=0.0, st=0.0,
                    vDesc=0.0, desc = 0.0, descg=0.0, precioG=0.0;
-    private int id, cantG=0, fmIndex=0;
+    private int idF, cantG=0, fmIndex=0;
     private Fact_Model fm;
     
     @FXML
@@ -52,7 +52,7 @@ public class SalesController implements Initializable {
     @FXML 
     private TextField txtIDProd, txtUser, txtDniCli, txtProdName, txtPrice, txtCant;
     @FXML
-    private Label lblSTot, lblDesc, lblTotal, lblCant;
+    private Label lblSTot, lblDesc, lblTotal, lblCant, lblFact;
     @FXML
     private AnchorPane pnlPrinc;
     @FXML
@@ -125,13 +125,13 @@ public class SalesController implements Initializable {
     }
     
     //metodo para limpiar las cajas de texto en un panel
-    private void cleanTxt(AnchorPane ap, String txtName){ // El Pane es el panel en que se encuentran las cajas de texto
+    private void cleanTxt(AnchorPane ap, String txtName, String txtName2){ // El Pane es el panel en que se encuentran las cajas de texto
         //System.out.println(txtIDProd.getParent().toString());
         try{
             for(Node n1 : ap.getChildren()){ //se usa un ciclo foreach y se recorren todos los objetos hijos del panel
                 //Node de javafx = Component de java.awt
                 if (n1 instanceof TextField) { //si el nodo es un textfield se limpia
-                    if(!n1.getId().equals(txtName)) //El unico txtfld que no se limpiara es el que muestra el id del usuario
+                    if(!n1.getId().equals(txtName) && !n1.getId().equals(txtName2)) //El unico txtfld que no se limpiara es el que muestra el id del usuario
                         ((TextField) n1).setText("");
                }
             }
@@ -149,14 +149,15 @@ public class SalesController implements Initializable {
     }
     
     private void agrProd(String sql){
-        int cant = cantG;
-        int rc = tblDet.getItems().size();
-        int exists = 0;
+        int cant = cantG, rc = tblDet.getItems().size(), exists = 0, rsSize=0;
         try{
-            if(!txtIDProd.getText().isEmpty() && !txtProdName.getText().isEmpty()){
+            if(!txtIDProd.getText().isEmpty() && !txtProdName.getText().isEmpty() && !txtDniCli.getText().isEmpty()){
                 rs = buscar(sql, con);
-                if(rs.next()){
-                    if(rs.getInt("Existencias") > cant && cant > 0){
+                while(rs.next()){
+                    System.out.println(rs.getInt("n_lote"));
+                    System.out.println(rs.getInt("existencias"));
+                    System.out.println(rsSize);
+                    if(rs.getInt("existencias") > cant && cant > 0){
                         sum(rs.getDouble("porcentaje"), Double.parseDouble(txtPrice.getText()));
                         if(rc > 0){
                             for(int i=0;i<rc;i++){
@@ -183,16 +184,27 @@ public class SalesController implements Initializable {
                             exists=1;
                         }
                         exists = 0;
-                        cleanTxt(pnlPrinc, "txtUser");
+                        cleanTxt(pnlPrinc, "txtUser", "txtDniCli");
                         lblCant.setText("");
                     } else{
-                        fun.msg("La cantidad de producto a facturar supera le existencia actual o su valor es 0");
+                        fun.msg("La cantidad de producto a facturar supera la existencia actual del lote # " + rs.getInt("n_lote") + "  o su valor es 0");
                     }
                 }
                 rs = null;
                 con.DesconectarBasedeDatos();
             }
         }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
+    }
+    
+    private void facturar(){
+        int rc = tblDet.getItems().size();
+        if(rc > 0 && !txtDniCli.getText().isEmpty()){
+            if(txtDniCli.getText().length() == 15){
+                
+            }
+        } else{
+            fun.msg("NO hay productos para facturar o no hay cliente ");
+        }
     }
     
     private void quitarProd(){
@@ -280,6 +292,24 @@ public class SalesController implements Initializable {
         cargarObjeto(id);
     }
 
+    public void CargarIdFact(){
+        try{
+            String sql = "select * from fcatura_a";
+            rs = buscar(sql, con);
+            if(rs.next()){
+                do{
+                    if(rs.isLast()){
+                        idF = rs.getInt("id_factura") + 1;
+                        lblFact.setText("FACTURA                                      " + idF);
+                    } 
+                }while((rs.next()));
+            } else{ 
+                idF=1;
+                lblFact.setText("#FACTURA                                      " + idF);
+            }
+        }catch(Exception e){fun.msg("Error!!");}
+    }
+    
     private void cargarObjeto(int id) {
         try {
             usuario = fun.llenarObejto(id);
@@ -333,7 +363,7 @@ public class SalesController implements Initializable {
     
     @FXML
     private void SaveBill(ActionEvent evt){
-        
+        facturar();
     }
     
     @FXML
@@ -343,7 +373,7 @@ public class SalesController implements Initializable {
     
     @FXML
     private void clean(ActionEvent evt){
-        cleanTxt(pnlPrinc, "txtUser");
+        cleanTxt(pnlPrinc, "txtUser","");
     }
     
     @FXML
@@ -382,5 +412,6 @@ public class SalesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         fillCBox();
+        CargarIdFact();
     }    
 }

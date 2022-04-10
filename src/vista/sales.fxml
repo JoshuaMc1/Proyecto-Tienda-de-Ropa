@@ -141,7 +141,7 @@
                      <children>
                         <Pane prefHeight="55.0" prefWidth="350.0" styleClass="pnl-title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="15.0" text="FACTURA">
+                              <Label fx:id="lblFact" layoutX="14.0" layoutY="15.0" text="FACTURA">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
