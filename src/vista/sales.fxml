@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -49,20 +50,47 @@
                <center>
                   <AnchorPane fx:id="pnlPrinc" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label layoutX="124.0" layoutY="34.0" text="ID Producto:" />
+                        <Label layoutX="124.0" layoutY="34.0" text="ID Producto:">
+                           <tooltip>
+                              <Tooltip text="ID del producto a facturar" />
+                           </tooltip></Label>
                         <Label layoutX="63.0" layoutY="110.0" text="Nombre del producto:" />
                         <Label layoutX="159.0" layoutY="153.0" text="Precio:" />
-                        <Label layoutX="365.0" layoutY="153.0" text="Cantidad:" />
+                        <Label layoutX="365.0" layoutY="153.0" text="Cantidad:">
+                           <tooltip>
+                              <Tooltip text="La cantidad de producto a facturar" />
+                           </tooltip></Label>
                         <Label layoutX="430.0" layoutY="34.0" text="Usuario:" />
-                        <TextField fx:id="txtIDProd" layoutX="210.0" layoutY="29.0" onKeyPressed="#IDProdkpr" prefHeight="30.0" prefWidth="160.0" AnchorPane.leftAnchor="210.0" />
-                        <TextField fx:id="txtProdName" editable="false" layoutX="210.0" layoutY="105.0" prefHeight="30.0" prefWidth="410.0" AnchorPane.leftAnchor="210.0" />
-                        <TextField fx:id="txtUser" editable="false" layoutX="489.0" layoutY="29.0" prefHeight="30.0" prefWidth="130.0" AnchorPane.leftAnchor="489.0" />
-                        <TextField fx:id="txtPrice" editable="false" layoutX="210.0" layoutY="148.0" prefHeight="30.0" prefWidth="150.0" AnchorPane.leftAnchor="210.0" />
-                        <TextField fx:id="txtCant" layoutX="430.0" layoutY="148.0" onKeyPressed="#Cantkpr" prefHeight="30.0" prefWidth="190.0" AnchorPane.leftAnchor="430.0" />
+                        <TextField fx:id="txtIDProd" layoutX="210.0" layoutY="29.0" onKeyPressed="#IDProdkpr" prefHeight="30.0" prefWidth="160.0" AnchorPane.leftAnchor="210.0">
+                           <tooltip>
+                              <Tooltip text="Cuando ingrese el ID presione enter para buscar" />
+                           </tooltip></TextField>
+                        <TextField fx:id="txtProdName" editable="false" layoutX="210.0" layoutY="105.0" prefHeight="30.0" prefWidth="410.0" AnchorPane.leftAnchor="210.0">
+                           <tooltip>
+                              <Tooltip text="Nombre del producto" />
+                           </tooltip></TextField>
+                        <TextField fx:id="txtUser" editable="false" layoutX="489.0" layoutY="29.0" prefHeight="30.0" prefWidth="130.0" AnchorPane.leftAnchor="489.0">
+                           <tooltip>
+                              <Tooltip text="ID del usuario" />
+                           </tooltip></TextField>
+                        <TextField fx:id="txtPrice" editable="false" layoutX="210.0" layoutY="148.0" prefHeight="30.0" prefWidth="150.0" AnchorPane.leftAnchor="210.0">
+                           <tooltip>
+                              <Tooltip text="Precio del Producto" />
+                           </tooltip></TextField>
+                        <TextField fx:id="txtCant" layoutX="430.0" layoutY="148.0" onKeyPressed="#Cantkpr" prefHeight="30.0" prefWidth="190.0" AnchorPane.leftAnchor="430.0">
+                           <tooltip>
+                              <Tooltip text="Introduzca un valor y luego presione enter para sumar el producto" />
+                           </tooltip></TextField>
                         <Label layoutX="347.0" layoutY="73.0" text="DNI Cliente:" />
-                        <TextField fx:id="txtDniCli" layoutX="430.0" layoutY="68.0" onKeyPressed="#dniCkpr" prefHeight="30.0" prefWidth="190.0" />
+                        <TextField fx:id="txtDniCli" layoutX="430.0" layoutY="68.0" onKeyPressed="#dniCkpr" prefHeight="30.0" prefWidth="190.0">
+                           <tooltip>
+                              <Tooltip text="Introduzca el DNI Cliente" />
+                           </tooltip></TextField>
                         <Label layoutX="126.0" layoutY="73.0" text="Tipo cliente:" />
-                        <ComboBox fx:id="cmbCli" layoutX="210.0" layoutY="68.0" prefHeight="30.0" prefWidth="130.0" />
+                        <ComboBox fx:id="cmbCli" layoutX="210.0" layoutY="68.0" prefHeight="30.0" prefWidth="130.0">
+                           <tooltip>
+                              <Tooltip text="escoja el tipo de cliente" />
+                           </tooltip></ComboBox>
                         <Button fx:id="btnSear" layoutX="379.0" layoutY="29.0" mnemonicParsing="false" onAction="#busc" styleClass="btn-search">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -71,7 +99,15 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Buscar Producto" />
+                           </tooltip>
                         </Button>
+                        <Label fx:id="lblCant" layoutX="430.0" layoutY="178.0" prefHeight="17.0" prefWidth="88.0" textFill="RED">
+                           <tooltip>
+                              <Tooltip text="Cantidad Total de Producto a agregar" />
+                           </tooltip>
+                        </Label>
                      </children>
                   </AnchorPane>
                </center>
