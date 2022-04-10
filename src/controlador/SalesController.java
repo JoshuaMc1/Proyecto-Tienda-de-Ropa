@@ -31,17 +31,18 @@ import modelo.funciones.funciones;
 public class SalesController implements Initializable {
 
     private static String uID="";  
-    private boolean suma = false;
+    private boolean suma = false, sumado=false;
+    //para verificar si ya se sumo en precio en el metodo calcant, sumado es para validar si el usuario ya sumo una cantidad antes
+    //de agregar el producto a la factura
     
     private funciones fun = new funciones();
     private Usuario usuario = new Usuario();
-    ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
-    private String bd = "tienda_de_ropa_2"; //nombre de la bd
-    private ResultSet rs = null;
-    ObservableList<Fact_Model> ol = FXCollections.observableArrayList();
+    private ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
+    private ResultSet rs = null; //ResultSet para varios usos
+    private ObservableList<Fact_Model> ol = FXCollections.observableArrayList(); //lista de tipo Fact_Model(clase) para llenar y manejar la tabla
     private double precio= 0.0, subt=0.0,imp=0.0,tot=0.0,s_TotG=0.0, totG =0.0, impG=0.0, vImp=0.0, txt_price=0.0, st=0.0,
-                   vDesc=0.0, desc = 0.0, descg=0.0;
-    private int id;
+                   vDesc=0.0, desc = 0.0, descg=0.0, precioG=0.0;
+    private int id, cantG=0;
     
     @FXML
     private Button btnAgProd;
@@ -83,29 +84,33 @@ public class SalesController implements Initializable {
         }
     }
     
-    public double giveFormat(double val){
+    public double giveFormat(double val){ //dar formato a double para que solo tenga dos digitos
         String formt = String.format("%.2f", val);
         double finalD = Double.parseDouble(formt);
         return finalD;
     }
     
-    private void verifyEnter(KeyEvent evt){
+    private void verifyEnter(KeyEvent evt){ //metodo para verificar que se presiono la tecla enter en la caja de texto del id del producto
         if(evt.getCode() == KeyCode.ENTER){
             int n = 0;
             buscartxt(n);
         } 
     }
     
-    private void calCant(KeyEvent evt){
-        double _price=Double.parseDouble(txtPrice.getText());
-       if(evt.getCode() == KeyCode.ENTER){
-           if(suma)  _price += txt_price * Double.parseDouble(txtCant.getText());
-           if(!suma){
-               _price += txt_price * Double.parseDouble(txtCant.getText()) - _price;
-               suma = true;
-           }
-            txtPrice.setText(Double.toString(_price));
-        } 
+    private void calCant(KeyEvent evt){ //metodo para sumar el precio total de un producto
+        precioG = Double.parseDouble(txtPrice.getText());
+        if(precioG > 0){
+            if(evt.getCode() == KeyCode.ENTER){
+                cantG += Integer.parseInt(txtCant.getText());
+                if(suma)  precioG += txt_price * Double.parseDouble(txtCant.getText());
+                if(!suma){
+                    precioG += txt_price * Double.parseDouble(txtCant.getText()) - precioG;
+                    suma = true;
+                }
+                txtPrice.setText(Double.toString(precioG));
+                sumado=true;
+            } 
+        }
     }
     
     private void request(KeyEvent evt, Node n1){
@@ -126,10 +131,7 @@ public class SalesController implements Initializable {
                         ((TextField) n1).setText("");
                }
             }
-        }catch(Exception e){
-            
-            fun.msg("Ha ocurrido un error: \n Por Favor contacte a soporte");
-        }
+        }catch(Exception e){   fun.msg("Ha ocurrido un error: \n Por Favor contacte a soporte");}
     }    
     
     private void setCellValue(){
@@ -151,27 +153,45 @@ public class SalesController implements Initializable {
                 rs = buscar(sql, con);
                 if(rs.next()){
                     if(rs.getInt("Existencias") > cant && cant > 0){
-                        sum(rs.getDouble("porcentaje"));
+                        if(!sumado){
+                            precioG += txt_price * Double.parseDouble(txtCant.getText());
+                            cantG += Integer.parseInt(txtCant.getText());
+                            sum(rs.getDouble("porcentaje"), precioG);
+                        } else sum(rs.getDouble("porcentaje"), Double.parseDouble(txtPrice.getText()));
+                        
                         if(rc > 0){
+                            System.out.println(exists);
                             System.out.println("mayor");
                             for(int i=0;i<rc;i++){
                                 if(txtIDProd.getText().equals(tblDet.getItems().get(i).get_id())){
                                     System.out.println("igual");
                                     exists = 1;
                                     System.out.println(tblDet.getItems().get(i).getCant().toString());
-                                    int ct = Integer.parseInt(tblDet.getItems().get(i).getCant()) + cant;
+                                    int ct = Integer.parseInt(tblDet.getItems().get(i).getCant()) + cantG;
                                     tblDet.getItems().get(i).setCant(Integer.toString(ct));
+                                    tblDet.getItems().set(i, tblDet.getItems().get(i));
                                     System.out.println(tblDet.getItems().get(i).getCant().toString());
-                                    exists=1;
+                                } else if(exists == 0){
+                                    System.out.println("entre");
+                                    exists = 1;
+                                    ol.add(new Fact_Model(txtIDProd.getText(), rs.getString("descripcion"), Integer.toString(cantG),
+                                    Double.toString(rs.getDouble("Precio")), "0.15", Double.toString(rs.getDouble("porcentaje")),
+                                    Integer.toString(rs.getInt("n_lote"))));
+                                    setCellValue();
+                                    tblDet.setItems(ol);
                                 }
+                                System.out.println("salio");
                             }
                         }else if(exists == 0){
-                            ol.add(new Fact_Model(usuario.getIdUsuario(), rs.getString("descripcion"), txtCant.getText(),
+                            ol.add(new Fact_Model(txtIDProd.getText(), rs.getString("descripcion"), Integer.toString(cantG),
                             Double.toString(rs.getDouble("Precio")), "0.15", Double.toString(rs.getDouble("porcentaje")),
                             Integer.toString(rs.getInt("n_lote"))));
                             setCellValue();
                             tblDet.setItems(ol);
+                            exists=1;
                         }
+                        exists = 0;
+                        cleanTxt(pnlPrinc, "txtUser");
                     } else{
                         fun.msg("La cantidad de producto a facturar supera le existencia actual o su valor es 0");
                     }
@@ -182,9 +202,9 @@ public class SalesController implements Initializable {
         }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
     }
     
-    private void sum(double _desc){
+    private void sum(double _desc, double s_tt){
         try{
-            double stt = Double.parseDouble(txtPrice.getText());
+            double stt = s_tt;
             st = giveFormat(stt);
             vDesc = _desc;
             double desct = st * vDesc;
@@ -226,6 +246,9 @@ public class SalesController implements Initializable {
                 txtProdName.setText(rs.getString("descripcion"));
                 txtPrice.setText(Double.toString(rs.getDouble("precio")));
                 txt_price = Double.parseDouble(txtPrice.getText());
+                cantG = 0;
+                precioG=0.0;
+                suma = false;
             }
         }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
     }
@@ -245,11 +268,14 @@ public class SalesController implements Initializable {
     
     @FXML
     private void AgrProd(ActionEvent evt){
+        int idp = Integer.parseInt(txtIDProd.getText());
         String sql = "SELECT pr.descripcion, pr.precio, de.porcentaje, iv.n_lote, iv.existencias from producto pr " +
                          " INNER JOIN inventario iv on pr.id_pdt = iv.id_pdt " +
                          " INNER JOIN descuentos de on pr.id_desc = de.id_desc "
-                        +" where pr.id_pdt = 1";
-        agrProd(sql);
+                        +" where pr.id_pdt = " + idp;
+        if(!txtIDProd.getText().isEmpty() && !txtPrice.getText().isEmpty() && !txtCant.getText().isEmpty()) agrProd(sql);
+        else fun.msg("¡¡¡No hay productos para facturar!!");
+        idp = 0;
     }
     
     @FXML
@@ -285,9 +311,10 @@ public class SalesController implements Initializable {
     @FXML
     private void Cantkpr(KeyEvent evt){
         fun.validaNumeros(txtCant, 20);
-        calCant(evt);
-        request(evt, txtPrice);
-    }
+        sumado=false;
+        if(!txtCant.getText().isEmpty() && !txtPrice.getText().isEmpty()) calCant(evt);
+        System.out.println(sumado); 
+   }
     
     @FXML
     private void dniCkpr(KeyEvent evt){
