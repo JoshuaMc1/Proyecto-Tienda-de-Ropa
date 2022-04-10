@@ -204,7 +204,7 @@ public class SalesController implements Initializable {
     
     private void sum(double _desc, double s_tt){
         try{
-            double stt = Double.parseDouble(txtPrice.getText());
+            double stt = s_tt;
             st = giveFormat(stt);
             vDesc = _desc;
             double desct = st * vDesc;
@@ -313,7 +313,8 @@ public class SalesController implements Initializable {
         fun.validaNumeros(txtCant, 20);
         sumado=false;
         if(!txtCant.getText().isEmpty() && !txtPrice.getText().isEmpty()) calCant(evt);
-    }
+        System.out.println(sumado); 
+   }
     
     @FXML
     private void dniCkpr(KeyEvent evt){
