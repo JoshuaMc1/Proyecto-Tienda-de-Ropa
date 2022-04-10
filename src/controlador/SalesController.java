@@ -49,7 +49,7 @@ public class SalesController implements Initializable {
     @FXML 
     private TextField txtIDProd, txtUser, txtDniCli, txtProdName, txtPrice, txtCant;
     @FXML
-    private Label lblSTot, lblDesc, lblTotal;
+    private Label lblSTot, lblDesc, lblTotal, lblCant;
     @FXML
     private AnchorPane pnlPrinc;
     @FXML
@@ -108,7 +108,8 @@ public class SalesController implements Initializable {
                     suma = true;
                 }
                 txtPrice.setText(Double.toString(precioG));
-                sumado=true;
+                txtCant.setText("");
+                lblCant.setText(Integer.toString(cantG));
             } 
         }
     }
@@ -145,34 +146,23 @@ public class SalesController implements Initializable {
     }
     
     private void agrProd(String sql){
-        int cant = Integer.parseInt(txtCant.getText());
+        int cant = cantG;
         int rc = tblDet.getItems().size();
         int exists = 0;
         try{
-            if(!txtIDProd.getText().isEmpty() && !txtCant.getText().isEmpty() && !txtProdName.getText().isEmpty()){
+            if(!txtIDProd.getText().isEmpty() && !txtProdName.getText().isEmpty()){
                 rs = buscar(sql, con);
                 if(rs.next()){
                     if(rs.getInt("Existencias") > cant && cant > 0){
-                        if(!sumado){
-                            precioG += txt_price * Double.parseDouble(txtCant.getText());
-                            cantG += Integer.parseInt(txtCant.getText());
-                            sum(rs.getDouble("porcentaje"), precioG);
-                        } else sum(rs.getDouble("porcentaje"), Double.parseDouble(txtPrice.getText()));
-                        
+                        sum(rs.getDouble("porcentaje"), Double.parseDouble(txtPrice.getText()));
                         if(rc > 0){
-                            System.out.println(exists);
-                            System.out.println("mayor");
                             for(int i=0;i<rc;i++){
                                 if(txtIDProd.getText().equals(tblDet.getItems().get(i).get_id())){
-                                    System.out.println("igual");
                                     exists = 1;
-                                    System.out.println(tblDet.getItems().get(i).getCant().toString());
                                     int ct = Integer.parseInt(tblDet.getItems().get(i).getCant()) + cantG;
                                     tblDet.getItems().get(i).setCant(Integer.toString(ct));
                                     tblDet.getItems().set(i, tblDet.getItems().get(i));
-                                    System.out.println(tblDet.getItems().get(i).getCant().toString());
                                 } else if(exists == 0){
-                                    System.out.println("entre");
                                     exists = 1;
                                     ol.add(new Fact_Model(txtIDProd.getText(), rs.getString("descripcion"), Integer.toString(cantG),
                                     Double.toString(rs.getDouble("Precio")), "0.15", Double.toString(rs.getDouble("porcentaje")),
@@ -180,7 +170,6 @@ public class SalesController implements Initializable {
                                     setCellValue();
                                     tblDet.setItems(ol);
                                 }
-                                System.out.println("salio");
                             }
                         }else if(exists == 0){
                             ol.add(new Fact_Model(txtIDProd.getText(), rs.getString("descripcion"), Integer.toString(cantG),
@@ -202,19 +191,19 @@ public class SalesController implements Initializable {
         }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
     }
     
-    private void sum(double _desc, double s_tt){
+    private void sum(double _desc, double s_tt){ //metodo para realizar la sumatoria del total ,sTotal,isv y decuento
         try{
-            double stt = s_tt;
-            st = giveFormat(stt);
-            vDesc = _desc;
-            double desct = st * vDesc;
+            double stt = s_tt; //recibe el valor del subtotal
+            st = giveFormat(stt); //Se le da formato al sTotal, se le dejan solamente 2 ceros
+            vDesc = _desc; //recibe el valor del descuento
+            double desct = st * vDesc; //se calcula el descuento
             desc = giveFormat(desct);
             vImp = 0.15;
-            double impte = st * vImp;
+            double impte = st * vImp; //se calcula el valor del impuesto
             imp = giveFormat(impte);
             double tott = st + imp - desc;
             tot = giveFormat(tott);
-            s_TotG += st;
+            s_TotG += st;//se asignan los valores oficiales de total, sTotal, descuento e isv
             totG+=tot;
             impG+=imp;
             descg+=desc;
@@ -237,15 +226,15 @@ public class SalesController implements Initializable {
         }
     }
     
-    public void buscartxt(int _id){
-        _id = Integer.parseInt(txtIDProd.getText()); 
+    public void buscartxt(int _id){ //metodo para buscar un producto
+        _id = Integer.parseInt(txtIDProd.getText());  //se captura el id del prodcuto a buscar en la caja de texto idProducto
         String sql = "select p.descripcion, p.precio from producto p where p.id_pdt = '" + _id + "' && status = 1";
         try{
             rs = buscar(sql, con);
             if(rs.next()){
-                txtProdName.setText(rs.getString("descripcion"));
-                txtPrice.setText(Double.toString(rs.getDouble("precio")));
-                txt_price = Double.parseDouble(txtPrice.getText());
+                txtProdName.setText(rs.getString("descripcion"));//se carga el nombre del producto en el txtFLD nombreProducto
+                txtPrice.setText(Double.toString(rs.getDouble("precio")));//se carga el precio del producto en el txtFLD precio
+                txt_price = Double.parseDouble(txtPrice.getText());//se guarda el precio en una variable para poder usarlo luego
                 cantG = 0;
                 precioG=0.0;
                 suma = false;
@@ -253,7 +242,7 @@ public class SalesController implements Initializable {
         }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
     }
     
-    public ResultSet buscar(String sql, ConexionMySQL con){
+    public ResultSet buscar(String sql, ConexionMySQL con){ //Metodo para realizar una consulta devuelve un ResultSet
         try{
             con = new ConexionMySQL();
             con.ConectarBasedeDatos();
@@ -273,7 +262,7 @@ public class SalesController implements Initializable {
                          " INNER JOIN inventario iv on pr.id_pdt = iv.id_pdt " +
                          " INNER JOIN descuentos de on pr.id_desc = de.id_desc "
                         +" where pr.id_pdt = " + idp;
-        if(!txtIDProd.getText().isEmpty() && !txtPrice.getText().isEmpty() && !txtCant.getText().isEmpty()) agrProd(sql);
+        if(!txtIDProd.getText().isEmpty() && !txtPrice.getText().isEmpty()) agrProd(sql);
         else fun.msg("¡¡¡No hay productos para facturar!!");
         idp = 0;
     }
