@@ -24,7 +24,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javax.swing.JOptionPane;
 import modelo.ConexionMySQL;
 import modelo.funciones.funciones;
 
@@ -42,7 +44,8 @@ public class SalesController implements Initializable {
     private ObservableList<Fact_Model> ol = FXCollections.observableArrayList(); //lista de tipo Fact_Model(clase) para llenar y manejar la tabla
     private double precio= 0.0, subt=0.0,imp=0.0,tot=0.0,s_TotG=0.0, totG =0.0, impG=0.0, vImp=0.0, txt_price=0.0, st=0.0,
                    vDesc=0.0, desc = 0.0, descg=0.0, precioG=0.0;
-    private int id, cantG=0;
+    private int id, cantG=0, fmIndex=0;
+    private Fact_Model fm;
     
     @FXML
     private Button btnAgProd;
@@ -181,6 +184,7 @@ public class SalesController implements Initializable {
                         }
                         exists = 0;
                         cleanTxt(pnlPrinc, "txtUser");
+                        lblCant.setText("");
                     } else{
                         fun.msg("La cantidad de producto a facturar supera le existencia actual o su valor es 0");
                     }
@@ -189,6 +193,67 @@ public class SalesController implements Initializable {
                 con.DesconectarBasedeDatos();
             }
         }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
+    }
+    
+    private void quitarProd(){
+        if(fm!=null){
+            String opc []={"Eliminar la fila completa", "Quitar una cantidad x de producto"};// arreglo de opciones
+            int dec = JOptionPane.showOptionDialog(null,"Que deseas realizar?","Opciones",JOptionPane.YES_OPTION,JOptionPane.WARNING_MESSAGE,null,opc,opc[0]);
+            switch(dec){
+                case 0:{
+                    restar(fmIndex, Double.parseDouble(tblDet.getItems().get(fmIndex).getCant()));
+                    tblDet.getItems().remove(fmIndex);
+                    fm = null;
+                }break;
+                case 1:{
+                    int ndec = Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad que desea eliminar"));
+                    if(ndec < Integer.parseInt(tblDet.getItems().get(fmIndex).getCant())){
+                        int cant = Integer.parseInt(tblDet.getItems().get(fmIndex).getCant()) - ndec;
+                        double n = (double)ndec;
+                        restar(fmIndex, n);
+                        tblDet.getItems().get(fmIndex).setCant(Integer.toString(cant));
+                        tblDet.getItems().set(fmIndex, tblDet.getItems().get(fmIndex));
+                    } else fun.msg("La cantidad introducida excede la cantidad que se encuentra en la tabla");
+                }break;
+            }
+        }
+    }
+    
+    private void selRow(){
+        if(tblDet.getItems().size() > 0)
+            if(tblDet.getSelectionModel().getSelectedItem() != null){
+                fm = tblDet.getSelectionModel().getSelectedItem();
+                fmIndex = tblDet.getSelectionModel().getSelectedIndex();
+            }
+    }
+    
+    private void restar(int index, double cantidad){
+        double rprecio = Double.parseDouble(tblDet.getItems().get(index).getPrice()); //precio del producto que se va a quitar
+        double risv = Double.parseDouble(tblDet.getItems().get(index).getIsv()); //isv del producto que se va a quitar
+        double rdesc = Double.parseDouble(tblDet.getItems().get(index).getDesc());
+        double rcant = cantidad;
+        double rst = rprecio * rcant;
+        rst = giveFormat(rst);
+        double risvg = rst * risv;
+        risvg = giveFormat(risvg);
+        double rdescg = rst * rdesc;
+        rdescg = giveFormat(rdescg);
+        double rtotal = rst + risvg - rdescg;
+        rtotal = giveFormat(rtotal);
+        impG = impG - risvg;
+        s_TotG = s_TotG - rst;
+        descg = descg - rdescg;
+        totG = totG - rtotal;
+        updtLbl();
+    }
+    
+    private void updtLbl(){
+        if(descg < 0) descg = 0.0;
+        if(s_TotG < 0) s_TotG = 0.0;
+        if(totG < 0) totG = 0.0;
+        lblDesc.setText("L. " + String.format("%.2f",descg));
+        lblSTot.setText("L. " + String.format("%.2f",s_TotG));
+        lblTotal.setText("L. " + String.format("%.2f",totG));
     }
     
     private void sum(double _desc, double s_tt){ //metodo para realizar la sumatoria del total ,sTotal,isv y decuento
@@ -207,9 +272,7 @@ public class SalesController implements Initializable {
             totG+=tot;
             impG+=imp;
             descg+=desc;
-            lblDesc.setText("L. " + String.format("%.2f",descg));
-            lblSTot.setText("L. " + String.format("%.2f",s_TotG));
-            lblTotal.setText("L. " + String.format("%.2f",totG));
+            updtLbl();
         }catch(Exception e){fun.msg("ERROR"+e);}
     }
     
@@ -240,6 +303,7 @@ public class SalesController implements Initializable {
                 suma = false;
             }
         }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
+        con.DesconectarBasedeDatos();
     }
     
     public ResultSet buscar(String sql, ConexionMySQL con){ //Metodo para realizar una consulta devuelve un ResultSet
@@ -274,7 +338,7 @@ public class SalesController implements Initializable {
     
     @FXML
     private void RemProd(ActionEvent evt){
-        
+        quitarProd();
     }
     
     @FXML
@@ -308,6 +372,11 @@ public class SalesController implements Initializable {
     @FXML
     private void dniCkpr(KeyEvent evt){
         fun.formatTD(txtDniCli, 2);
+    }
+    
+    @FXML
+    private void tblMC(MouseEvent evt){
+        selRow();
     }
     
     @Override
