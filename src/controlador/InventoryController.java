@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -94,13 +93,13 @@ public class InventoryController implements Initializable {
     }
 
     public void cargarGraficoInvBajo() {
-        ObservableList<XYChart.Data<String, Number>> data = fun.datosGrafico1();
+        ObservableList<XYChart.Data<String, Number>> data = fun.datosGrafico1Inventario();
         XYChart.Series<String, Number> series = new XYChart.Series<>("Productos con inventario bajo", data);
         grfCantidadInvBajo.getData().setAll(series);
     }
 
     public void cargarGraficoProductoPorMarca() {
-        ObservableList<PieChart.Data> data = fun.datosGrafico2();
+        ObservableList<PieChart.Data> data = fun.datosGrafico2Inventario();
         grfContidadProductoPorMarcas.setData(data);
         grfContidadProductoPorMarcas.getData().forEach(this::installTooltip);
     }

@@ -6,6 +6,7 @@ import java.util.function.UnaryOperator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
@@ -92,8 +93,90 @@ public class funciones {
             ex.printStackTrace();
         }
     }*/
+    
+    public String totalVentasHoy(){
+        String res = "L. 0";
+        try{
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("SELECT SUM(total) AS TotalVentas FROM fcatura_a WHERE fechaVenta = CURDATE()");
+            if(con.resultado.next()){
+                res = "L. "+con.resultado.getDouble("TotalVentas"); 
+            }
+            con.DesconectarBasedeDatos();
+        }catch(SQLException ex){
+            msg(ex.getMessage());
+        }
+        return res;
+    }
+    
+    public String totalVentasSemana(){
+        String res = "L. 0";
+        //SELECT SUM(total) AS TotalVentaSemana FROM fcatura_a WHERE DATEDIFF(now(),fechaVenta) <='7' AND DATEDIFF(now(),fechaVenta) >='1'
+        return res;
+    }
+    
+    public String totalVentasMes(){
+        String res = "L. 0";
+        try{
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("SELECT SUM(total) AS Total FROM fcatura_a WHERE MONTH(CURDATE()) = MONTH(fechaVenta) GROUP BY MONTH(fechaVenta)");
+            if(con.resultado.next()){
+                res = "L. "+con.resultado.getDouble("Total");
+            }
+            con.DesconectarBasedeDatos();
+        }catch(SQLException ex){
+            msg(ex.getMessage());
+        }
+        return res;
+    }
+    
+    public ObservableList<PieChart.Data> cargarGraficoVentasUsuario(){
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+        try {
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("SELECT SUM(fa.total) as total, us.usuario FROM fcatura_a fa INNER JOIN usuarios us ON fa.id_user=us.id_user WHERE us.status='1' GROUP BY us.usuario LIMIT 10");
+            while(con.resultado.next()) {
+                data.add(new PieChart.Data(con.resultado.getString("usuario"), con.resultado.getDouble("total")));
+            }
+            con.DesconectarBasedeDatos();
+        } catch (SQLException e) {
+            msg(e.getMessage());
+        }
+        return data;
+    }
+    
+    public ObservableList<XYChart.Data<String, Double>> topUsuariosVentas(){
+        ObservableList<XYChart.Data<String, Double>> data = FXCollections.observableArrayList();
+        try {
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("SELECT SUM(fa.total) as total, us.usuario FROM fcatura_a fa INNER JOIN usuarios us ON fa.id_user=us.id_user WHERE us.status='1' GROUP BY us.usuario LIMIT 5");
+            while(con.resultado.next()) {
+                data.add(new XYChart.Data<>(con.resultado.getString("usuario"),con.resultado.getDouble("total")));
+            }
+            con.DesconectarBasedeDatos();
+        } catch (SQLException e) {
+            msg(e.getMessage());
+        }
+        return data;
+    }
+    
+    public LineChart.Series<String, Double> graficoVentasPorMes(){
+        LineChart.Series<String, Double> series = new LineChart.Series<String, Double>();
+        try{
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("SELECT SUM(total) AS Total, MONTHNAME(fechaVenta) AS Mes FROM fcatura_a GROUP BY Mes ORDER BY CASE Mes WHEN 'January' THEN 1 WHEN 'February' THEN 2 WHEN 'March' THEN 3 WHEN 'April' THEN 4 WHEN 'May' THEN 5 WHEN 'June' THEN 6 WHEN 'July' THEN 7 WHEN 'Agoust' THEN 8 WHEN 'September' THEN 9 WHEN 'October' THEN 10 WHEN 'November' THEN 11 WHEN 'December' THEN 12 END");
+            while(con.resultado.next()){
+                series.getData().add(new XYChart.Data<String, Double>(con.resultado.getString("Mes"), con.resultado.getDouble("Total")));
+            }
+            con.DesconectarBasedeDatos();
+        }catch(SQLException ex){
+            msg(ex.getMessage());
+        }
+        return series;
+    }
+    
     public String totalInventario() {
-        String res = "";
+        String res = "L. 0";
         try {
             con.ConectarBasedeDatos();
             con.resultado = con.sentencia.executeQuery("SELECT SUM(precio*existencias) total FROM producto, inventario WHERE inventario.status='1' AND producto.status='1'");
@@ -108,7 +191,7 @@ public class funciones {
     }
 
     public String catidadInventario() {
-        String res = "";
+        String res = "0";
         try {
             con.ConectarBasedeDatos();
             con.resultado = con.sentencia.executeQuery("SELECT SUM(existencias) AS total FROM inventario WHERE status='1'");
@@ -123,7 +206,7 @@ public class funciones {
     }
     
     public String catidadInventarioBajo() {
-        String res = "";
+        String res = "0";
         try {
             con.ConectarBasedeDatos();
             con.resultado = con.sentencia.executeQuery("SELECT COUNT(id_inv) AS total FROM inventario WHERE status='1' AND existencias < 15");
@@ -137,7 +220,7 @@ public class funciones {
         return res;
     }
     
-    public ObservableList<XYChart.Data<String, Number>> datosGrafico1(){
+    public ObservableList<XYChart.Data<String, Number>> datosGrafico1Inventario(){
         ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
         try {
             con.ConectarBasedeDatos();
@@ -152,7 +235,7 @@ public class funciones {
         return data;
     }
     
-    public ObservableList<PieChart.Data> datosGrafico2(){
+    public ObservableList<PieChart.Data> datosGrafico2Inventario(){
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
         try {
             con.ConectarBasedeDatos();

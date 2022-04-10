@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" styleClass="pnl" stylesheets="@style/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.DashboardController">
+<AnchorPane id="AnchorPane" prefHeight="1200.0" prefWidth="1100.0" styleClass="pnl" stylesheets="@style/dashboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.DashboardController">
    <children>
       <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -51,7 +51,7 @@
                                                       </Label>
                                                    </children>
                                                 </Pane>
-                                                <Label alignment="CENTER" layoutX="16.0" layoutY="110.0" prefHeight="70.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
+                                                <Label fx:id="lblVentasHoy" alignment="CENTER" layoutX="16.0" layoutY="110.0" prefHeight="70.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="48.0" />
                                                    </font>
@@ -96,7 +96,7 @@
                                                       </Button>
                                                    </children>
                                                 </Pane>
-                                                <Label alignment="CENTER" layoutX="17.0" layoutY="110.0" prefHeight="70.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
+                                                <Label fx:id="lblVentasSemana" alignment="CENTER" layoutX="17.0" layoutY="110.0" prefHeight="70.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="48.0" />
                                                    </font>
@@ -141,7 +141,7 @@
                                                       </Button>
                                                    </children>
                                                 </Pane>
-                                                <Label alignment="CENTER" layoutX="16.0" layoutY="110.0" prefHeight="70.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
+                                                <Label fx:id="lblVentasMes" alignment="CENTER" layoutX="16.0" layoutY="110.0" prefHeight="70.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="48.0" />
                                                    </font>
@@ -164,7 +164,7 @@
                                        <children>
                                           <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
                                              <children>
-                                                <Label layoutX="14.0" layoutY="15.0" prefHeight="25.0" prefWidth="200.0" text="VENTAS DE LA SEMANA">
+                                                <Label layoutX="14.0" layoutY="15.0" prefHeight="25.0" prefWidth="200.0" text="VENTAS POR MES">
                                                    <font>
                                                       <Font name="System Bold" size="16.0" />
                                                    </font>
@@ -195,7 +195,7 @@
                                                 </Button>
                                              </children>
                                           </Pane>
-                                          <LineChart layoutX="5.0" layoutY="65.0" prefHeight="400.0" prefWidth="1034.0">
+                                          <LineChart fx:id="grfVentasPorMes" layoutX="5.0" layoutY="65.0" prefHeight="400.0" prefWidth="1034.0">
                                             <xAxis>
                                               <CategoryAxis prefHeight="30.0" prefWidth="975.0" side="BOTTOM" tickLabelFill="WHITE" />
                                             </xAxis>
@@ -247,7 +247,7 @@
                                                 </Button>
                                              </children>
                                           </Pane>
-                                          <BarChart layoutX="4.0" layoutY="59.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="59.0">
+                                          <BarChart fx:id="grfTopVentas" layoutX="4.0" layoutY="59.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="59.0">
                                             <xAxis>
                                               <CategoryAxis prefHeight="25.0" prefWidth="598.0" side="BOTTOM" tickLabelFill="WHITE" />
                                             </xAxis>
@@ -297,7 +297,7 @@
                                                 </Button>
                                              </children>
                                           </Pane>
-                                          <PieChart layoutX="4.0" layoutY="59.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="65.0" />
+                                          <PieChart fx:id="grfVentasUsuario" layoutX="4.0" layoutY="59.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="65.0" />
                                        </children>
                                     </AnchorPane>
                                  </right>
