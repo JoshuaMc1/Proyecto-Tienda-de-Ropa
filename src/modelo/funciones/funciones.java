@@ -111,7 +111,16 @@ public class funciones {
     
     public String totalVentasSemana(){
         String res = "L. 0";
-        //SELECT SUM(total) AS TotalVentaSemana FROM fcatura_a WHERE DATEDIFF(now(),fechaVenta) <='7' AND DATEDIFF(now(),fechaVenta) >='1'
+        try{
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("SELECT week(now()) -1 as week, sum(total) as Total from fcatura_a WHERE week(fcatura_a.fechaVenta) = week(now()) - 1 AND fcatura_a.status='1'");
+            if(con.resultado.next()){
+                res = "L. "+con.resultado.getDouble("Total");
+            }
+            con.DesconectarBasedeDatos();
+        }catch(SQLException ex){
+            msg(ex.getMessage());
+        }
         return res;
     }
     
