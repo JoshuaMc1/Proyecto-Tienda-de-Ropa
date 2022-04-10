@@ -41,7 +41,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </BorderPane.margin>
                                  <children>
-                                    <ImageView fx:id="txtProfile" fitHeight="350.0" fitWidth="230.0" layoutX="14.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="txtProfile" fitHeight="350.0" fitWidth="230.0" layoutX="14.0" layoutY="37.0" pickOnBounds="true" />
                                     <Button layoutX="14.0" layoutY="392.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="230.0" styleClass="btn" text="Editar foto" textFill="WHITE">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

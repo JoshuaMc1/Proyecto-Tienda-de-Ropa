@@ -48,6 +48,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         lblVentasHoy.setText(fun.totalVentasHoy());
         lblVentasMes.setText(fun.totalVentasMes());
+        lblVentasSemana.setText(fun.totalVentasSemana());
         cargarGraficaVentasMes();
         cargarGraficoTopVentas();
         cargarGraficaTopUsuarios();
