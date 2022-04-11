@@ -35,36 +35,50 @@ import modelo.funciones.funciones;
 
 public class SalesController implements Initializable {
 
+    //Variable que almacena el id del usuario
     private static String uID="";  
-    private boolean suma = false, sumado=false;
+    //variables para sumar
+    private boolean suma = false;// sumado=false;
     //para verificar si ya se sumo en precio en el metodo calcant, sumado es para validar si el usuario ya sumo una cantidad antes
     //de agregar el producto a la factura
     
+    //objeto de la clase funciones, tiene varios metodos
     private funciones fun = new funciones();
+    //objeto de la clase usuario, para manejar el id del usuario
     private Usuario usuario = new Usuario();
     private ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
     private ResultSet rs = null; //ResultSet para varios usos
+    //String que almacena la fecha actual
     private String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    private ObservableList<Fact_Model> ol = FXCollections.observableArrayList(); //lista de tipo Fact_Model(clase) para llenar y manejar la tabla
+    //lista de tipo Fact_Model(clase) para llenar y manejar la tabla
+    private ObservableList<Fact_Model> ol = FXCollections.observableArrayList();
+    //array list para guardar las existencias actuales de cada producto agregado a la tabla
     private ArrayList<Integer> _exists =  new ArrayList<Integer>();
+    //las variables que terminan con una g mayuscula son las que manejan el valor que se mostrara en la cabeza de la factura,
+    //las variables que terminan con una b mayuscula son las que manejan el valor que se mostrara en el detalle de la factura
+    //las otras variables son de apoyo para la sumatoria de las variables generales
     private double imp=0.0,tot=0.0,s_TotG=0.0, totG =0.0, impG=0.0, vImp=0.0, txt_price=0.0, st=0.0,
                    vDesc=0.0, desc = 0.0, descg=0.0, precioG=0.0, totB=0.0, stB=0.0, isvB=0.0, descB=0.0;
+    //idF=id de la factura, cantG=cantidad general de un producto que se agregara a la tabla
+    //fmIndex=variable que aloja la posicion de una fila en la tabla, se llena cuando se selecciona una fila
+    //exisB=maneja las existencias de cada producto luego de restarle lo que se facturara
     private int idF, cantG=0, fmIndex=0, exisB=0;
+    //clase que maneja los valores con los que se llena la tabla
     private Fact_Model fm;
     
-    @FXML
+    @FXML//boton agregar producto
     private Button btnAgProd;
-    @FXML 
+    @FXML //textfield del modulo, ID de Producto, ID Usario, DNI Cliente, Nombre de Producto, Precio Producto y cantidad de producto
     private TextField txtIDProd, txtUser, txtDniCli, txtProdName, txtPrice, txtCant;
-    @FXML
+    @FXML//label del modulo, SubTotal General, Descuento General, cantidad general de producto, ID del Factura
     private Label lblSTot, lblDesc, lblTotal, lblCant, lblFact;
-    @FXML
+    @FXML//Panel en el que estan los componentes del modulo
     private AnchorPane pnlPrinc;
-    @FXML
+    @FXML//Combobox que le permite al usuario escoger el tipo de cliente al que se le vendera
     private ComboBox cmbCli; 
-    @FXML
+    @FXML//Tabla del modulo, aqui se mostrara el detalle de la factura
     private TableView<Fact_Model> tblDet;
-    @FXML
+    @FXML//Las columnas de la tabla
     private TableColumn<Fact_Model, String> col_IDProd;
     @FXML
     private TableColumn<Fact_Model, String> colDescr;
@@ -79,13 +93,17 @@ public class SalesController implements Initializable {
     @FXML
     private TableColumn<Fact_Model, String> colLote;
     
+    //metodo para llenar el combobox
     private void fillCBox(){
         try{
             //String arr[] = {"1","2","3","4","5"};
+            //se limpian todos los valores del combobox, se hace por precaucion
             cmbCli.getItems().removeAll(cmbCli.getItems());
             //cmbCli.getItems().addAll(arr);
+            //se le agregan los valores que se quieren mostrar en el combobox
             cmbCli.getItems().addAll("Cliente Normal","Cliente Temporal");
             //cmbCli.getSelectionModel().select("1");
+            //se elije que valor aparecera seleccionado
             cmbCli.getSelectionModel().select("Cliente Normal");
         }catch(Exception e){
             e.printStackTrace();
@@ -99,32 +117,42 @@ public class SalesController implements Initializable {
     }
     
     private void verifyEnter(KeyEvent evt){ //metodo para verificar que se presiono la tecla enter en la caja de texto del id del producto
-        if(evt.getCode() == KeyCode.ENTER){
+        if(evt.getCode() == KeyCode.ENTER){//si se presiona la tecla enter se procede a buscar el producto
             int n = 0;
             buscartxt(n);
         } 
     }
     
     private void calCant(KeyEvent evt){ //metodo para sumar el precio total de un producto
-        precioG = Double.parseDouble(txtPrice.getText());
-        if(precioG > 0){
-            if(evt.getCode() == KeyCode.ENTER){
-                cantG += Integer.parseInt(txtCant.getText());
-                if(suma)  precioG += txt_price * Double.parseDouble(txtCant.getText());
+        precioG = Double.parseDouble(txtPrice.getText()); //se obtiene el precio general del producto
+        if(precioG > 0){ //si el precio es mayor a cero
+            if(evt.getCode() == KeyCode.ENTER){//si se presiona la tecla enter
+                cantG += Integer.parseInt(txtCant.getText());//se va sumando la cantidad general de producto
+                //si la variable suma es verdadera significa que ya se realizo una primera sumaoria 
+                if(suma)  precioG += txt_price * Double.parseDouble(txtCant.getText()); 
+                //si es falsa quiere decir que es la primera vez que se suma
                 if(!suma){
                     precioG += txt_price * Double.parseDouble(txtCant.getText()) - precioG;
+                    //suma se vuelve verdadera por si el usuario decide ingresar mas producto
                     suma = true;
                 }
+                //se le agrega el precio a la caja de texto precios
                 txtPrice.setText(Double.toString(precioG));
+                //se limpia la caja de texto cantidad
                 txtCant.setText("");
+                //se coloca la cantidad de producto a agregar a la tabla en un label que se muestra abajo
                 lblCant.setText(Integer.toString(cantG));
             } 
         }
     }
     
+    //metodo para pasar el focus a otro componente, los  parametros son un KeyEvent y el componente al que se le pasara el focus
     private void request(KeyEvent evt, Node n1){
+        //se se presiona la tecla enter
        if(evt.getCode() == KeyCode.ENTER){
+           //El componente que se pasa por parametro es un textfield este recibe el focus
             if(n1 instanceof TextField) n1.requestFocus();
+            //Elcomponente que se pasa por parametro es un boton este recibe el focus
             if(n1 instanceof Button) n1.requestFocus();
         } 
     }
@@ -143,6 +171,7 @@ public class SalesController implements Initializable {
         }catch(Exception e){   fun.msg("Ha ocurrido un error: \n Por Favor contacte a soporte");}
     }    
     
+    //Los valores que recibira cada columna
     private void setCellValue(){
         col_IDProd.setCellValueFactory(new PropertyValueFactory<>("_id"));
         colDescr.setCellValueFactory(new PropertyValueFactory<>("descr"));
@@ -154,7 +183,7 @@ public class SalesController implements Initializable {
     }
     
     private void agrProd(String sql){
-        int cant = cantG, rc = tblDet.getItems().size(), exists = 0, rsSize=0, agr=0;
+        int cant = cantG, rc = tblDet.getItems().size(), exists = 0, agr=0;
         try{
             if(!txtIDProd.getText().isEmpty() && !txtProdName.getText().isEmpty() && !txtDniCli.getText().isEmpty()){
                 rs = buscar(sql, con);
@@ -199,9 +228,9 @@ public class SalesController implements Initializable {
                 agr=0;
                 rs = null;
                 con.DesconectarBasedeDatos();
+                txtIDProd.requestFocus();
             }
         }catch(Exception e){
-            e.printStackTrace();
             fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
     }
     
@@ -385,12 +414,12 @@ public class SalesController implements Initializable {
         }
     }
     
-    public void buscartxt(int _id){ //metodo para buscar un producto
+    public void buscartxt(int _id){ //metodo para buscar un producto a partir del id ingresado en la caja de texto id del producto
         _id = Integer.parseInt(txtIDProd.getText());  //se captura el id del prodcuto a buscar en la caja de texto idProducto
         String sql = "select p.descripcion, p.precio from producto p where p.id_pdt = '" + _id + "' && status = 1";
         try{
-            rs = buscar(sql, con);
-            if(rs.next()){
+            rs = buscar(sql, con); //se realiza la busqueda del producto
+            if(rs.next()){ //si la busqueda da resultados
                 txtProdName.setText(rs.getString("descripcion"));//se carga el nombre del producto en el txtFLD nombreProducto
                 txtPrice.setText(Double.toString(rs.getDouble("precio")));//se carga el precio del producto en el txtFLD precio
                 txt_price = Double.parseDouble(txtPrice.getText());//se guarda el precio en una variable para poder usarlo luego
@@ -404,7 +433,6 @@ public class SalesController implements Initializable {
     
     public ResultSet buscar(String sql, ConexionMySQL con){ //Metodo para realizar una consulta devuelve un ResultSet
         try{
-            //con = new ConexionMySQL();
             con.ConectarBasedeDatos();
             PreparedStatement ps = con.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -412,6 +440,13 @@ public class SalesController implements Initializable {
         }catch(Exception e){
             e.printStackTrace();
             return null;
+        }
+    }
+    
+    @FXML
+    private void cbxOA(ActionEvent evt){
+        if(cmbCli.getSelectionModel().getSelectedItem().equals("Cliente Temporal")){
+            txtDniCli.setText("0000-0000-00000");
         }
     }
     
@@ -458,27 +493,32 @@ public class SalesController implements Initializable {
         request(evt, txtDniCli);
     }
     
-    @FXML
+    @FXML//evento para verificar si se ingreso algun valor en la caja de texto Cantidad
     private void Cantkpr(KeyEvent evt){
+        //metodo para verificar que solamente se ingresen numeros
         fun.validaNumeros(txtCant, 20);
-        sumado=false;
+        //sumado=false;
+        //se verifica que la caja de texto cantidad y precio no esten vacias para llamar al siguiente metodo calCant(evt)
         if(!txtCant.getText().isEmpty() && !txtPrice.getText().isEmpty()) calCant(evt);
-        System.out.println(sumado); 
    }
     
-    @FXML
+    @FXML//evento para verificar si se ingreso algun valor en la caja de texto DNI Cliente
     private void dniCkpr(KeyEvent evt){
+        //metodo para verificar que solamente se ingresen numeros
         fun.formatTD(txtDniCli, 2);
     }
     
-    @FXML
+    @FXML//evento que se llama cuando se clikea en la tabla
     private void tblMC(MouseEvent evt){
+        //metodo para seleccionar una fila de la tabla
         selRow();
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //se llena el combobox de tipo de cliente
         fillCBox();
+        //Se carga el id de la factura
         CargarIdFact();
     }    
 }

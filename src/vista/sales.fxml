@@ -58,7 +58,7 @@
                         <Label layoutX="159.0" layoutY="153.0" text="Precio:" />
                         <Label layoutX="365.0" layoutY="153.0" text="Cantidad:">
                            <tooltip>
-                              <Tooltip text="La cantidad de producto a facturar" />
+                              <Tooltip text="Al ingresar la cantidad de producto presione enter" />
                            </tooltip></Label>
                         <Label layoutX="430.0" layoutY="34.0" text="Usuario:" />
                         <TextField fx:id="txtIDProd" layoutX="210.0" layoutY="29.0" onKeyPressed="#IDProdkpr" prefHeight="30.0" prefWidth="160.0" AnchorPane.leftAnchor="210.0">
@@ -87,7 +87,7 @@
                               <Tooltip text="Introduzca el DNI Cliente" />
                            </tooltip></TextField>
                         <Label layoutX="126.0" layoutY="73.0" text="Tipo cliente:" />
-                        <ComboBox fx:id="cmbCli" layoutX="210.0" layoutY="68.0" prefHeight="30.0" prefWidth="130.0">
+                        <ComboBox fx:id="cmbCli" layoutX="210.0" layoutY="68.0" onAction="#cbxOA" prefHeight="30.0" prefWidth="130.0">
                            <tooltip>
                               <Tooltip text="escoja el tipo de cliente" />
                            </tooltip></ComboBox>
@@ -105,7 +105,7 @@
                         </Button>
                         <Label fx:id="lblCant" layoutX="430.0" layoutY="178.0" prefHeight="17.0" prefWidth="88.0" textFill="RED">
                            <tooltip>
-                              <Tooltip text="Cantidad Total de Producto a agregar" />
+                              <Tooltip text="Cantidad Total de Producto a agregar  a la tabla" />
                            </tooltip>
                         </Label>
                      </children>
