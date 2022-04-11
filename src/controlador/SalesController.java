@@ -440,6 +440,7 @@ public class SalesController implements Initializable {
     @FXML
     private void clean(ActionEvent evt){
         cleanTxt(pnlPrinc, "txtUser","");
+        lblCant.setText("");
     }
     
     @FXML
