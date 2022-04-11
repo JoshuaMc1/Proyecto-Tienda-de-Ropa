@@ -7,6 +7,9 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,10 +44,12 @@ public class SalesController implements Initializable {
     private Usuario usuario = new Usuario();
     private ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
     private ResultSet rs = null; //ResultSet para varios usos
+    private String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     private ObservableList<Fact_Model> ol = FXCollections.observableArrayList(); //lista de tipo Fact_Model(clase) para llenar y manejar la tabla
+    private ArrayList<Integer> _exists =  new ArrayList<Integer>();
     private double imp=0.0,tot=0.0,s_TotG=0.0, totG =0.0, impG=0.0, vImp=0.0, txt_price=0.0, st=0.0,
                    vDesc=0.0, desc = 0.0, descg=0.0, precioG=0.0, totB=0.0, stB=0.0, isvB=0.0, descB=0.0;
-    private int idF, cantG=0, fmIndex=0;
+    private int idF, cantG=0, fmIndex=0, exisB=0;
     private Fact_Model fm;
     
     @FXML
@@ -154,20 +159,19 @@ public class SalesController implements Initializable {
             if(!txtIDProd.getText().isEmpty() && !txtProdName.getText().isEmpty() && !txtDniCli.getText().isEmpty()){
                 rs = buscar(sql, con);
                 while(rs.next() && agr == 0){
-                    agr=1;
-                    System.out.println(rs.getInt("n_lote"));
-                    System.out.println(rs.getInt("existencias"));
-                    System.out.println(rsSize);
                     if(rs.getInt("existencias") > cant && cant > 0){
+                        agr=1;
                         sum(rs.getDouble("porcentaje"), precioG);
                         if(rc > 0){
                             for(int i=0;i<rc;i++){
                                 if(txtIDProd.getText().equals(tblDet.getItems().get(i).get_id())){
+                                    _exists.add(rs.getInt("existencias"));
                                     exists = 1;
                                     int ct = Integer.parseInt(tblDet.getItems().get(i).getCant()) + cantG;
                                     tblDet.getItems().get(i).setCant(Integer.toString(ct));
                                     tblDet.getItems().set(i, tblDet.getItems().get(i));
                                 } else if(exists == 0){
+                                    _exists.add(rs.getInt("existencias"));
                                     exists = 1;
                                     ol.add(new Fact_Model(txtIDProd.getText(), rs.getString("descripcion"), Integer.toString(cantG),
                                     Double.toString(rs.getDouble("Precio")), "0.15", Double.toString(rs.getDouble("porcentaje")),
@@ -177,6 +181,7 @@ public class SalesController implements Initializable {
                                 }
                             }
                         }else if(exists == 0){
+                            _exists.add(rs.getInt("existencias"));
                             ol.add(new Fact_Model(txtIDProd.getText(), rs.getString("descripcion"), Integer.toString(cantG),
                             Double.toString(rs.getDouble("Precio")), "0.15", Double.toString(rs.getDouble("porcentaje")),
                             Integer.toString(rs.getInt("n_lote"))));
@@ -209,7 +214,30 @@ public class SalesController implements Initializable {
         if(rc > 0 && !txtDniCli.getText().isEmpty()){ 
             //si se escribio el DNI de manera correcta
             if(txtDniCli.getText().length() == 15){
-                
+                fact_a = "insert into fcatura_a (id_factura, dni_cliente, t_desc, id_user, t_imp, sub_total, total, fechaVenta, status) "+
+                             "values ('"+idF+"','"+txtDniCli.getText()+"','"+descg+"','"+txtUser.getText()+"','"+impG+"','"+s_TotG+"','"+totG+"','"+date+"','1')";
+                fun.guardar(fact_a);
+                for(int i=0; i<rc; i++){
+                    stB = Double.parseDouble(tblDet.getItems().get(i).getCant()) * Double.parseDouble(tblDet.getItems().get(i).getPrice());
+                    isvB = Double.parseDouble(tblDet.getItems().get(i).getIsv()) * stB;
+                    descB = Double.parseDouble(tblDet.getItems().get(i).getDesc()) * stB;
+                    totB = stB + isvB - descB;
+                    exisB = _exists.get(i) - Integer.parseInt(tblDet.getItems().get(i).getCant());
+                    frmtB();
+                    fact_b = "insert into fcatura_b (id_factura, id_pdt, isv, descuento, sub_total, total, status) "+
+                             "values ('"+idF+"','"+tblDet.getItems().get(i).get_id()+"','"+isvB+"','"+descB+"','"+stB+"','"+totB+"','1')";
+                    upExis = "update inventario set existencias = '" + exisB + "' where id_pdt='"+tblDet.getItems().get(i).get_id()+"' and n_lote='"+tblDet.getItems().get(i).getLote()+"'";
+                    fun.guardar(fact_b);
+                    fun.guardar(upExis);
+                    exisB = 0;
+                }
+                cleanTxt(pnlPrinc, "txtUser", "");
+                resetD();
+                CargarIdFact();
+                resetLbl();
+                tblDet.getItems().clear();
+                con.DesconectarBasedeDatos();
+                fun.msg("Facturacion Exitosa");
             }
         } else{
             fun.msg("NO hay productos para facturar o no hay cliente ");
@@ -238,6 +266,33 @@ public class SalesController implements Initializable {
                 }break;
             }
         }
+    }
+    
+    //Metodo para darle formato a los valores decimales que se le agregan al cuerpo de la factura
+    private void frmtB(){
+        stB = giveFormat(stB);
+        isvB = giveFormat(isvB);
+        totB = giveFormat(totB);
+        descB = giveFormat(descB);
+    }
+    
+    //
+    private void resetD(){
+        st=0.0;
+        vDesc=0.0;
+        vImp=0.0;
+        imp=0.0;
+        tot=0.0;
+        s_TotG=0.0;
+        totG=0.0;
+        impG=0.0;
+        descg=0.0;
+    }
+    
+    private void resetLbl(){
+        lblDesc.setText("L.");
+        lblSTot.setText("L.");
+        lblTotal.setText("L.");
     }
     
     private void selRow(){

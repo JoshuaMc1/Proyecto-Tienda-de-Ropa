@@ -1,6 +1,7 @@
 package modelo.funciones;
 
 import controlador.clases.Usuario;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.function.UnaryOperator;
 import javafx.collections.FXCollections;
@@ -52,7 +53,7 @@ public class funciones {
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR EL REGISTRO\nERROR: "+e.getMessage(), "ATENCION!", 0);
         }
-    }
+    }*/
     
     //metodo para modificar los datos en la base de datos
     public void modificar(String sentencia){
@@ -66,7 +67,7 @@ public class funciones {
         }
     }
     
-    //metodo para buscar en la base de datos
+    /*metodo para buscar en la base de datos
     public ResultSet buscar(String sql, Conexion.ConexionMySQL con){
         try{
             con = new Conexion.ConexionMySQL();
@@ -77,13 +78,12 @@ public class funciones {
         }catch(Exception e){
             return null;
         }
-    }
+    }*/
     
     //metodo para guardar el la base de datos
     public void guardar(String sentencia){
         try{
             con.ConectarBasedeDatos();
-            System.out.println("coencta");
             PreparedStatement ps = con.getConnection().prepareStatement(sentencia);
             ps.execute();
             con.DesconectarBasedeDatos();
@@ -92,7 +92,7 @@ public class funciones {
             JOptionPane.showMessageDialog(null, "NO SE PUDO GUARDAR EL REGISTRO\nError: "+ex.getMessage(), "ATENCION!", 0);
             ex.printStackTrace();
         }
-    }*/
+    }
     
     public String totalVentasHoy(){
         String res = "L. 0";
