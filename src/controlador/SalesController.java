@@ -42,8 +42,8 @@ public class SalesController implements Initializable {
     private ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
     private ResultSet rs = null; //ResultSet para varios usos
     private ObservableList<Fact_Model> ol = FXCollections.observableArrayList(); //lista de tipo Fact_Model(clase) para llenar y manejar la tabla
-    private double precio= 0.0, subt=0.0,imp=0.0,tot=0.0,s_TotG=0.0, totG =0.0, impG=0.0, vImp=0.0, txt_price=0.0, st=0.0,
-                   vDesc=0.0, desc = 0.0, descg=0.0, precioG=0.0;
+    private double imp=0.0,tot=0.0,s_TotG=0.0, totG =0.0, impG=0.0, vImp=0.0, txt_price=0.0, st=0.0,
+                   vDesc=0.0, desc = 0.0, descg=0.0, precioG=0.0, totB=0.0, stB=0.0, isvB=0.0, descB=0.0;
     private int idF, cantG=0, fmIndex=0;
     private Fact_Model fm;
     
@@ -149,16 +149,17 @@ public class SalesController implements Initializable {
     }
     
     private void agrProd(String sql){
-        int cant = cantG, rc = tblDet.getItems().size(), exists = 0, rsSize=0;
+        int cant = cantG, rc = tblDet.getItems().size(), exists = 0, rsSize=0, agr=0;
         try{
             if(!txtIDProd.getText().isEmpty() && !txtProdName.getText().isEmpty() && !txtDniCli.getText().isEmpty()){
                 rs = buscar(sql, con);
-                while(rs.next()){
+                while(rs.next() && agr == 0){
+                    agr=1;
                     System.out.println(rs.getInt("n_lote"));
                     System.out.println(rs.getInt("existencias"));
                     System.out.println(rsSize);
                     if(rs.getInt("existencias") > cant && cant > 0){
-                        sum(rs.getDouble("porcentaje"), Double.parseDouble(txtPrice.getText()));
+                        sum(rs.getDouble("porcentaje"), precioG);
                         if(rc > 0){
                             for(int i=0;i<rc;i++){
                                 if(txtIDProd.getText().equals(tblDet.getItems().get(i).get_id())){
@@ -190,15 +191,23 @@ public class SalesController implements Initializable {
                         fun.msg("La cantidad de producto a facturar supera la existencia actual del lote # " + rs.getInt("n_lote") + "  o su valor es 0");
                     }
                 }
+                agr=0;
                 rs = null;
                 con.DesconectarBasedeDatos();
             }
-        }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
+        }catch(Exception e){
+            e.printStackTrace();
+            fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
     }
     
     private void facturar(){
+        String fact_a="", fact_b="", upExis="";
+        //string para hacer el query para guardar el header de la factura junto con el cuerpo y actualizar la existencia de productos
         int rc = tblDet.getItems().size();
-        if(rc > 0 && !txtDniCli.getText().isEmpty()){
+        //el numero de filas que tiene la tabla
+        //se verifica que la tabla este llena y que se haya especificado el DNI del cliente
+        if(rc > 0 && !txtDniCli.getText().isEmpty()){ 
+            //si se escribio el DNI de manera correcta
             if(txtDniCli.getText().length() == 15){
                 
             }
@@ -236,6 +245,7 @@ public class SalesController implements Initializable {
             if(tblDet.getSelectionModel().getSelectedItem() != null){
                 fm = tblDet.getSelectionModel().getSelectedItem();
                 fmIndex = tblDet.getSelectionModel().getSelectedIndex();
+                System.out.println(fmIndex + " index");
             }
     }
     
@@ -307,6 +317,7 @@ public class SalesController implements Initializable {
                 idF=1;
                 lblFact.setText("#FACTURA                                      " + idF);
             }
+            con.DesconectarBasedeDatos();
         }catch(Exception e){fun.msg("Error!!");}
     }
     
@@ -338,7 +349,7 @@ public class SalesController implements Initializable {
     
     public ResultSet buscar(String sql, ConexionMySQL con){ //Metodo para realizar una consulta devuelve un ResultSet
         try{
-            con = new ConexionMySQL();
+            //con = new ConexionMySQL();
             con.ConectarBasedeDatos();
             PreparedStatement ps = con.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
