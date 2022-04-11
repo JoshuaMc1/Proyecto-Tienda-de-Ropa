@@ -141,7 +141,7 @@
                      <children>
                         <Pane prefHeight="55.0" prefWidth="350.0" styleClass="pnl-title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="15.0" text="FACTURA">
+                              <Label fx:id="lblFact" layoutX="14.0" layoutY="15.0" text="FACTURA">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
@@ -250,7 +250,7 @@
                      <center>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <TableView fx:id="tblDet" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tblDet" onMouseClicked="#tblMC" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="col_IDProd" text="ID Producto" />
                                   <TableColumn fx:id="colDescr" prefWidth="194.0" text="Descripcion" />
@@ -283,6 +283,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="RemProd" alignment="CENTER" layoutX="15.0" layoutY="88.0" mnemonicParsing="false" onAction="#RemProd" prefHeight="60.0" prefWidth="320.0" styleClass="btn-remove" text="REMOVER PRODUCTO">
                            <font>
@@ -295,6 +298,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Seleccione la fila con el producto que quiera eliminar" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="cleanTxt" alignment="CENTER" layoutX="15.0" layoutY="161.0" mnemonicParsing="false" onAction="#clean" prefHeight="60.0" prefWidth="320.0" styleClass="btn-clean-up" text="LIMPIAR">
                            <font>
@@ -307,6 +313,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Click aqui para limpiar las cajas de texto y la tabla" />
+                           </tooltip>
                         </Button>
                      </children>
                   </AnchorPane>

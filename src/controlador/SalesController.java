@@ -24,7 +24,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javax.swing.JOptionPane;
 import modelo.ConexionMySQL;
 import modelo.funciones.funciones;
 
@@ -40,16 +42,17 @@ public class SalesController implements Initializable {
     private ConexionMySQL con = new ConexionMySQL(); //Variable que referencia a la clase que realiza la conexion a la bd
     private ResultSet rs = null; //ResultSet para varios usos
     private ObservableList<Fact_Model> ol = FXCollections.observableArrayList(); //lista de tipo Fact_Model(clase) para llenar y manejar la tabla
-    private double precio= 0.0, subt=0.0,imp=0.0,tot=0.0,s_TotG=0.0, totG =0.0, impG=0.0, vImp=0.0, txt_price=0.0, st=0.0,
-                   vDesc=0.0, desc = 0.0, descg=0.0, precioG=0.0;
-    private int id, cantG=0;
+    private double imp=0.0,tot=0.0,s_TotG=0.0, totG =0.0, impG=0.0, vImp=0.0, txt_price=0.0, st=0.0,
+                   vDesc=0.0, desc = 0.0, descg=0.0, precioG=0.0, totB=0.0, stB=0.0, isvB=0.0, descB=0.0;
+    private int idF, cantG=0, fmIndex=0;
+    private Fact_Model fm;
     
     @FXML
     private Button btnAgProd;
     @FXML 
     private TextField txtIDProd, txtUser, txtDniCli, txtProdName, txtPrice, txtCant;
     @FXML
-    private Label lblSTot, lblDesc, lblTotal, lblCant;
+    private Label lblSTot, lblDesc, lblTotal, lblCant, lblFact;
     @FXML
     private AnchorPane pnlPrinc;
     @FXML
@@ -122,13 +125,13 @@ public class SalesController implements Initializable {
     }
     
     //metodo para limpiar las cajas de texto en un panel
-    private void cleanTxt(AnchorPane ap, String txtName){ // El Pane es el panel en que se encuentran las cajas de texto
+    private void cleanTxt(AnchorPane ap, String txtName, String txtName2){ // El Pane es el panel en que se encuentran las cajas de texto
         //System.out.println(txtIDProd.getParent().toString());
         try{
             for(Node n1 : ap.getChildren()){ //se usa un ciclo foreach y se recorren todos los objetos hijos del panel
                 //Node de javafx = Component de java.awt
                 if (n1 instanceof TextField) { //si el nodo es un textfield se limpia
-                    if(!n1.getId().equals(txtName)) //El unico txtfld que no se limpiara es el que muestra el id del usuario
+                    if(!n1.getId().equals(txtName) && !n1.getId().equals(txtName2)) //El unico txtfld que no se limpiara es el que muestra el id del usuario
                         ((TextField) n1).setText("");
                }
             }
@@ -146,15 +149,17 @@ public class SalesController implements Initializable {
     }
     
     private void agrProd(String sql){
-        int cant = cantG;
-        int rc = tblDet.getItems().size();
-        int exists = 0;
+        int cant = cantG, rc = tblDet.getItems().size(), exists = 0, rsSize=0, agr=0;
         try{
-            if(!txtIDProd.getText().isEmpty() && !txtProdName.getText().isEmpty()){
+            if(!txtIDProd.getText().isEmpty() && !txtProdName.getText().isEmpty() && !txtDniCli.getText().isEmpty()){
                 rs = buscar(sql, con);
-                if(rs.next()){
-                    if(rs.getInt("Existencias") > cant && cant > 0){
-                        sum(rs.getDouble("porcentaje"), Double.parseDouble(txtPrice.getText()));
+                while(rs.next() && agr == 0){
+                    agr=1;
+                    System.out.println(rs.getInt("n_lote"));
+                    System.out.println(rs.getInt("existencias"));
+                    System.out.println(rsSize);
+                    if(rs.getInt("existencias") > cant && cant > 0){
+                        sum(rs.getDouble("porcentaje"), precioG);
                         if(rc > 0){
                             for(int i=0;i<rc;i++){
                                 if(txtIDProd.getText().equals(tblDet.getItems().get(i).get_id())){
@@ -180,15 +185,97 @@ public class SalesController implements Initializable {
                             exists=1;
                         }
                         exists = 0;
-                        cleanTxt(pnlPrinc, "txtUser");
+                        cleanTxt(pnlPrinc, "txtUser", "txtDniCli");
+                        lblCant.setText("");
                     } else{
-                        fun.msg("La cantidad de producto a facturar supera le existencia actual o su valor es 0");
+                        fun.msg("La cantidad de producto a facturar supera la existencia actual del lote # " + rs.getInt("n_lote") + "  o su valor es 0");
                     }
                 }
+                agr=0;
                 rs = null;
                 con.DesconectarBasedeDatos();
             }
-        }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
+        }catch(Exception e){
+            e.printStackTrace();
+            fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
+    }
+    
+    private void facturar(){
+        String fact_a="", fact_b="", upExis="";
+        //string para hacer el query para guardar el header de la factura junto con el cuerpo y actualizar la existencia de productos
+        int rc = tblDet.getItems().size();
+        //el numero de filas que tiene la tabla
+        //se verifica que la tabla este llena y que se haya especificado el DNI del cliente
+        if(rc > 0 && !txtDniCli.getText().isEmpty()){ 
+            //si se escribio el DNI de manera correcta
+            if(txtDniCli.getText().length() == 15){
+                
+            }
+        } else{
+            fun.msg("NO hay productos para facturar o no hay cliente ");
+        }
+    }
+    
+    private void quitarProd(){
+        if(fm!=null){
+            String opc []={"Eliminar la fila completa", "Quitar una cantidad x de producto"};// arreglo de opciones
+            int dec = JOptionPane.showOptionDialog(null,"Que deseas realizar?","Opciones",JOptionPane.YES_OPTION,JOptionPane.WARNING_MESSAGE,null,opc,opc[0]);
+            switch(dec){
+                case 0:{
+                    restar(fmIndex, Double.parseDouble(tblDet.getItems().get(fmIndex).getCant()));
+                    tblDet.getItems().remove(fmIndex);
+                    fm = null;
+                }break;
+                case 1:{
+                    int ndec = Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad que desea eliminar"));
+                    if(ndec < Integer.parseInt(tblDet.getItems().get(fmIndex).getCant())){
+                        int cant = Integer.parseInt(tblDet.getItems().get(fmIndex).getCant()) - ndec;
+                        double n = (double)ndec;
+                        restar(fmIndex, n);
+                        tblDet.getItems().get(fmIndex).setCant(Integer.toString(cant));
+                        tblDet.getItems().set(fmIndex, tblDet.getItems().get(fmIndex));
+                    } else fun.msg("La cantidad introducida excede la cantidad que se encuentra en la tabla");
+                }break;
+            }
+        }
+    }
+    
+    private void selRow(){
+        if(tblDet.getItems().size() > 0)
+            if(tblDet.getSelectionModel().getSelectedItem() != null){
+                fm = tblDet.getSelectionModel().getSelectedItem();
+                fmIndex = tblDet.getSelectionModel().getSelectedIndex();
+                System.out.println(fmIndex + " index");
+            }
+    }
+    
+    private void restar(int index, double cantidad){
+        double rprecio = Double.parseDouble(tblDet.getItems().get(index).getPrice()); //precio del producto que se va a quitar
+        double risv = Double.parseDouble(tblDet.getItems().get(index).getIsv()); //isv del producto que se va a quitar
+        double rdesc = Double.parseDouble(tblDet.getItems().get(index).getDesc());
+        double rcant = cantidad;
+        double rst = rprecio * rcant;
+        rst = giveFormat(rst);
+        double risvg = rst * risv;
+        risvg = giveFormat(risvg);
+        double rdescg = rst * rdesc;
+        rdescg = giveFormat(rdescg);
+        double rtotal = rst + risvg - rdescg;
+        rtotal = giveFormat(rtotal);
+        impG = impG - risvg;
+        s_TotG = s_TotG - rst;
+        descg = descg - rdescg;
+        totG = totG - rtotal;
+        updtLbl();
+    }
+    
+    private void updtLbl(){
+        if(descg < 0) descg = 0.0;
+        if(s_TotG < 0) s_TotG = 0.0;
+        if(totG < 0) totG = 0.0;
+        lblDesc.setText("L. " + String.format("%.2f",descg));
+        lblSTot.setText("L. " + String.format("%.2f",s_TotG));
+        lblTotal.setText("L. " + String.format("%.2f",totG));
     }
     
     private void sum(double _desc, double s_tt){ //metodo para realizar la sumatoria del total ,sTotal,isv y decuento
@@ -207,9 +294,7 @@ public class SalesController implements Initializable {
             totG+=tot;
             impG+=imp;
             descg+=desc;
-            lblDesc.setText("L. " + String.format("%.2f",descg));
-            lblSTot.setText("L. " + String.format("%.2f",s_TotG));
-            lblTotal.setText("L. " + String.format("%.2f",totG));
+            updtLbl();
         }catch(Exception e){fun.msg("ERROR"+e);}
     }
     
@@ -217,6 +302,25 @@ public class SalesController implements Initializable {
         cargarObjeto(id);
     }
 
+    public void CargarIdFact(){
+        try{
+            String sql = "select * from fcatura_a";
+            rs = buscar(sql, con);
+            if(rs.next()){
+                do{
+                    if(rs.isLast()){
+                        idF = rs.getInt("id_factura") + 1;
+                        lblFact.setText("FACTURA                                      " + idF);
+                    } 
+                }while((rs.next()));
+            } else{ 
+                idF=1;
+                lblFact.setText("#FACTURA                                      " + idF);
+            }
+            con.DesconectarBasedeDatos();
+        }catch(Exception e){fun.msg("Error!!");}
+    }
+    
     private void cargarObjeto(int id) {
         try {
             usuario = fun.llenarObejto(id);
@@ -240,11 +344,12 @@ public class SalesController implements Initializable {
                 suma = false;
             }
         }catch(Exception e){fun.msg("Hubo un error¡¡¡ " + e + "\n favor contactar al administrador ");}
+        con.DesconectarBasedeDatos();
     }
     
     public ResultSet buscar(String sql, ConexionMySQL con){ //Metodo para realizar una consulta devuelve un ResultSet
         try{
-            con = new ConexionMySQL();
+            //con = new ConexionMySQL();
             con.ConectarBasedeDatos();
             PreparedStatement ps = con.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -269,17 +374,17 @@ public class SalesController implements Initializable {
     
     @FXML
     private void SaveBill(ActionEvent evt){
-        
+        facturar();
     }
     
     @FXML
     private void RemProd(ActionEvent evt){
-        
+        quitarProd();
     }
     
     @FXML
     private void clean(ActionEvent evt){
-        cleanTxt(pnlPrinc, "txtUser");
+        cleanTxt(pnlPrinc, "txtUser","");
     }
     
     @FXML
@@ -310,8 +415,14 @@ public class SalesController implements Initializable {
         fun.formatTD(txtDniCli, 2);
     }
     
+    @FXML
+    private void tblMC(MouseEvent evt){
+        selRow();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         fillCBox();
+        CargarIdFact();
     }    
 }
