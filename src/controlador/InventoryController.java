@@ -39,6 +39,7 @@ import javafx.stage.Stage;
 import modelo.ConexionMySQL;
 import modelo.funciones.funciones;
 import modelo.inventoryModel.product;
+import modelo.inventoryModel.proveedor;
 
 /**
  * FXML Controller class
@@ -91,7 +92,7 @@ public class InventoryController implements Initializable {
     @FXML
     private ComboBox<?> slcGenreProduct;
     @FXML
-    private ComboBox<?> slcProveedor;
+    private ComboBox<proveedor> slcProveedor;
     @FXML
     private ComboBox<?> slcDescuento;
     @FXML
@@ -113,6 +114,7 @@ public class InventoryController implements Initializable {
     @FXML
     private Button btnAgregarMarca;
     private ObservableList<product> tablaProd;
+    
     ConexionMySQL con = new ConexionMySQL();
     @FXML
     private TableColumn<product, Integer> col1;
@@ -151,25 +153,32 @@ public class InventoryController implements Initializable {
         cargarGraficoInvBajo();
         cargarGraficoProductoPorMarca();
         cargarTabla();
+        cargarComboProveedor();
     }
     
     public void cargarTabla(){
+        product pdt = new product();
         tablaProd = FXCollections.observableArrayList();
-        tablaProd = product.llenarTablaProductos(con);
+        tablaProd = pdt.llenarTablaProductos();
         tblDatosProduct.setItems(tablaProd);
-        
-        col1.setCellValueFactory(new PropertyValueFactory<product, Integer>("idP"));
-        col2.setCellValueFactory(new PropertyValueFactory<product, Integer>("idLote"));
-        col3.setCellValueFactory(new PropertyValueFactory<product, String>("nombreP"));
-        col4.setCellValueFactory(new PropertyValueFactory<product, String>("marca"));
-        col5.setCellValueFactory(new PropertyValueFactory<product, String>("color"));
-        col6.setCellValueFactory(new PropertyValueFactory<product, String>("talla"));
-        col7.setCellValueFactory(new PropertyValueFactory<product, String>("tipoP"));
-        col8.setCellValueFactory(new PropertyValueFactory<product, String>("generoP"));
-        col9.setCellValueFactory(new PropertyValueFactory<product, String>("proveedor"));
-        col10.setCellValueFactory(new PropertyValueFactory<product, Double>("precio"));
-        col11.setCellValueFactory(new PropertyValueFactory<product, Integer>("cantidad"));
-        col12.setCellValueFactory(new PropertyValueFactory<product, Double>("descuento"));
+        col1.setCellValueFactory(new PropertyValueFactory<>("idP"));
+        col2.setCellValueFactory(new PropertyValueFactory<>("idLote"));
+        col3.setCellValueFactory(new PropertyValueFactory<>("nombreP"));
+        col4.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        col5.setCellValueFactory(new PropertyValueFactory<>("color"));
+        col6.setCellValueFactory(new PropertyValueFactory<>("talla"));
+        col7.setCellValueFactory(new PropertyValueFactory<>("tipoP"));
+        col8.setCellValueFactory(new PropertyValueFactory<>("generoP"));
+        col9.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
+        col10.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        col11.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+        col12.setCellValueFactory(new PropertyValueFactory<>("descuento"));
+    }
+    
+    public void cargarComboProveedor(){
+        proveedor prv = new proveedor();
+        ObservableList<proveedor> comboProv = prv.cargarDatos();
+        this.slcProveedor.setItems(comboProv);
     }
     
     public void permisoCompra(int permiso){
