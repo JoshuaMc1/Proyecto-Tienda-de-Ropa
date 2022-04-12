@@ -40,8 +40,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.ConexionMySQL;
 import modelo.funciones.funciones;
+import modelo.inventoryModel.descuentos;
+import modelo.inventoryModel.generoProducto;
+import modelo.inventoryModel.marca;
 import modelo.inventoryModel.product;
 import modelo.inventoryModel.proveedor;
+import modelo.inventoryModel.tipoProducto;
 
 /**
  * FXML Controller class
@@ -82,7 +86,7 @@ public class InventoryController implements Initializable {
     @FXML
     private TextField txtNombreProduct;
     @FXML
-    private ComboBox<?> slcTipoProduct;
+    private ComboBox<tipoProducto> slcTipoProduct;
     @FXML
     private TextField txtTalla;
     @FXML
@@ -92,11 +96,11 @@ public class InventoryController implements Initializable {
     @FXML
     private TextField txtColor;
     @FXML
-    private ComboBox<?> slcGenreProduct;
+    private ComboBox<generoProducto> slcGenreProduct;
     @FXML
-    private ComboBox<?> slcProveedor;
+    private ComboBox<proveedor> slcProveedor;
     @FXML
-    private ComboBox<?> slcDescuento;
+    private ComboBox<descuentos> slcDescuento;
     @FXML
     private Button btnSave;
     @FXML
@@ -112,11 +116,16 @@ public class InventoryController implements Initializable {
     @FXML
     private AnchorPane pnlCompra;
     @FXML
-    private ComboBox<?> slcMarca;
+    private ComboBox<marca> slcMarca;
     @FXML
     private Button btnAgregarMarca;
     private ObservableList<product> tablaProd;
-
+    private ObservableList<proveedor> prov;
+    private ObservableList<marca> marcas;
+    private ObservableList<tipoProducto> tipoProd;
+    private ObservableList<generoProducto> genre;
+    private ObservableList<descuentos> desc;
+    
     ConexionMySQL con = new ConexionMySQL();
     @FXML
     private TableColumn<product, Integer> col1;
@@ -155,7 +164,7 @@ public class InventoryController implements Initializable {
         cargarGraficoInvBajo();
         cargarGraficoProductoPorMarca();
         cargarTabla();
-        cargarComboProveedor();
+        cargarCombos();
     }
 
     public void cargarTabla() {
@@ -177,23 +186,49 @@ public class InventoryController implements Initializable {
         col12.setCellValueFactory(new PropertyValueFactory<>("descuento"));
     }
 
-    public void cargarComboProveedor() {
-        try{
-            ConexionMySQL con = new ConexionMySQL();
-            ArrayList prov = new ArrayList();
-            String sql = "SELECT * FROM proveedores WHERE status='1'";
-            con.resultado = con.sentencia.executeQuery(sql);
-            while(con.resultado.next()){
-                prov.add(con.resultado.getString("nombre_prov"));
-            }
-            slcProveedor.getItems().removeAll(slcProveedor.getItems());
-            slcProveedor.getItems().addAll(prov);
-            con.DesconectarBasedeDatos();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+    public void cargarCombos(){
+        cargarComboProveedor();
+        cargarComboMarca();
+        cargarComboTipo();
+        cargarComboGenre();
+        cargarComboDescuentos();
     }
-
+    
+    public void cargarComboProveedor() {
+        prov = FXCollections.observableArrayList();
+        proveedor prv = new proveedor();
+        prv.cargarDatos(prov);
+        slcProveedor.setItems(prov);
+    }
+    
+    public void cargarComboMarca(){
+        marcas = FXCollections.observableArrayList();
+        marca mrc = new marca();
+        mrc.cargarDatos(marcas);
+        slcMarca.setItems(marcas);
+    }
+    
+    public void cargarComboTipo(){
+        tipoProd = FXCollections.observableArrayList();
+        tipoProducto tp = new tipoProducto();
+        tp.cargarDatos(tipoProd);
+        slcTipoProduct.setItems(tipoProd);
+    }
+    
+    public void cargarComboGenre(){
+        genre = FXCollections.observableArrayList();
+        generoProducto gp = new generoProducto();
+        gp.cargarDatos(genre);
+        slcGenreProduct.setItems(genre);
+    }
+    
+    public void cargarComboDescuentos(){
+        desc = FXCollections.observableArrayList();
+        descuentos ds = new descuentos();
+        ds.cargarDatos(desc);
+        slcDescuento.setItems(desc);
+    }
+    
     public void permisoCompra(int permiso) {
         if (permiso == 1) {
             tabCompra.setDisable(false);
@@ -201,7 +236,7 @@ public class InventoryController implements Initializable {
             tabCompra.setDisable(true);
         }
     }
-
+    
     public void cargarTooltip() {
         btnAgregarTipoProducto.setTooltip(new Tooltip("Agregar nuevo tipo de producto"));
         btnAgregarGenero.setTooltip(new Tooltip("Agregar un nuevo genero a los productos"));
