@@ -1,6 +1,7 @@
 package modelo.funciones;
 
 import controlador.clases.Usuario;
+import java.awt.HeadlessException;
 import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -49,16 +50,15 @@ public class funciones {
     }
 
     //metodo para cambiar de estado los datos en la base de datos
-    /* public void eliminar(String sentencia){
+    public void eliminar(String sentencia){
         try {
             con.ConectarBasedeDatos();
             con.sentencia.execute(sentencia);
-            JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO CORRECTAMENTE", "ATENCION!", 1);
             con.DesconectarBasedeDatos();
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "NO SE PUDO ELIMINAR EL REGISTRO\nERROR: "+e.getMessage(), "ATENCION!", 0);
         }
-    }*/
+    }
     
     //metodo para modificar los datos en la base de datos
     public void modificar(String sentencia){

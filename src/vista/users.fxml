@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -148,6 +149,9 @@
                                                                            </image>
                                                                         </ImageView>
                                                                      </graphic>
+                                                                     <tooltip>
+                                                                        <Tooltip text="Seleccion un usuario de la tabla" />
+                                                                     </tooltip>
                                                                   </Button>
                                                                   <Button fx:id="btnClean" layoutX="173.0" layoutY="62.0" mnemonicParsing="false" onAction="#clean" prefHeight="35.0" prefWidth="150.0" styleClass="btn-clean-up" text="Limpiar">
                                                                      <graphic>
