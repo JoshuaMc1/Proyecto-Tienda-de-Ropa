@@ -178,6 +178,8 @@ public class UsersController implements Initializable {
                            is+"','"+ txtDir.getText()+"','" +gnr+"','1')";
                 System.out.println(sent1);
                 System.out.println(sent2);
+                System.out.println(perm);
+                System.out.println(prms);
                /* fun.guardar(sent1);
                 fun.guardar(sent2);*/
             }catch(Exception e){
