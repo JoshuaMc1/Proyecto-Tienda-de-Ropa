@@ -16,11 +16,11 @@ public class ConexionMySQL {
 
     public void ConectarBasedeDatos() {
         try {
-            String db = "Lq9ZYP8Xuf";
+            String db = "tienda_de_ropa";
             final String Controlador = "com.mysql.cj.jdbc.Driver";
             Class.forName(Controlador);
-            final String url_bd = "jdbc:mysql://remotemysql.com:3306/" + db;
-            conexion = DriverManager.getConnection(url_bd, "Lq9ZYP8Xuf", "IQPva8dOfN");
+            final String url_bd = "jdbc:mysql://localhost:3306/" + db;
+            conexion = DriverManager.getConnection(url_bd, "root", "");
             sentencia = conexion.createStatement();
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "", JOptionPane.ERROR_MESSAGE);
