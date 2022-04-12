@@ -94,9 +94,9 @@
                                                                   <TextField fx:id="txtnombre" layoutX="103.0" layoutY="66.0" prefHeight="30.0" prefWidth="355.0" AnchorPane.rightAnchor="39.0" />
                                                                   <TextField fx:id="txtapellido" layoutX="103.0" layoutY="105.0" prefHeight="30.0" prefWidth="355.0" AnchorPane.rightAnchor="39.0" />
                                                                   <TextField fx:id="txttelefono" layoutX="103.0" layoutY="144.0" prefHeight="30.0" prefWidth="355.0" AnchorPane.rightAnchor="39.0" />
-                                                                  <TextArea layoutX="103.0" layoutY="229.0" prefHeight="150.0" prefWidth="355.0" AnchorPane.rightAnchor="39.0" />
-                                                                  <TextField layoutX="103.0" layoutY="184.0" prefHeight="30.0" prefWidth="90.0" />
-                                                                  <ComboBox layoutX="267.0" layoutY="184.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.rightAnchor="39.0" />
+                                                                  <TextArea fx:id="txtdireccion" layoutX="103.0" layoutY="229.0" prefHeight="150.0" prefWidth="355.0" AnchorPane.rightAnchor="39.0" />
+                                                                  <TextField fx:id="txtedad" layoutX="103.0" layoutY="184.0" prefHeight="30.0" prefWidth="90.0" />
+                                                                  <ComboBox fx:id="cmbgenero" layoutX="267.0" layoutY="184.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.rightAnchor="39.0" />
                                                                </children>
                                                             </AnchorPane>
                                                          </center>
@@ -122,7 +122,7 @@
                                                          <center>
                                                             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                                                <children>
-                                                                  <Button layoutX="4.0" layoutY="18.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" styleClass="btn-save" text="Guardar">
+                                                                  <Button fx:id="btnguardar" layoutX="4.0" layoutY="18.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" styleClass="btn-save" text="Guardar">
                                                                      <graphic>
                                                                         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
@@ -140,7 +140,7 @@
                                                                         </ImageView>
                                                                      </graphic>
                                                                   </Button>
-                                                                  <Button layoutX="4.0" layoutY="62.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" styleClass="btn-delete" text="Eliminar">
+                                                                  <Button fx:id="btneditar" layoutX="4.0" layoutY="62.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" styleClass="btn-delete" text="Eliminar">
                                                                      <graphic>
                                                                         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                                                            <image>
@@ -186,12 +186,12 @@
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <TextField layoutX="92.0" layoutY="27.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.rightAnchor="18.0" />
-                                                                  <PasswordField layoutX="92.0" layoutY="71.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.rightAnchor="18.0" />
-                                                                  <CheckBox layoutX="28.0" layoutY="159.0" mnemonicParsing="false" text="Permiso 1" />
-                                                                  <CheckBox layoutX="28.0" layoutY="199.0" mnemonicParsing="false" text="Permiso 2" />
-                                                                  <CheckBox layoutX="134.0" layoutY="199.0" mnemonicParsing="false" text="Permiso 4" />
-                                                                  <CheckBox layoutX="134.0" layoutY="159.0" mnemonicParsing="false" text="Permiso 3" />
+                                                                  <TextField fx:id="txtusuario" layoutX="92.0" layoutY="27.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.rightAnchor="18.0" />
+                                                                  <PasswordField fx:id="txtcontra" layoutX="92.0" layoutY="71.0" prefHeight="30.0" prefWidth="190.0" AnchorPane.rightAnchor="18.0" />
+                                                                  <CheckBox fx:id="chec1" layoutX="28.0" layoutY="159.0" mnemonicParsing="false" text="Permiso 1" />
+                                                                  <CheckBox fx:id="chec2" layoutX="28.0" layoutY="199.0" mnemonicParsing="false" text="Permiso 2" />
+                                                                  <CheckBox fx:id="chec4" layoutX="134.0" layoutY="199.0" mnemonicParsing="false" text="Permiso 4" />
+                                                                  <CheckBox fx:id="chec3" layoutX="134.0" layoutY="159.0" mnemonicParsing="false" text="Permiso 3" />
                                                                </children>
                                                             </AnchorPane>
                                                          </center>
@@ -215,7 +215,7 @@
                                                       </Pane>
                                                    </top>
                                                    <center>
-                                                      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                      <TableView fx:id="tbusuario" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                                         <columns>
                                                           <TableColumn prefWidth="75.0" text="C1" />
                                                           <TableColumn prefWidth="75.0" text="C2" />
