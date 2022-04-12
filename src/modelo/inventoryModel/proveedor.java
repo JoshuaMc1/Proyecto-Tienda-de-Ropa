@@ -32,66 +32,68 @@ public class proveedor {
         this.correo = new SimpleStringProperty(correo);
     }
 
+    public IntegerProperty getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(IntegerProperty idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public StringProperty getNombreProveedor() {
+        return nombreProveedor;
+    }
+
+    public void setNombreProveedor(StringProperty nombreProveedor) {
+        this.nombreProveedor = nombreProveedor;
+    }
+
+    public StringProperty getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(StringProperty telefono) {
+        this.telefono = telefono;
+    }
+
+    public StringProperty getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(StringProperty direccion) {
+        this.direccion = direccion;
+    }
+
+    public StringProperty getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(StringProperty correo) {
+        this.correo = correo;
+    }
+    
+    
     public proveedor() {
     }
 
-    public Integer getIdProveedor() {
-        return idProveedor.get();
-    }
-
-    public void setIdProveedor(Integer idProveedor) {
-        this.idProveedor = new SimpleIntegerProperty(idProveedor);
-    }
-
-    public String getNombreProveedor() {
+    public String toString(){
         return nombreProveedor.get();
     }
-
-    public void setNombreProveedor(String nombreProveedor) {
-        this.nombreProveedor = new SimpleStringProperty(nombreProveedor);
-    }
-
-    public String getTelefono() {
-        return telefono.get();
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = new SimpleStringProperty(telefono);
-    }
-
-    public String getDireccion() {
-        return direccion.get();
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = new SimpleStringProperty(direccion);
-    }
-
-    public String getCorreo() {
-        return correo.get();
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = new SimpleStringProperty(correo);
-    }
-
-    public void cargarDatos() {
-        ObservableList<proveedor> datos = FXCollections.observableArrayList();
-        try {
+    
+    public void cargarDatos(ObservableList<proveedor> datos) {
+        try{
             con.ConectarBasedeDatos();
             con.resultado = con.sentencia.executeQuery("SELECT * FROM proveedores WHERE status='1'");
-            while (con.resultado.next()) {
+            while(con.resultado.next()){
                 int id = con.resultado.getInt("id_prov");
                 String prov = con.resultado.getString("nombre_prov");
                 String telefono = con.resultado.getString("telefono");
                 String direccion = con.resultado.getString("direccion");
                 String correo = con.resultado.getString("correo");
-
-                proveedor p = new proveedor(id, prov, telefono, direccion, correo);
-                datos.add(p);
+                datos.add(new proveedor(id, prov, telefono, direccion, correo));
             }
             con.DesconectarBasedeDatos();
-        } catch (SQLException ex) {
+        }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, Arrays.toString(ex.getStackTrace()));
         }
     }
