@@ -3,11 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Joshua%20Mc/Documents/NetBeansProjects/Proyecto-Tienda-de-Ropa/src/modelo/inventoryModel/descuentos.java</file>
-            <file>file:/C:/Users/Joshua%20Mc/Documents/NetBeansProjects/Proyecto-Tienda-de-Ropa/src/modelo/inventoryModel/marca.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/modelo/funciones/funciones.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/SalesController.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/MainMenuController.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/LoginController.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/clases/Fact_Model.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/modelo/ConexionMySQL.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/clases/User_Model.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/vista/users.fxml</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/clases/Usuario.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/UsersController.java</file>
             <file>file:/C:/Users/Joshua%20Mc/Documents/NetBeansProjects/Proyecto-Tienda-de-Ropa/src/controlador/InventoryController.java</file>
             <file>file:/C:/Users/Joshua%20Mc/Documents/NetBeansProjects/Proyecto-Tienda-de-Ropa/src/controlador/launch.java</file>
             <file>file:/C:/Users/Joshua%20Mc/Documents/NetBeansProjects/Proyecto-Tienda-de-Ropa/src/modelo/inventoryModel/product.java</file>
+            <file>file:/C:/Users/Joshua%20Mc/Documents/NetBeansProjects/Proyecto-Tienda-de-Ropa/src/modelo/inventoryModel/proveedor.java</file>
         </group>
     </open-files>
 </project-private>

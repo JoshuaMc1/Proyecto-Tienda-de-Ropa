@@ -329,7 +329,6 @@ public class SalesController implements Initializable {
             if(tblDet.getSelectionModel().getSelectedItem() != null){
                 fm = tblDet.getSelectionModel().getSelectedItem();
                 fmIndex = tblDet.getSelectionModel().getSelectedIndex();
-                System.out.println(fmIndex + " index");
             }
     }
     

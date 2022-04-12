@@ -1,6 +1,7 @@
 package modelo.funciones;
 
 import controlador.clases.Usuario;
+import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.function.UnaryOperator;
@@ -10,9 +11,13 @@ import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import modelo.ConexionMySQL;
 
@@ -329,6 +334,25 @@ public class funciones {
         return permisos;
     }
 
+    //Metodo para escoger una foto, se le pasa por parametro el imageView donde se colocara la foto
+    public String EscogerArchivo(ImageView lblImagen){ 
+        String path=""; //la direccion donde se encuentra la imagen
+        try{
+            JFileChooser chooser = new JFileChooser(); //mostrar una ventana donde se podra buscar la imagen
+            chooser.showOpenDialog(null);
+            File f = chooser.getSelectedFile(); //se obtiene la ruta del archivo
+            String ap = f.getAbsolutePath();
+            path = ap;
+            //se crea una nueva imagen y se adapta al largo y ancho del imageView
+            javafx.scene.image.Image img = new javafx.scene.image.Image(f.toURI().toString(), lblImagen.getFitWidth(), lblImagen.getFitHeight(), false, false);
+            lblImagen.setImage(img);//se le agrega la imagen al imagaView
+        }catch(Exception e){
+            msg("Ha ocurrido un error: " + e + 
+                "\n Por Favor contacte a soporte");
+        }
+        return path;
+    }
+    
     public void formatTD(TextField tf, int bt) { //metodo para validar la caja de texto telefono y DNI
         UnaryOperator<TextFormatter.Change> filter = change -> {
             if (change.isContentChange()) { //si hay cambios en la caja de texto
@@ -381,7 +405,7 @@ public class funciones {
     }
 
     //Metodo para validar la longitud en una caja de texto, asi se evita que el usuario ingrese un valor mayor al permitido en la bd
-    public void manejaLongitudTxt(TextField tf, int longitud) {
+    public void manejaLongitudTxt(TextField tf, int longitud, TextArea ta) {
         UnaryOperator<TextFormatter.Change> filter = change -> {
             if (change.getControlNewText().length() <= longitud) {
                 /*si la longitud del texto es menor a la longitud deseada por el usuario*/
@@ -390,7 +414,8 @@ public class funciones {
             return null; //si no no devuelve nada o sea no permite que se ingrese el valor tecleado
         };
         TextFormatter<String> formatter = new TextFormatter<>(filter);
-        tf.setTextFormatter(formatter);
+        if(tf != null) tf.setTextFormatter(formatter);
+        if(ta != null) ta.setTextFormatter(formatter);
     }
 
     private void handleBackspaceOverSpecialCharacter(TextFormatter.Change change) {
