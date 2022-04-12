@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.Pane;
@@ -91,6 +92,17 @@ public class funciones {
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "NO SE PUDO GUARDAR EL REGISTRO\nError: "+ex.getMessage(), "ATENCION!", 0);
             ex.printStackTrace();
+        }
+    }
+    
+    public void llenarTablaInventario(ObservableList data){
+        try{
+            con.ConectarBasedeDatos();
+            con.resultado = con.sentencia.executeQuery("SELECT p.*,m.nombre, gp.genero, inv.existencias, inv.n_lote,tp.nombre,pv.nombre_prov FROM inventario inv INNER JOIN producto p ON inv.id_pdt=p.id_pdt INNER JOIN proveedores pv ON p.id_prov=pv.id_prov INNER JOIN tipo_producto tp ON p.id_tipo=tp.id_tipo INNER JOIN marca m ON p.id_marca=m.id_marca INNER JOIN genero_producto gp ON p.id_gen=gp.id_gen WHERE inv.existencias > 0 ORDER BY `p`.`id_pdt` ASC");
+            
+            con.DesconectarBasedeDatos();
+        }catch(SQLException ex){
+            msg(ex.getStackTrace().toString());
         }
     }
     
@@ -359,7 +371,7 @@ public class funciones {
 
     public void validaNumeros(TextField tf, int longitud) {
         UnaryOperator<TextFormatter.Change> filter = change -> {
-            if (change.getControlNewText().matches("[0-9]*") && change.getControlNewText().length() <= longitud) {
+            if (change.getControlNewText().matches("[0-9.]*") && change.getControlNewText().length() <= longitud) {
                 /*si el texto que se encuentra en la caja de texto es un numero*/
                 return change;
             }
