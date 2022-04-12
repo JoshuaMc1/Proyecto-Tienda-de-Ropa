@@ -31,6 +31,7 @@ public class product {
     private DoubleProperty precio;
     private IntegerProperty cantidad;
     private DoubleProperty descuento;
+    ConexionMySQL con = new ConexionMySQL();
     
     public product(Integer idP, Integer idLote, String nombreP, String marca, String color, String talla, String tipoP, String generoP, String proveedor, Double precio, Integer cantidad, Double descuento) {
         this.idP = new SimpleIntegerProperty(idP);
@@ -47,6 +48,9 @@ public class product {
         this.descuento = new SimpleDoubleProperty(descuento);
     }
 
+    public product(){
+    }
+    
     public Integer getIdP() {
         return idP.get();
     }
@@ -143,7 +147,7 @@ public class product {
         this.descuento = new SimpleDoubleProperty(descuento);
     }
     
-    public static ObservableList<product> llenarTablaProductos(ConexionMySQL con){
+    public ObservableList<product> llenarTablaProductos(){
         ObservableList<product> datos = FXCollections.observableArrayList();
         try{
             con.ConectarBasedeDatos();
