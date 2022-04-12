@@ -7,11 +7,13 @@ package controlador;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -92,7 +94,7 @@ public class InventoryController implements Initializable {
     @FXML
     private ComboBox<?> slcGenreProduct;
     @FXML
-    private ComboBox<proveedor> slcProveedor;
+    private ComboBox<?> slcProveedor;
     @FXML
     private ComboBox<?> slcDescuento;
     @FXML
@@ -114,7 +116,7 @@ public class InventoryController implements Initializable {
     @FXML
     private Button btnAgregarMarca;
     private ObservableList<product> tablaProd;
-    
+
     ConexionMySQL con = new ConexionMySQL();
     @FXML
     private TableColumn<product, Integer> col1;
@@ -140,7 +142,7 @@ public class InventoryController implements Initializable {
     private TableColumn<product, Integer> col11;
     @FXML
     private TableColumn<product, Double> col12;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -155,8 +157,8 @@ public class InventoryController implements Initializable {
         cargarTabla();
         cargarComboProveedor();
     }
-    
-    public void cargarTabla(){
+
+    public void cargarTabla() {
         product pdt = new product();
         tablaProd = FXCollections.observableArrayList();
         tablaProd = pdt.llenarTablaProductos();
@@ -174,18 +176,32 @@ public class InventoryController implements Initializable {
         col11.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         col12.setCellValueFactory(new PropertyValueFactory<>("descuento"));
     }
-    
-    public void cargarComboProveedor(){
-        proveedor prv = new proveedor();
-        ObservableList<proveedor> comboProv = prv.cargarDatos();
-        this.slcProveedor.setItems(comboProv);
+
+    public void cargarComboProveedor() {
+        try{
+            ConexionMySQL con = new ConexionMySQL();
+            ArrayList prov = new ArrayList();
+            String sql = "SELECT * FROM proveedores WHERE status='1'";
+            con.resultado = con.sentencia.executeQuery(sql);
+            while(con.resultado.next()){
+                prov.add(con.resultado.getString("nombre_prov"));
+            }
+            slcProveedor.getItems().removeAll(slcProveedor.getItems());
+            slcProveedor.getItems().addAll(prov);
+            con.DesconectarBasedeDatos();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
-    
-    public void permisoCompra(int permiso){
-        if(permiso == 1)tabCompra.setDisable(false);
-        else tabCompra.setDisable(true);
+
+    public void permisoCompra(int permiso) {
+        if (permiso == 1) {
+            tabCompra.setDisable(false);
+        } else {
+            tabCompra.setDisable(true);
+        }
     }
-    
+
     public void cargarTooltip() {
         btnAgregarTipoProducto.setTooltip(new Tooltip("Agregar nuevo tipo de producto"));
         btnAgregarGenero.setTooltip(new Tooltip("Agregar un nuevo genero a los productos"));
@@ -292,7 +308,7 @@ public class InventoryController implements Initializable {
 
     @FXML
     private void clickSave(ActionEvent event) {
-        
+
     }
 
     @FXML
@@ -309,7 +325,19 @@ public class InventoryController implements Initializable {
 
     @FXML
     private void buscarKeyPressed(KeyEvent event) {
-        
+        product pdt = new product();
+        FilteredList<product> filteredData = new FilteredList<>(pdt.llenarTablaProductos(), p -> true);
+        tblDatosProduct.setItems(filteredData);
+        txtBuscarProduct.textProperty().addListener((prop, old, text) -> {
+            filteredData.setPredicate(person -> {
+                if (text == null || text.isEmpty()) {
+                    return true;
+                }
+
+                String name = person.getNombreP().toLowerCase();
+                return name.contains(text.toLowerCase());
+            });
+        });
     }
 
     @FXML
