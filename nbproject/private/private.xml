@@ -6,9 +6,13 @@
             <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/modelo/funciones/funciones.java</file>
             <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/SalesController.java</file>
             <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/MainMenuController.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/LoginController.java</file>
             <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/clases/Fact_Model.java</file>
             <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/modelo/ConexionMySQL.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/clases/User_Model.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/vista/users.fxml</file>
             <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/clases/Usuario.java</file>
+            <file>file:/C:/Users/carlo/OneDrive/Documents/GitHub/Proyecto-Tienda-de-Ropa/src/controlador/UsersController.java</file>
         </group>
     </open-files>
 </project-private>
