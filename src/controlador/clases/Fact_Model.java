@@ -1,3 +1,6 @@
+/*
+Clase usada para manejar la tabla en el modulo de venta, a partir de esta clase se llena la tabla
+*/
 package controlador.clases;
 
 public class Fact_Model {

@@ -103,9 +103,12 @@ public class MainMenuController implements Initializable {
     @FXML
     private void openInventory(ActionEvent event) {
         try {
-            Parent fxml = FXMLLoader.load(getClass().getResource("/vista/inventory.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/inventory.fxml"));
+            Parent root = loader.load();
+            InventoryController controlador = loader.<InventoryController>getController();
+            controlador.permisoCompra(this.accesoCompras);
             pnlPrincipal.getChildren().removeAll();
-            pnlPrincipal.getChildren().setAll(fxml);
+            pnlPrincipal.getChildren().setAll(root);
         } catch (IOException e) {
             System.out.println(e.getStackTrace());
         }
@@ -119,7 +122,11 @@ public class MainMenuController implements Initializable {
     @FXML
     private void openSales(ActionEvent event) {
         try {
-            Parent fxml = FXMLLoader.load(getClass().getResource("/vista/sales.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/sales.fxml"));
+            Parent fxml = loader.load();
+            SalesController sc = loader.<SalesController>getController();
+            sc.recibirId(Integer.parseInt(usuario.getIdUsuario()));
+            //Parent fxml = FXMLLoader.load(getClass().getResource("/vista/sales.fxml"));
             pnlPrincipal.getChildren().removeAll();
             pnlPrincipal.getChildren().setAll(fxml);
         } catch (IOException e) {

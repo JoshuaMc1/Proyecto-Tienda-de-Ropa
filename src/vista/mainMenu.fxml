@@ -61,7 +61,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnReportes" alignment="CENTER" layoutY="375.0" mnemonicParsing="false" onAction="#openReports" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Reportes">
+                  <Button fx:id="btnReportes" alignment="CENTER" layoutY="375.0" mnemonicParsing="false" onAction="#openReports" prefHeight="50.0" prefWidth="290.0" styleClass="btn-menu" stylesheets="@style/mainmenu.css" text="Reportes" visible="false">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

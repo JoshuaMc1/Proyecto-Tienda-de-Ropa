@@ -20,10 +20,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1300.0" prefWidth="1100.0" stylesheets="@style/inventory.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InventoryController">
+<AnchorPane id="AnchorPane" prefHeight="1300.0" prefWidth="1100.0" stylesheets="@style/inventory.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InventoryController">
    <children>
       <Pane prefHeight="55.0" prefWidth="1100.0" styleClass="pnl-title" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -69,7 +68,7 @@
                                                             <Image url="@img/estante.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <Label alignment="CENTER" layoutX="128.0" layoutY="96.0" prefHeight="122.0" prefWidth="200.0" text="L. 0" textFill="WHITE">
+                                                      <Label fx:id="lblTotalInv" alignment="CENTER" layoutX="128.0" layoutY="96.0" prefHeight="122.0" prefWidth="200.0" text="L. 0" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="20.0" />
                                                          </font>
@@ -100,7 +99,7 @@
                                                             <Font name="System Bold" size="16.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER" layoutX="134.0" layoutY="161.0" prefHeight="20.0" prefWidth="200.0" text="0" textFill="WHITE">
+                                                      <Label fx:id="lblCantidadInv" alignment="CENTER" layoutX="134.0" layoutY="161.0" prefHeight="20.0" prefWidth="200.0" text="0" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="18.0" />
                                                          </font>
@@ -131,7 +130,7 @@
                                                             <Font name="System Bold" size="16.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER" layoutX="131.0" layoutY="163.0" prefHeight="20.0" prefWidth="200.0" text="0" textFill="WHITE">
+                                                      <Label fx:id="lblProductoBajo" alignment="CENTER" layoutX="131.0" layoutY="163.0" prefHeight="20.0" prefWidth="200.0" text="0" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="18.0" />
                                                          </font>
@@ -142,19 +141,19 @@
                                           </HBox>
                                           <HBox layoutY="280.0" prefHeight="500.0" prefWidth="1055.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="280.0">
                                              <children>
-                                                <AnchorPane prefHeight="200.0" prefWidth="525.0" styleClass="card-producto-bajo">
+                                                <AnchorPane prefHeight="490.0" prefWidth="1047.0" styleClass="card-producto-bajo">
                                                    <HBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </HBox.margin>
                                                    <children>
                                                       <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
                                                          <children>
-                                                            <Label layoutX="14.0" layoutY="15.0" text="CANTIDAD TOTAL DE INVENTARIO">
+                                                            <Label layoutX="14.0" layoutY="15.0" text="PRODUCTOS CON  INVENTARIO BAJO MENOR A 15">
                                                                <font>
                                                                   <Font name="System Bold" size="16.0" />
                                                                </font>
                                                             </Label>
-                                                            <Button layoutX="428.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0" styleClass="btn-pdf">
+                                                            <Button layoutX="753.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" styleClass="btn-pdf" text="Exportar PDF">
                                                                <font>
                                                                   <Font name="System Bold" size="12.0" />
                                                                </font>
@@ -166,7 +165,7 @@
                                                                   </ImageView>
                                                                </graphic>
                                                             </Button>
-                                                            <Button layoutX="470.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0" styleClass="btn-excel">
+                                                            <Button layoutX="899.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="124.0" styleClass="btn-excel" text="Exportar Excel">
                                                                <font>
                                                                   <Font name="System Bold" size="12.0" />
                                                                </font>
@@ -182,124 +181,19 @@
                                                       </Pane>
                                                       <BorderPane layoutX="14.0" layoutY="59.0" prefHeight="200.0" prefWidth="497.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="60.0">
                                                          <center>
-                                                            <BarChart BorderPane.alignment="CENTER">
+                                                            <BarChart fx:id="grfCantidadInvBajo" focusTraversable="true" prefHeight="426.0" prefWidth="1038.0" stylesheets="@style/inventory.css" BorderPane.alignment="CENTER">
                                                               <xAxis>
-                                                                <CategoryAxis side="BOTTOM" />
+                                                                <CategoryAxis fx:id="navProducto" side="BOTTOM" tickLabelFill="WHITE">
+                                                                     <tickLabelFont>
+                                                                        <Font name="System Bold" size="10.0" />
+                                                                     </tickLabelFont></CategoryAxis>
                                                               </xAxis>
                                                               <yAxis>
-                                                                <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+                                                                <NumberAxis fx:id="navExistencias" autoRanging="false" minorTickCount="0" side="LEFT" tickLabelFill="WHITE" upperBound="20.0" />
                                                               </yAxis>
                                                             </BarChart>
                                                          </center>
                                                       </BorderPane>
-                                                   </children>
-                                                </AnchorPane>
-                                                <AnchorPane prefHeight="200.0" prefWidth="515.0">
-                                                   <children>
-                                                      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                         <children>
-                                                            <AnchorPane prefHeight="250.0" prefWidth="200.0" styleClass="card-producto">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                               <children>
-                                                                  <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
-                                                                     <children>
-                                                                        <Label layoutX="11.0" layoutY="15.0" prefHeight="25.0" prefWidth="100.0" text="ENTRADAS">
-                                                                           <font>
-                                                                              <Font name="System Bold" size="16.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <Button layoutX="215.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" styleClass="btn-pdf" text="Exportar PDF">
-                                                                           <font>
-                                                                              <Font name="System Bold" size="12.0" />
-                                                                           </font>
-                                                                           <graphic>
-                                                                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                                                                 <image>
-                                                                                    <Image url="@img/archivo-pdf.png" />
-                                                                                 </image>
-                                                                              </ImageView>
-                                                                           </graphic>
-                                                                        </Button>
-                                                                        <Button layoutX="364.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="124.0" styleClass="btn-excel" text="Exportar Excel">
-                                                                           <font>
-                                                                              <Font name="System Bold" size="12.0" />
-                                                                           </font>
-                                                                           <graphic>
-                                                                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                                                                 <image>
-                                                                                    <Image url="@img/sobresalir.png" />
-                                                                                 </image>
-                                                                              </ImageView>
-                                                                           </graphic>
-                                                                        </Button>
-                                                                     </children>
-                                                                  </Pane>
-                                                                  <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="14.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@img/dos-flechas-hacia-abajo.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                                  <Label layoutX="172.0" layoutY="81.0" prefHeight="130.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
-                                                                     <font>
-                                                                        <Font name="System Bold" size="36.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                               </children>
-                                                            </AnchorPane>
-                                                            <AnchorPane prefHeight="250.0" prefWidth="200.0" styleClass="card-ventas">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" left="5.0" top="5.0" />
-                                                               </VBox.margin>
-                                                               <children>
-                                                                  <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
-                                                                     <children>
-                                                                        <Label layoutX="11.0" layoutY="15.0" prefHeight="25.0" prefWidth="90.0" text="SALIDAS">
-                                                                           <font>
-                                                                              <Font name="System Bold" size="16.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <Button layoutX="215.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="140.0" styleClass="btn-pdf" text="Exportar PDF">
-                                                                           <font>
-                                                                              <Font name="System Bold" size="12.0" />
-                                                                           </font>
-                                                                           <graphic>
-                                                                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                                                                 <image>
-                                                                                    <Image url="@img/archivo-pdf.png" />
-                                                                                 </image>
-                                                                              </ImageView>
-                                                                           </graphic>
-                                                                        </Button>
-                                                                        <Button layoutX="364.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="124.0" styleClass="btn-excel" text="Exportar Excel">
-                                                                           <font>
-                                                                              <Font name="System Bold" size="12.0" />
-                                                                           </font>
-                                                                           <graphic>
-                                                                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                                                                 <image>
-                                                                                    <Image url="@img/sobresalir.png" />
-                                                                                 </image>
-                                                                              </ImageView>
-                                                                           </graphic>
-                                                                        </Button>
-                                                                     </children>
-                                                                  </Pane>
-                                                                  <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="14.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
-                                                                     <image>
-                                                                        <Image url="@img/dos-flechas-apuntando-hacia-arriba.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                                  <Label layoutX="168.0" layoutY="82.0" prefHeight="130.0" prefWidth="310.0" text="L. 0" textFill="WHITE">
-                                                                     <font>
-                                                                        <Font name="System Bold" size="36.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                               </children>
-                                                            </AnchorPane>
-                                                         </children>
-                                                      </VBox>
                                                    </children>
                                                 </AnchorPane>
                                              </children>
@@ -311,11 +205,11 @@
                                              <children>
                                                 <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <center>
-                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="card-producto-bajo" BorderPane.alignment="CENTER">
+                                                      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="color-6" BorderPane.alignment="CENTER">
                                                          <children>
                                                             <Pane prefHeight="55.0" prefWidth="200.0" styleClass="pnl-title" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="4.0">
                                                                <children>
-                                                                  <Label layoutX="11.0" layoutY="15.0" prefHeight="25.0" prefWidth="420.0" text="CANTIDAD DE PRODUCTOS POR TIPO DE PRODUCTO">
+                                                                  <Label layoutX="11.0" layoutY="15.0" prefHeight="25.0" prefWidth="420.0" text="CANTIDAD DE PRODUCTOS POR MARCA">
                                                                      <font>
                                                                         <Font name="System Bold" size="16.0" />
                                                                      </font>
@@ -346,7 +240,7 @@
                                                                   </Button>
                                                                </children>
                                                             </Pane>
-                                                            <PieChart layoutX="14.0" layoutY="66.0" prefHeight="400.0" prefWidth="1028.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="66.0" />
+                                                            <PieChart fx:id="grfContidadProductoPorMarcas" layoutX="14.0" layoutY="66.0" prefHeight="400.0" prefWidth="1028.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="66.0" />
                                                          </children>
                                                       </AnchorPane>
                                                    </center>
@@ -361,13 +255,13 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Compra de productos">
+                <Tab fx:id="tabCompra" text="Compra de productos">
                   <content>
                     <AnchorPane maxWidth="1100.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <ScrollPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1055.0">
+                                  <AnchorPane fx:id="pnlCompra" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1055.0">
                                        <children>
                                           <BorderPane prefHeight="440.0" prefWidth="1055.0" AnchorPane.bottomAnchor="360.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <padding>
@@ -390,23 +284,23 @@
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </BorderPane.margin>
                                                    <children>
-                                                      <Label layoutX="75.0" layoutY="45.0" text="ID Producto:" />
-                                                      <Label layoutX="14.0" layoutY="79.0" text="Nombre del producto:" />
-                                                      <Label layoutX="41.0" layoutY="114.0" text="Tipo de producto:" />
-                                                      <Label layoutX="115.0" layoutY="149.0" text="Color:" />
-                                                      <Label layoutX="120.0" layoutY="187.0" text="Talla:" />
-                                                      <Label layoutX="110.0" layoutY="224.0" text="Precio:" />
-                                                      <Label layoutX="93.0" layoutY="262.0" text="Cantidad:" />
-                                                      <Label layoutX="244.0" layoutY="45.0" text="ID Lote:" />
-                                                      <TextField layoutX="161.0" layoutY="40.0" prefHeight="30.0" prefWidth="70.0" />
-                                                      <TextField layoutX="301.0" layoutY="40.0" prefHeight="30.0" prefWidth="130.0" />
-                                                      <TextField layoutX="161.0" layoutY="74.0" prefHeight="30.0" prefWidth="270.0" />
-                                                      <ComboBox layoutX="161.0" layoutY="109.0" prefHeight="30.0" prefWidth="270.0" />
-                                                      <TextField layoutX="161.0" layoutY="182.0" prefHeight="30.0" prefWidth="270.0" />
-                                                      <TextField layoutX="161.0" layoutY="219.0" prefHeight="30.0" prefWidth="270.0" />
-                                                      <TextField layoutX="161.0" layoutY="257.0" prefHeight="30.0" prefWidth="270.0" />
-                                                      <TextField layoutX="161.0" layoutY="144.0" prefHeight="30.0" prefWidth="270.0" />
-                                                      <Button fx:id="btnAgregarTipoProducto" layoutX="442.0" layoutY="109.0" mnemonicParsing="false" onAction="#abrirTipoProducto" styleClass="btn-save">
+                                                      <Label layoutX="79.0" layoutY="19.0" text="ID Producto:" />
+                                                      <Label layoutX="18.0" layoutY="53.0" text="Nombre del producto:" />
+                                                      <Label layoutX="45.0" layoutY="88.0" text="Tipo de producto:" />
+                                                      <Label layoutX="115.0" layoutY="165.0" text="Color:" />
+                                                      <Label layoutX="120.0" layoutY="203.0" text="Talla:" />
+                                                      <Label layoutX="110.0" layoutY="240.0" text="Precio:" />
+                                                      <Label layoutX="93.0" layoutY="278.0" text="Cantidad:" />
+                                                      <Label layoutX="244.0" layoutY="19.0" text="ID Lote:" />
+                                                      <TextField fx:id="txtIdProduct" editable="false" layoutX="161.0" layoutY="14.0" prefHeight="30.0" prefWidth="70.0" />
+                                                      <TextField fx:id="txtIdLote" layoutX="301.0" layoutY="14.0" onKeyPressed="#idLoteKP" prefHeight="30.0" prefWidth="130.0" />
+                                                      <TextField fx:id="txtNombreProduct" layoutX="161.0" layoutY="48.0" prefHeight="30.0" prefWidth="270.0" />
+                                                      <ComboBox fx:id="slcTipoProduct" layoutX="161.0" layoutY="83.0" prefHeight="30.0" prefWidth="270.0" />
+                                                      <TextField fx:id="txtTalla" layoutX="161.0" layoutY="198.0" prefHeight="30.0" prefWidth="270.0" />
+                                                      <TextField fx:id="txtPrecio" layoutX="161.0" layoutY="235.0" onKeyPressed="#precioKP" prefHeight="30.0" prefWidth="270.0" />
+                                                      <TextField fx:id="txtCantidad" layoutX="161.0" layoutY="273.0" onKeyPressed="#cantidadKP" prefHeight="30.0" prefWidth="270.0" />
+                                                      <TextField fx:id="txtColor" layoutX="161.0" layoutY="160.0" prefHeight="30.0" prefWidth="270.0" />
+                                                      <Button fx:id="btnAgregarTipoProducto" layoutX="442.0" layoutY="83.0" mnemonicParsing="false" onAction="#abrirTipoProducto" styleClass="btn-save">
                                                          <graphic>
                                                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -415,9 +309,20 @@
                                                             </ImageView>
                                                          </graphic>
                                                       </Button>
-                                                      <Label layoutX="20.0" layoutY="300.0" text="Genero del producto:" />
-                                                      <ComboBox layoutX="161.0" layoutY="295.0" prefHeight="30.0" prefWidth="270.0" />
-                                                      <Button fx:id="btnAgregarGenero" layoutX="442.0" layoutY="295.0" mnemonicParsing="false" onAction="#abrirGeneroProducto" prefHeight="30.0" prefWidth="26.0" styleClass="btn-save">
+                                                      <Label layoutX="20.0" layoutY="316.0" text="Genero del producto:" />
+                                                      <ComboBox fx:id="slcGenreProduct" layoutX="161.0" layoutY="311.0" prefHeight="30.0" prefWidth="270.0" />
+                                                      <Button fx:id="btnAgregarGenero" layoutX="442.0" layoutY="311.0" mnemonicParsing="false" onAction="#abrirGeneroProducto" prefHeight="30.0" prefWidth="26.0" styleClass="btn-save">
+                                                         <graphic>
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@img/plus.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Label layoutX="33.0" layoutY="128.0" text="Marca del producto:" />
+                                                      <ComboBox fx:id="slcMarca" layoutX="161.0" layoutY="122.0" prefHeight="30.0" prefWidth="270.0" />
+                                                      <Button fx:id="btnAgregarMarca" layoutX="442.0" layoutY="122.0" mnemonicParsing="false" onAction="#abrirMarca" styleClass="btn-save">
                                                          <graphic>
                                                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
@@ -437,8 +342,8 @@
                                                    <children>
                                                       <Label layoutX="30.0" layoutY="81.0" text="Proveedor:" />
                                                       <Label layoutX="28.0" layoutY="120.0" text="Descuento:" />
-                                                      <ComboBox layoutX="110.0" layoutY="76.0" prefHeight="30.0" prefWidth="290.0" />
-                                                      <ComboBox layoutX="110.0" layoutY="115.0" prefHeight="30.0" prefWidth="290.0" />
+                                                      <ComboBox fx:id="slcProveedor" layoutX="110.0" layoutY="76.0" prefHeight="30.0" prefWidth="290.0" />
+                                                      <ComboBox fx:id="slcDescuento" layoutX="110.0" layoutY="115.0" prefHeight="30.0" prefWidth="290.0" />
                                                       <Button fx:id="btnAgregarProveedor" layoutX="413.0" layoutY="76.0" mnemonicParsing="false" onAction="#abrirProveedor" styleClass="btn-save">
                                                          <graphic>
                                                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -457,7 +362,7 @@
                                                             </ImageView>
                                                          </graphic>
                                                       </Button>
-                                                      <Button layoutX="28.0" layoutY="210.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" styleClass="btn-save" text="GUARDAR">
+                                                      <Button fx:id="btnSave" layoutX="28.0" layoutY="210.0" mnemonicParsing="false" onAction="#clickSave" prefHeight="50.0" prefWidth="200.0" styleClass="btn-save" text="GUARDAR">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -469,7 +374,7 @@
                                                             </ImageView>
                                                          </graphic>
                                                       </Button>
-                                                      <Button layoutX="28.0" layoutY="281.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" styleClass="btn-delete" text="ELIMINAR">
+                                                      <Button fx:id="btnDelete" layoutX="28.0" layoutY="281.0" mnemonicParsing="false" onAction="#clickDelete" prefHeight="50.0" prefWidth="200.0" styleClass="btn-delete" text="ELIMINAR">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -481,7 +386,7 @@
                                                             </ImageView>
                                                          </graphic>
                                                       </Button>
-                                                      <Button layoutX="270.0" layoutY="210.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" styleClass="btn-edit" text="EDITAR">
+                                                      <Button fx:id="btnEdit" layoutX="270.0" layoutY="210.0" mnemonicParsing="false" onAction="#clickEdit" prefHeight="50.0" prefWidth="200.0" styleClass="btn-edit" text="EDITAR">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -493,7 +398,7 @@
                                                             </ImageView>
                                                          </graphic>
                                                       </Button>
-                                                      <Button layoutX="270.0" layoutY="281.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" styleClass="btn-clean-up" text="LIMPIAR">
+                                                      <Button fx:id="btnClean" layoutX="270.0" layoutY="281.0" mnemonicParsing="false" onAction="#clickClean" prefHeight="50.0" prefWidth="200.0" styleClass="btn-clean-up" text="LIMPIAR">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -521,15 +426,24 @@
                                                    </children>
                                                 </Pane>
                                                 <Label layoutX="14.0" layoutY="73.0" text="Buscar:" />
-                                                <TextField layoutX="69.0" layoutY="68.0" prefHeight="30.0" prefWidth="988.0" AnchorPane.rightAnchor="2.0" />
+                                                <TextField fx:id="txtBuscarProduct" layoutX="69.0" layoutY="68.0" onKeyPressed="#buscarKeyPressed" prefHeight="30.0" prefWidth="988.0" AnchorPane.rightAnchor="2.0" />
                                                 <AnchorPane layoutX="5.0" layoutY="106.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="105.0">
                                                    <children>
-                                                      <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                        <columns>
-                                                          <TableColumn prefWidth="75.0" text="C1" />
-                                                          <TableColumn prefWidth="75.0" text="C2" />
-                                                        </columns>
-                                                      </TableView>
+                                                      <TableView fx:id="tblDatosProduct" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="col1" prefWidth="60.0" text="ID Producto" />
+                                                            <TableColumn fx:id="col2" prefWidth="73.0" text="ID Lote" />
+                                                            <TableColumn fx:id="col3" prefWidth="163.0" text="Nombre" />
+                                                            <TableColumn fx:id="col4" prefWidth="117.0" text="Marca" />
+                                                            <TableColumn fx:id="col5" prefWidth="68.0" text="Color" />
+                                                            <TableColumn fx:id="col6" prefWidth="65.0" text="Talla" />
+                                                            <TableColumn fx:id="col7" prefWidth="61.0" text="Tipo" />
+                                                            <TableColumn fx:id="col8" prefWidth="87.0" text="Genero Producto" />
+                                                            <TableColumn fx:id="col9" prefWidth="127.0" text="Proveedor" />
+                                                            <TableColumn fx:id="col10" prefWidth="73.0" text="Precio" />
+                                                            <TableColumn fx:id="col11" prefWidth="71.0" text="Cantidad" />
+                                                            <TableColumn fx:id="col12" prefWidth="76.0" text="Descuento" />
+                                                         </columns></TableView>
                                                    </children>
                                                 </AnchorPane>
                                              </children>
