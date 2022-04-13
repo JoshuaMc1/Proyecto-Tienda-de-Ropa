@@ -46,6 +46,7 @@ public class UsersController implements Initializable {
     private ArrayList<Integer> permisos = new ArrayList<Integer>();
     private ArrayList<String> gen = new ArrayList<String>();
     private ObservableList<User_Model> ol = FXCollections.observableArrayList();
+    private ObservableList<User_Model> ola = FXCollections.observableArrayList();
     private String path="", perm="";
     private int idUsr=0, prms=0, ad=0, de=0,index;
     private boolean selec=false;
@@ -56,21 +57,31 @@ public class UsersController implements Initializable {
     @FXML
     private TextField txtDNI, txtNombre, txtApellido, txtTelefono, txtEdad,txtUser;
     @FXML
+    private TextField txtIDA, txtDNIA, txtNameA, txtApelA, txtUserA;
+    @FXML
     private TextArea txtDir;
     @FXML
     private ImageView lblFotoU;
     @FXML
     private PasswordField txtPass;
     @FXML
-    private AnchorPane apu, apdu;
+    private AnchorPane apu, apdu, apA;
     @FXML
     private TableView<User_Model> tblDat;
+    @FXML
+    private TableView<User_Model> tblUsuD;
     @FXML
     private TableColumn<User_Model, String> col_ID;
     @FXML
     private TableColumn<User_Model, String> col_NU;
     @FXML
     private TableColumn<User_Model, String> col_Rol;
+    @FXML
+    private TableColumn<User_Model, String> col_IDA;
+    @FXML
+    private TableColumn<User_Model, String> col_UNA;
+    @FXML
+    private TableColumn<User_Model, String> col_RolA;
     @FXML
     private CheckBox chkV, chkC, chkI, chkU;
     
@@ -94,6 +105,12 @@ public class UsersController implements Initializable {
         col_ID.setCellValueFactory(new PropertyValueFactory<>("id_user"));
         col_NU.setCellValueFactory(new PropertyValueFactory<>("u_Name"));
         col_Rol.setCellValueFactory(new PropertyValueFactory<>("rol"));
+    }
+    
+    private void setCellValueA(){
+        col_IDA.setCellValueFactory(new PropertyValueFactory<>("id_user"));
+        col_UNA.setCellValueFactory(new PropertyValueFactory<>("u_Name"));
+        col_RolA.setCellValueFactory(new PropertyValueFactory<>("rol"));
     }
     
     private void access(){
@@ -141,6 +158,21 @@ public class UsersController implements Initializable {
                 ol.add(new User_Model(Integer.toString(rs.getInt("id_user")), rs.getString("usuario"), rs.getString("rol")));
                 setCellValue();
                 tblDat.setItems(ol);
+            }
+        }catch(Exception e){
+            fun.msg("Hubo un error + " + e + " profavor contactar al administrador");
+        }
+    }
+    
+    private void cargarTablaUsuA(){
+        String sql = "select id_user, usuario, rol from usuarios where status = '2'";
+        try{
+            rs = buscar(sql, con);
+            while(rs.next()){
+                ola.add(new User_Model(Integer.toString(rs.getInt("id_user")), rs.getString("usuario"), rs.getString("rol")));
+                setCellValueA();
+                tblUsuD.setItems(ola);
+                System.out.println("foud");
             }
         }catch(Exception e){
             fun.msg("Hubo un error + " + e + " profavor contactar al administrador");
@@ -219,19 +251,77 @@ public class UsersController implements Initializable {
                             chkV.setSelected(true);
                         }if(rs.getString("rol").equals("Ventas")){
                             chkV.setSelected(true);
+                            chkC.setSelected(false);
+                            chkI.setSelected(false);
+                            chkU.setSelected(false);
                         }if(rs.getString("rol").equals("Inventario")){
                             chkI.setSelected(true);
                             chkC.setSelected(true);
+                            chkU.setSelected(false);
+                            chkV.setSelected(false);
                         }
                         InputStream is = rs.getBinaryStream("foto");
                         Image img = new Image(is);
                         lblFotoU.setImage(img);
+                        con.DesconectarBasedeDatos();
                     }
                 }catch(Exception e){
                     fun.msg("Error");
                 }
             }
         }
+    }
+    
+    private void filltxtA(){
+        if(tblUsuD.getItems().size() >= 0){
+            if(index>=0){
+                int id = Integer.parseInt(tblUsuD.getItems().get(index).getId_user());
+                String sql = "select e.nombre,e.apellido,e.DNI, u.usuario,u.clave,u.rol "
+                           + "from empleado e inner join usuarios u on e.id_user=u.id_user where u.id_user = '" + id + "'";
+                try{
+                    rs = buscar(sql, con);
+                    if(rs.next()){
+                        txtIDA.setText(Integer.toString(id));
+                        txtDNIA.setText(rs.getString("DNI"));
+                        txtNameA.setText(rs.getString("nombre"));
+                        txtApelA.setText(rs.getString("apellido"));
+                        txtUserA.setText(rs.getString("usuario"));
+                    }
+                }catch(Exception e){fun.msg("Error");}
+            }
+        }
+    }
+    
+    private void modU(){
+        int gnr=0,id=0;
+        if(!Vacio(apu) && !Vacio(apdu) && !path.isEmpty()){
+            try{
+                gnr = gen();
+                File file = new File(path);
+                FileInputStream is = new FileInputStream(file);
+                if(HasRTN(txtDNI.getText())) fun.msg("Ya hay un empleado con un DNI similar");
+                else{
+                    if(index >= 0){
+                    sent1 = "insert into usuarios (id_user,usuario,clave,rol,status) values('0','"+txtUser.getText()+"',SHA('"+txtPass.getText()+"'),'Administrador','1')";
+                    id = Integer.parseInt(tblDat.getItems().get(index).getId_user());
+                    fun.guardar(sent1);
+                    idUsr = cargarIDU();
+                    verifPrms(idUsr, is, gnr);
+                    fun.guardar(sent2);
+                    fun.guardar(sent3);
+                    fun.msg("Usuario creado");
+                    tblDat.getItems().clear();
+                    cargarTablaUsu();
+                    cleanTxt(apu, "", "");
+                    cleanTxt(apdu, "", "");
+                }else if(prms==0){
+                    fun.msg("No ha seleccionado los permisos");
+                }
+                }
+            }catch(Exception e){
+                fun.msg("Hubo un error, " +e+" por favor contactar al administrador");
+            }
+        }else fun.msg("no pueden haber campos vacios y debe seleccionar una foto");
     }
     
     private void delU(){
@@ -284,6 +374,19 @@ public class UsersController implements Initializable {
         }else fun.msg("no pueden haber campos vacios y debe seleccionar una foto");
     }
     
+    private void actU(){
+        int id = Integer.parseInt(txtIDA.getText());
+        String sql = "update usuarios set status = '1' where id_user = '" + id + "' and status = '2'";
+        try{
+            fun.modificar(sql);
+            fun.msg("Usuario activado");
+            cleanTxt(apA, "", "");
+            tblUsuD.getItems().clear();
+            cargarTablaUsuA();
+            cargarTablaUsu();
+        }catch(Exception e){fun.msg("ERROR");}
+    }
+    
     private ResultSet buscar(String sql, ConexionMySQL con){ //Metodo para realizar una consulta devuelve un ResultSet
         try{
             con.ConectarBasedeDatos();
@@ -333,12 +436,12 @@ public class UsersController implements Initializable {
         return has;
     }
     
-    private void selRow(){
-        if(tblDat.getItems().size() >= 0)
-            if(tblDat.getSelectionModel().getSelectedItem() != null){
-                //fm = tblDat.getSelectionModel().getSelectedItem();
-                index = tblDat.getSelectionModel().getSelectedIndex();
-                fillTxt();
+    private void selRow(TableView tbl, int n){
+        if(tbl.getItems().size() >= 0)
+            if(tbl.getSelectionModel().getSelectedItem() != null){
+                index = tbl.getSelectionModel().getSelectedIndex();
+                if(n==1)  fillTxt();
+                if(n==2) filltxtA();
             }
     }
     
@@ -383,8 +486,33 @@ public class UsersController implements Initializable {
     }
     
     @FXML
+    private void kprIDA(KeyEvent evt){
+        
+    }
+    
+    @FXML
+    private void kprDNIA(KeyEvent evt){
+        fun.formatTD(txtDNI, 2);
+    }
+    
+    @FXML
+    private void kprNameA(KeyEvent evt){
+        fun.validaTexto(txtNameA, 30);
+    }
+    
+    @FXML
+    private void kprApelA(KeyEvent evt){
+        fun.validaTexto(txtApelA, 30);
+    }
+    
+    @FXML
+    private void kprUsuA(KeyEvent evt){
+        fun.validaTexto(txtUserA, 30);
+    }
+    
+    @FXML
     private void tblMC(MouseEvent evt){
-        selRow();
+        selRow(tblDat,1);
     } 
     
     @FXML
@@ -412,6 +540,11 @@ public class UsersController implements Initializable {
     private void clean(ActionEvent evt){
         cleanTxt(apu, "", "");
         cleanTxt(apdu, "", "");
+    }
+    
+    @FXML
+    private void act(ActionEvent evt){
+        actU();
     }
     
     @FXML
@@ -462,6 +595,11 @@ public class UsersController implements Initializable {
     }
     
     @FXML
+    private void tblASel(MouseEvent evt){
+        selRow(tblUsuD,2);
+    }
+    
+    @FXML
     private void selInv(ActionEvent evt){
         if(ad==0)
         if(chkV.isSelected()){
@@ -474,5 +612,6 @@ public class UsersController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cargarGen();
         cargarTablaUsu();
+        cargarTablaUsuA();
     }    
 }

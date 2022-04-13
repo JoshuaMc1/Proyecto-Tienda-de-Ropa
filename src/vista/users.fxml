@@ -263,7 +263,7 @@
                                  <center>
                                     <BorderPane prefHeight="450.0" prefWidth="1090.0" BorderPane.alignment="CENTER">
                                        <center>
-                                          <AnchorPane prefHeight="422.0" prefWidth="780.0" BorderPane.alignment="CENTER">
+                                          <AnchorPane fx:id="apA" prefHeight="422.0" prefWidth="780.0" BorderPane.alignment="CENTER">
                                              <BorderPane.margin>
                                                 <Insets right="5.0" />
                                              </BorderPane.margin>
@@ -273,11 +273,11 @@
                                                 <Label layoutX="49.0" layoutY="156.0" text="Apellido:" />
                                                 <Label layoutX="53.0" layoutY="198.0" text="Usuario:" />
                                                 <Label layoutX="87.0" layoutY="72.0" text="ID:" />
-                                                <TextField layoutX="110.0" layoutY="151.0" prefHeight="30.0" prefWidth="350.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="250.0" />
-                                                <TextField layoutX="110.0" layoutY="193.0" prefHeight="30.0" prefWidth="350.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="250.0" />
-                                                <TextField layoutX="110.0" layoutY="109.0" prefHeight="30.0" prefWidth="350.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="250.0" />
-                                                <TextField layoutX="287.0" layoutY="67.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="250.0" />
-                                                <TextField layoutX="110.0" layoutY="67.0" prefHeight="30.0" prefWidth="140.0" />
+                                                <TextField fx:id="txtApelA" layoutX="110.0" layoutY="151.0" onKeyPressed="#kprApelA" prefHeight="30.0" prefWidth="350.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="250.0" />
+                                                <TextField fx:id="txtUserA" layoutX="110.0" layoutY="193.0" onKeyPressed="#kprUsuA" prefHeight="30.0" prefWidth="350.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="250.0" />
+                                                <TextField fx:id="txtNameA" layoutX="110.0" layoutY="109.0" onKeyPressed="#kprNameA" prefHeight="30.0" prefWidth="350.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="250.0" />
+                                                <TextField fx:id="txtDNIA" layoutX="287.0" layoutY="67.0" onKeyPressed="#kprDNIA" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="250.0" />
+                                                <TextField fx:id="txtIDA" editable="false" layoutX="110.0" layoutY="67.0" onKeyPressed="#kprIDA" prefHeight="30.0" prefWidth="140.0" />
                                              </children>
                                           </AnchorPane>
                                        </center>
@@ -287,7 +287,7 @@
                                                 <Insets left="5.0" />
                                              </BorderPane.margin>
                                              <children>
-                                                <Button layoutX="25.0" layoutY="121.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="250.0" styleClass="btn-clean-up" text="Activar" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+                                                <Button fx:id="btnAct" layoutX="25.0" layoutY="121.0" mnemonicParsing="false" onAction="#act" prefHeight="55.0" prefWidth="250.0" styleClass="btn-clean-up" text="Activar" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -328,10 +328,11 @@
                                                 <Insets top="5.0" />
                                              </BorderPane.margin>
                                              <children>
-                                                <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <TableView fx:id="tblUsuD" onMouseClicked="#tblASel" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="75.0" text="C1" />
-                                                    <TableColumn prefWidth="75.0" text="C2" />
+                                                    <TableColumn fx:id="col_IDA" prefWidth="154.0" text="ID" />
+                                                    <TableColumn fx:id="col_UNA" prefWidth="586.0" text="Nombre Usuario" />
+                                                      <TableColumn fx:id="col_RolA" prefWidth="349.0" text="Rol" />
                                                   </columns>
                                                 </TableView>
                                              </children>
