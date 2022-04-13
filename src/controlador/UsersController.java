@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -47,10 +49,12 @@ public class UsersController implements Initializable {
     private ArrayList<String> gen = new ArrayList<String>();
     private ObservableList<User_Model> ol = FXCollections.observableArrayList();
     private ObservableList<User_Model> ola = FXCollections.observableArrayList();
-    private String path="", perm="";
-    private int idUsr=0, prms=0, ad=0, de=0,index;
-    private boolean selec=false;
+    private ObservableList<User_Model> olp = FXCollections.observableArrayList();
+    private String path="", perm="",perm2="";
+    private int idUsr=0, prms=0, prms2=0, ad=0, de=0,index, ad2=0;
+    private boolean selec=false, selec2=false;
     private String sent1="",sent2="",sent3="";
+    private Connection cone=null;
     
     @FXML
     private ComboBox cmbGen;
@@ -58,6 +62,8 @@ public class UsersController implements Initializable {
     private TextField txtDNI, txtNombre, txtApellido, txtTelefono, txtEdad,txtUser;
     @FXML
     private TextField txtIDA, txtDNIA, txtNameA, txtApelA, txtUserA;
+    @FXML
+    private TextField txtIDP, txtUsuP;
     @FXML
     private TextArea txtDir;
     @FXML
@@ -71,6 +77,8 @@ public class UsersController implements Initializable {
     @FXML
     private TableView<User_Model> tblUsuD;
     @FXML
+    private TableView<User_Model> tblDatP;
+    @FXML
     private TableColumn<User_Model, String> col_ID;
     @FXML
     private TableColumn<User_Model, String> col_NU;
@@ -83,7 +91,15 @@ public class UsersController implements Initializable {
     @FXML
     private TableColumn<User_Model, String> col_RolA;
     @FXML
+    private TableColumn<User_Model, String> col_IDP;
+    @FXML
+    private TableColumn<User_Model, String> col_UsuP;
+    @FXML
+    private TableColumn<User_Model, String> col_RolP;
+    @FXML
     private CheckBox chkV, chkC, chkI, chkU;
+    @FXML
+    private CheckBox chkVP, chkInvP, chkBP, chkUP;
     
     
     //metodo para verificar que todas las cajas de texto en un panel esten vacias
@@ -113,6 +129,12 @@ public class UsersController implements Initializable {
         col_RolA.setCellValueFactory(new PropertyValueFactory<>("rol"));
     }
     
+    private void setCellValueP(){
+        col_IDP.setCellValueFactory(new PropertyValueFactory<>("id_user"));
+        col_UsuP.setCellValueFactory(new PropertyValueFactory<>("u_Name"));
+        col_RolP.setCellValueFactory(new PropertyValueFactory<>("rol"));
+    }
+    
     private void access(){
         if(chkV.isSelected() && !chkC.isSelected() && !chkI.isSelected() && !chkU.isSelected()){
             perm="Ventas";
@@ -128,6 +150,24 @@ public class UsersController implements Initializable {
         }else{
             perm="";
             prms=0;
+        }
+    }
+    
+    private void access2(){
+        if(chkVP.isSelected() && !chkBP.isSelected() && !chkInvP.isSelected() && !chkUP.isSelected()){
+            perm2="Ventas";
+            prms2=1;
+        }
+        else if(chkBP.isSelected() && chkInvP.isSelected() && !chkUP.isSelected() && !chkVP.isSelected()){
+            perm2="Inventario";
+            prms2=2;
+        }
+        else if(chkBP.isSelected() && chkInvP.isSelected() && chkUP.isSelected() && chkVP.isSelected()){
+            perm2="Administrador";
+            prms2=4;
+        }else{
+            perm2="";
+            prms2=0;
         }
     }
     
@@ -160,8 +200,21 @@ public class UsersController implements Initializable {
                 tblDat.setItems(ol);
             }
         }catch(Exception e){
-            fun.msg("Hubo un error + " + e + " profavor contactar al administrador");
-        }
+            fun.msg("Hubo un error + " + e + " profavor contactar al administrador");}
+        con.DesconectarBasedeDatos();
+    }
+    
+    private void cargarTblUsuP(){
+        String sql = "select id_user, usuario, rol from usuarios where status = '1'";
+        try{
+            rs = buscar(sql, con);
+            while(rs.next()){
+                olp.add(new User_Model(Integer.toString(rs.getInt("id_user")), rs.getString("usuario"), rs.getString("rol")));
+                setCellValueP();
+                tblDatP.setItems(olp);
+            }
+        }catch(Exception e){fun.msg("Hubo un error + " + e + " profavor contactar al administrador");}
+        con.DesconectarBasedeDatos();
     }
     
     private void cargarTablaUsuA(){
@@ -175,8 +228,8 @@ public class UsersController implements Initializable {
                 System.out.println("foud");
             }
         }catch(Exception e){
-            fun.msg("Hubo un error + " + e + " profavor contactar al administrador");
-        }
+            fun.msg("Hubo un error + " + e + " profavor contactar al administrador");}
+        con.DesconectarBasedeDatos();
     }
     
     private int cargarIDU(){
@@ -192,6 +245,7 @@ public class UsersController implements Initializable {
                 }
             } else id = 1;
         }catch(Exception e){fun.msg("Hubo un error + " + e + " profavor contactar al administrador");}
+        con.DesconectarBasedeDatos();
         return id;
     }
     
@@ -272,6 +326,22 @@ public class UsersController implements Initializable {
         }
     }
     
+    private void filltxtP(){
+        if(tblDatP.getItems().size() >= 0){
+            if(index>=0){
+                int id = Integer.parseInt(tblDatP.getItems().get(index).getId_user());
+                String sql = "select usuario from usuarios  where id_user = '" + id + "'";
+                try{
+                    rs = buscar(sql, con);
+                    if(rs.next()){
+                        txtIDP.setText(Integer.toString(id));
+                        txtUsuP.setText(rs.getString("usuario"));
+                    }
+                }catch(Exception e){fun.msg("Error  " + e);e.printStackTrace();}
+            }
+        }
+    }
+    
     private void filltxtA(){
         if(tblUsuD.getItems().size() >= 0){
             if(index>=0){
@@ -290,6 +360,7 @@ public class UsersController implements Initializable {
                 }catch(Exception e){fun.msg("Error");}
             }
         }
+        con.DesconectarBasedeDatos();
     }
     
     private void modU(){
@@ -299,27 +370,34 @@ public class UsersController implements Initializable {
                 gnr = gen();
                 File file = new File(path);
                 FileInputStream is = new FileInputStream(file);
-                if(HasRTN(txtDNI.getText())) fun.msg("Ya hay un empleado con un DNI similar");
-                else{
                     if(index >= 0){
-                    sent1 = "insert into usuarios (id_user,usuario,clave,rol,status) values('0','"+txtUser.getText()+"',SHA('"+txtPass.getText()+"'),'Administrador','1')";
                     id = Integer.parseInt(tblDat.getItems().get(index).getId_user());
-                    fun.guardar(sent1);
-                    idUsr = cargarIDU();
-                    verifPrms(idUsr, is, gnr);
-                    fun.guardar(sent2);
-                    fun.guardar(sent3);
-                    fun.msg("Usuario creado");
+                    sent1 = "update usuarios set usuario='"+txtUser.getText()+"', clave = SHA('"+txtPass.getText()+"') where id_user = '"+id+"'";
+                    sent2 = "update empleado set nombre='"+txtNombre.getText()+"', apellido='"+txtApellido.getText()+
+                            "', telefono='"+txtTelefono.getText()+"', edad='"+ txtEdad.getText()+"', id_genero='"+gnr+"', direccion='"+txtDir.getText()+
+                            "' where id_user='"+id+"'";
+                    String ftu = "update empleado set foto=? where id_user='"+id+"'";
+                    Class.forName("com.mysql.cj.jdbc.Driver"); 
+                    cone = DriverManager.getConnection("jdbc:mysql://localhost:3306/tienda_de_ropa","root","");
+                    PreparedStatement pst = cone.prepareStatement(ftu);
+                    pst.setBinaryStream(1, is, (int)file.length());
+                    pst.executeUpdate();
+                    fun.modificar(sent1);
+                    fun.modificar(sent2);
+                    fun.msg("Usuario modificado");
                     tblDat.getItems().clear();
                     cargarTablaUsu();
                     cleanTxt(apu, "", "");
                     cleanTxt(apdu, "", "");
+                    lblFotoU.setImage(null);
+                    cone.close();
                 }else if(prms==0){
                     fun.msg("No ha seleccionado los permisos");
                 }
-                }
+                
             }catch(Exception e){
                 fun.msg("Hubo un error, " +e+" por favor contactar al administrador");
+                e.printStackTrace();
             }
         }else fun.msg("no pueden haber campos vacios y debe seleccionar una foto");
     }
@@ -433,6 +511,7 @@ public class UsersController implements Initializable {
         }catch(Exception e){
             fun.msg("ERROR"+e);
         }
+        con.DesconectarBasedeDatos();
         return has;
     }
     
@@ -442,6 +521,7 @@ public class UsersController implements Initializable {
                 index = tbl.getSelectionModel().getSelectedIndex();
                 if(n==1)  fillTxt();
                 if(n==2) filltxtA();
+                if(n==3) filltxtP();
             }
     }
     
@@ -511,9 +591,85 @@ public class UsersController implements Initializable {
     }
     
     @FXML
+    private void kprUP(KeyEvent evt){
+        fun.validaTexto(txtUsuP, 30);
+    }
+    
+    @FXML
+    private void kpIDP(KeyEvent evt){
+        fun.validaNumeros(txtIDP, 30);
+    }
+    
+    @FXML
     private void tblMC(MouseEvent evt){
         selRow(tblDat,1);
     } 
+    
+    @FXML
+    private void mcP(MouseEvent evt){
+        selRow(tblDatP,3);
+    }
+    
+    @FXML
+    private void vpA(ActionEvent evt){
+        if(ad==0)
+        if(chkI.isSelected() || chkC.isSelected()){
+            chkV.setSelected(false);
+            fun.msg("Debe deseleccionar las otras opciones, (Compra, Inventario)");
+        }
+    }
+    
+    @FXML
+    private void invA(ActionEvent evt){
+        if(ad==0)
+        if(chkV.isSelected()){
+            chkI.setSelected(false);
+            fun.msg("Debe deseleccionar las otras opciones, (Ventas)");
+        }
+    }
+    
+    @FXML
+    private void bpA(ActionEvent evt){
+        if(ad==0)
+        if(chkV.isSelected()){
+            chkC.setSelected(false);
+            fun.msg("Debe deseleccionar las otras opciones, (Ventas)");
+        }
+    }
+    
+    @FXML
+    private void upA(ActionEvent evt){
+        if(selec2) chkU.setSelected(true);
+        if(chkC.isSelected() || chkI.isSelected() || chkV.isSelected()){
+            if(!selec2){
+                fun.msg("Debe deseleccionar las otras opciones, (Compra, Venta, Inventario)"+1);
+                chkU.setSelected(false);
+                return;
+            }else if(selec2){
+                fun.msg("Debe deseleccionar las otras opciones, (Compra, Venta, Inventario) antes de deseleccionar esta"+2);
+                return;
+            }
+        }
+        if(chkU.isSelected()){
+            if(!selec2){
+                ad2=1;
+                selec2=true;
+            } else{
+                if(!chkC.isSelected() && !chkI.isSelected() && !chkV.isSelected()){
+                    if(selec2){
+                        ad2=0;
+                        selec2=false;
+                        chkU.setSelected(false);
+                    }
+                }
+            }
+        }
+    }
+    
+    @FXML
+    private void actP(ActionEvent evt){
+       access2();
+    }
     
     @FXML
     private void opFoto(ActionEvent evt){
@@ -528,7 +684,7 @@ public class UsersController implements Initializable {
     
     @FXML
     private void edit(ActionEvent evt){
-        
+        modU();
     }
     
     @FXML
@@ -613,5 +769,6 @@ public class UsersController implements Initializable {
         cargarGen();
         cargarTablaUsu();
         cargarTablaUsuA();
+        cargarTblUsuP();
     }    
 }

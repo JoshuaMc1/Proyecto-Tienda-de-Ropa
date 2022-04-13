@@ -372,8 +372,8 @@
                                        <children>
                                           <Label layoutX="35.0" layoutY="71.0" text="ID:" />
                                           <Label layoutX="160.0" layoutY="71.0" text="Usuario:" />
-                                          <TextField layoutX="225.0" layoutY="66.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="120.0" />
-                                          <TextField layoutX="62.0" layoutY="66.0" prefHeight="30.0" prefWidth="85.0" />
+                                          <TextField fx:id="txtUsuP" editable="false" layoutX="225.0" layoutY="66.0" onKeyPressed="#kprUP" prefHeight="30.0" prefWidth="240.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="120.0" />
+                                          <TextField fx:id="txtIDP" editable="false" layoutX="62.0" layoutY="66.0" onKeyPressed="#kpIDP" prefHeight="30.0" prefWidth="85.0" />
                                        </children>
                                     </AnchorPane>
                                  </center>
@@ -383,11 +383,11 @@
                                           <Insets top="5.0" />
                                        </BorderPane.margin>
                                        <children>
-                                          <CheckBox layoutX="43.0" layoutY="49.0" mnemonicParsing="false" text="Permiso 1" />
-                                          <CheckBox layoutX="152.0" layoutY="49.0" mnemonicParsing="false" text="Permiso 2" />
-                                          <CheckBox layoutX="262.0" layoutY="49.0" mnemonicParsing="false" text="Permiso 3" />
-                                          <CheckBox layoutX="371.0" layoutY="49.0" mnemonicParsing="false" text="Permiso 4" />
-                                          <Button layoutX="43.0" layoutY="101.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="421.0" styleClass="btn-edit" text="Editar permisos" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="36.0">
+                                          <CheckBox fx:id="chkVP" layoutX="43.0" layoutY="49.0" mnemonicParsing="false" onAction="#vpA" text="Ventas" />
+                                          <CheckBox fx:id="chkInvP" layoutX="152.0" layoutY="49.0" mnemonicParsing="false" onAction="#invA" text="Inventario" />
+                                          <CheckBox fx:id="chkBP" layoutX="262.0" layoutY="49.0" mnemonicParsing="false" onAction="#bpA" text="Compras" />
+                                          <CheckBox fx:id="chkUP" layoutX="371.0" layoutY="49.0" mnemonicParsing="false" onAction="#upA" text="Usuarios" />
+                                          <Button fx:id="acP" layoutX="43.0" layoutY="101.0" mnemonicParsing="false" onAction="#actP" prefHeight="35.0" prefWidth="421.0" styleClass="btn-edit" text="Editar permisos" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="36.0">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -426,10 +426,11 @@
                                                 <Insets top="5.0" />
                                              </BorderPane.margin>
                                              <children>
-                                                <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <TableView fx:id="tblDatP" onMouseClicked="#mcP" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="75.0" text="C1" />
-                                                    <TableColumn prefWidth="75.0" text="C2" />
+                                                    <TableColumn fx:id="col_IDP" prefWidth="200.0" text="ID" />
+                                                    <TableColumn fx:id="col_UsuP" prefWidth="549.0" text="Usuario" />
+                                                      <TableColumn fx:id="col_RolP" prefWidth="340.0" text="Rol" />
                                                   </columns>
                                                 </TableView>
                                              </children>
