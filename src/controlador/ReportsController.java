@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-        
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -29,57 +29,36 @@ import org.apache.poi.ss.usermodel.Workbook;
  */
 public class ReportsController implements Initializable {
 
+    public static void main(String[] args) {
 
-    public static void main(String[] args){  
     }
 
+    public static void crearexcel() {
+        Workbook book = new HSSFWorkbook();
+        Sheet sheet = book.createSheet("REPORTES EXCEL");
 
-
-   
-
-        public static void crearexcel() {
-  Workbook book = new HSSFWorkbook();
- Sheet sheet = book.createSheet("REPORTES EXCEL");
- 
         try {
             FileOutputStream fileout = new FileOutputStream("reporte.xls");
             book.write(fileout);
             fileout.close();
-            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ReportsController.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(ReportsController.class.getName()).log(Level.SEVERE, null, ex);
-        
-            
-    
-    
-    
-    
-    }
         }
-       
-   
-    
+    }
+
     @FXML
     private Button reporte;
     @FXML
     private Pane reporte2;
-    
- 
-    
-    
-    
-    
-    
-    
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         crearexcel();
-    }    
-    
+    }
+
 }
