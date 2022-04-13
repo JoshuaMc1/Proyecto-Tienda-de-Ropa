@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="700.0" styleClass="mainFxmlClass" stylesheets="@style/userprofile.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.UserProfileController">
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="700.0" styleClass="mainFxmlClass" stylesheets="@style/userprofile.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.UserProfileController">
    <children>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -42,18 +41,6 @@
                                  </BorderPane.margin>
                                  <children>
                                     <ImageView fx:id="txtProfile" fitHeight="350.0" fitWidth="230.0" layoutX="14.0" layoutY="37.0" pickOnBounds="true" />
-                                    <Button layoutX="14.0" layoutY="392.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="230.0" styleClass="btn" text="Editar foto" textFill="WHITE">
-                                       <graphic>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@img/galeria.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </Button>
                                     <Label layoutX="305.0" layoutY="37.0" text="DNI" />
                                     <Label layoutX="304.0" layoutY="93.0" text="Nombre" />
                                     <Label layoutX="307.0" layoutY="150.0" text="Apellido" />
@@ -68,30 +55,6 @@
                                     <ComboBox fx:id="slcGenero" disable="true" layoutX="416.0" layoutY="231.0" prefHeight="30.0" prefWidth="184.0" />
                                     <TextField fx:id="txtTelefono" disable="true" layoutX="305.0" layoutY="287.0" prefHeight="30.0" prefWidth="295.0" />
                                     <TextField fx:id="txtDireccion" disable="true" layoutX="305.0" layoutY="344.0" prefHeight="30.0" prefWidth="295.0" />
-                                    <Button layoutX="307.0" layoutY="392.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="140.0" styleClass="btn" text="Editar" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@img/editar.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button layoutX="459.0" layoutY="392.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="140.0" styleClass="btn" text="Guardar" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@img/diskette.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
                                  </children>
                               </AnchorPane>
                            </center>
