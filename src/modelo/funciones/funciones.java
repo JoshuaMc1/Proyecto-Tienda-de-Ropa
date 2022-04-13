@@ -69,6 +69,7 @@ public class funciones {
             con.DesconectarBasedeDatos();
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "NO SE PUDO MODIFICAR EL REGISTRO\nERROR: "+ex.getMessage(), "ATENCION!", 0);
+            ex.printStackTrace();
         }
     }
     
@@ -286,6 +287,7 @@ public class funciones {
             con.DesconectarBasedeDatos();
         } catch (SQLException e) {
             msg(e.getMessage());
+            e.printStackTrace();
         }
         return dato;
     }
