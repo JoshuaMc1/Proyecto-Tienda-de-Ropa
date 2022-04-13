@@ -1,12 +1,12 @@
 package modelo.inventoryModel;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.swing.JOptionPane;
 import modelo.ConexionMySQL;
@@ -32,59 +32,103 @@ public class proveedor {
         this.correo = new SimpleStringProperty(correo);
     }
 
-    public IntegerProperty getIdProveedor() {
-        return idProveedor;
+    public Integer getIdProveedor() {
+        return idProveedor.get();
     }
 
-    public void setIdProveedor(IntegerProperty idProveedor) {
-        this.idProveedor = idProveedor;
+    public void setIdProveedor(Integer idProveedor) {
+        this.idProveedor = new SimpleIntegerProperty(idProveedor);
     }
 
-    public StringProperty getNombreProveedor() {
-        return nombreProveedor;
+    public String getNombreProveedor() {
+        return nombreProveedor.get();
     }
 
-    public void setNombreProveedor(StringProperty nombreProveedor) {
-        this.nombreProveedor = nombreProveedor;
+    public void setNombreProveedor(String nombreProveedor) {
+        this.nombreProveedor = new SimpleStringProperty(nombreProveedor);
     }
 
-    public StringProperty getTelefono() {
-        return telefono;
+    public String getTelefono() {
+        return telefono.get();
     }
 
-    public void setTelefono(StringProperty telefono) {
-        this.telefono = telefono;
+    public void setTelefono(String telefono) {
+        this.telefono = new SimpleStringProperty(telefono);
     }
 
-    public StringProperty getDireccion() {
-        return direccion;
+    public String getDireccion() {
+        return direccion.get();
     }
 
-    public void setDireccion(StringProperty direccion) {
-        this.direccion = direccion;
+    public void setDireccion(String direccion) {
+        this.direccion = new SimpleStringProperty(direccion);
     }
 
-    public StringProperty getCorreo() {
-        return correo;
+    public String getCorreo() {
+        return correo.get();
     }
 
-    public void setCorreo(StringProperty correo) {
-        this.correo = correo;
+    public void setCorreo(String correo) {
+        this.correo = new SimpleStringProperty(correo);
     }
-    
-    
+
     public proveedor() {
     }
 
-    public String toString(){
+    public String toString() {
         return nombreProveedor.get();
+    }
+
+    public int guardar() {
+        try{
+            con.ConectarBasedeDatos();
+            PreparedStatement ps = con.getConnection().prepareStatement("INSERT INTO proveedores(nombre_prov, telefono, direccion, correo, status) VALUES (?, ?, ?, ?, ?)");
+            ps.setString(1, nombreProveedor.get());
+            ps.setString(2, telefono.get());
+            ps.setString(3, direccion.get());
+            ps.setString(4, correo.get());
+            ps.setString(5, "1");
+            return ps.executeUpdate();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return 0;
+        }
+    }
+    
+    public int actualizar(){
+        try{
+            con.ConectarBasedeDatos();
+            PreparedStatement ps = con.getConnection().prepareStatement("UPDATE proveedores SET nombre_prov=?, telefono=?, direccion=?, correo=? WHERE id_prov=?");
+            ps.setString(1, nombreProveedor.get());
+            ps.setString(2, telefono.get());
+            ps.setString(3, direccion.get());
+            ps.setString(4, correo.get());
+            ps.setInt(5, idProveedor.get());
+            return ps.executeUpdate();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return 0;
+        }
+    }
+    
+    public int eliminar(){
+        try{
+            con.ConectarBasedeDatos();
+            PreparedStatement ps = con.getConnection().prepareStatement("UPDATE proveedores SET status=? WHERE id_prov=?");
+            ps.setString(1, "0");
+            ps.setInt(2, idProveedor.get());
+            return ps.executeUpdate();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return 0;
+        }
     }
     
     public void cargarDatos(ObservableList<proveedor> datos) {
-        try{
+        try {
             con.ConectarBasedeDatos();
             con.resultado = con.sentencia.executeQuery("SELECT * FROM proveedores WHERE status='1'");
-            while(con.resultado.next()){
+            while (con.resultado.next()) {
                 int id = con.resultado.getInt("id_prov");
                 String prov = con.resultado.getString("nombre_prov");
                 String telefono = con.resultado.getString("telefono");
@@ -92,8 +136,7 @@ public class proveedor {
                 String correo = con.resultado.getString("correo");
                 datos.add(new proveedor(id, prov, telefono, direccion, correo));
             }
-            con.DesconectarBasedeDatos();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Arrays.toString(ex.getStackTrace()));
         }
     }

@@ -353,7 +353,7 @@
                                                             </ImageView>
                                                          </graphic>
                                                       </Button>
-                                                      <Button fx:id="btnAgregarDescuento" layoutX="413.0" layoutY="115.0" mnemonicParsing="false" onAction="#abrirDescuento" styleClass="btn-save">
+                                                      <Button fx:id="btnAgregarDescuento" disable="true" layoutX="413.0" layoutY="115.0" mnemonicParsing="false" onAction="#abrirDescuento" styleClass="btn-save">
                                                          <graphic>
                                                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
