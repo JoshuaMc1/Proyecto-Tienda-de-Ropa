@@ -17,7 +17,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Sheet;
 
@@ -31,11 +30,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class ReportsController implements Initializable {
 
 
-    public static void main(String[] args){
-           
-    
-            crearexcel();
-        
+    public static void main(String[] args){  
     }
 
 
@@ -84,7 +79,7 @@ public class ReportsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        crearexcel();
     }    
     
 }
