@@ -5,6 +5,7 @@
  */
 package modelo.inventoryModel;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
 import javafx.beans.property.IntegerProperty;
@@ -32,20 +33,20 @@ public class marca {
     public marca(){
     }
     
-    public IntegerProperty getId() {
-        return id;
+    public Integer getId() {
+        return id.get();
     }
 
-    public void setId(IntegerProperty id) {
-        this.id = id;
+    public void setId(Integer id) {
+        this.id = new SimpleIntegerProperty(id);
     }
 
-    public StringProperty getNombre() {
-        return nombre;
+    public String getNombre() {
+        return nombre.get();
     }
 
-    public void setNombre(StringProperty nombre) {
-        this.nombre = nombre;
+    public void setNombre(String nombre) {
+        this.nombre = new SimpleStringProperty(nombre);
     }
     
     public String toString(){
@@ -61,9 +62,47 @@ public class marca {
                 String nombre_marca = con.resultado.getString("nombre");
                 datos.add(new marca(id,nombre_marca));
             }
-            con.DesconectarBasedeDatos();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, Arrays.toString(ex.getStackTrace()));
+        }
+    }
+    
+    public int guardar() {
+        try{
+            con.ConectarBasedeDatos();
+            PreparedStatement ps = con.getConnection().prepareStatement("INSERT INTO marca(nombre, status) VALUES (?, ?)");
+            ps.setString(1, nombre.get());
+            ps.setString(2, "1");
+            return ps.executeUpdate();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return 0;
+        }
+    }
+    
+    public int actualizar(){
+        try{
+            con.ConectarBasedeDatos();
+            PreparedStatement ps = con.getConnection().prepareStatement("UPDATE marca SET nombre=? WHERE id_marca=?");
+            ps.setString(1, nombre.get());
+            ps.setInt(2, id.get());
+            return ps.executeUpdate();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return 0;
+        }
+    }
+    
+    public int eliminar(){
+        try{
+            con.ConectarBasedeDatos();
+            PreparedStatement ps = con.getConnection().prepareStatement("UPDATE marca SET status=? WHERE id_marca=?");
+            ps.setString(1, "0");
+            ps.setInt(2, id.get());
+            return ps.executeUpdate();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return 0;
         }
     }
 }

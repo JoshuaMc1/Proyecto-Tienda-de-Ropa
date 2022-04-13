@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="genreWindow" prefHeight="500.0" prefWidth="500.0" styleClass="mainFxmlClass" stylesheets="@../style/createsupplier.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="controlador.ProductOptions.CreateProductGenreController">
+<AnchorPane id="AnchorPane" fx:id="genreWindow" prefHeight="500.0" prefWidth="500.0" styleClass="mainFxmlClass" stylesheets="@../style/createsupplier.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ProductOptions.CreateProductGenreController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -32,15 +32,15 @@
                <children>
                   <Label layoutX="39.0" layoutY="74.0" text="ID Genero:" />
                   <Label layoutX="56.0" layoutY="117.0" text="Genero:" />
-                  <TextField layoutX="116.0" layoutY="69.0" prefHeight="30.0" prefWidth="160.0" />
-                  <TextField layoutX="116.0" layoutY="112.0" prefHeight="30.0" prefWidth="160.0" />
+                  <TextField fx:id="txtID" editable="false" layoutX="116.0" layoutY="69.0" prefHeight="30.0" prefWidth="160.0" />
+                  <TextField fx:id="txtGenero" layoutX="116.0" layoutY="112.0" prefHeight="30.0" prefWidth="160.0" />
                </children>
             </AnchorPane>
          </center>
          <right>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnGuardar" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="160.0" styleClass="btn-add" text="GUARDAR">
+                  <Button fx:id="btnGuardar" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickGuardar" prefHeight="30.0" prefWidth="160.0" styleClass="btn-add" text="GUARDAR">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -49,7 +49,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="btnEditar" layoutX="14.0" layoutY="52.0" mnemonicParsing="false" prefWidth="160.0" styleClass="btn-edit" text="EDITAR">
+                  <Button fx:id="btnEditar" layoutX="14.0" layoutY="52.0" mnemonicParsing="false" onAction="#clickEditar" prefWidth="160.0" styleClass="btn-edit" text="EDITAR">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -58,7 +58,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="btnEliminar" layoutX="14.0" layoutY="90.0" mnemonicParsing="false" prefWidth="160.0" styleClass="btn-remove" text="ELIMINAR">
+                  <Button fx:id="btnEliminar" layoutX="14.0" layoutY="90.0" mnemonicParsing="false" onAction="#clickEliminar" prefWidth="160.0" styleClass="btn-remove" text="ELIMINAR">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -67,7 +67,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="btnLimpiar" layoutX="14.0" layoutY="128.0" mnemonicParsing="false" prefWidth="160.0" styleClass="btn-clean-up" text="LIMPIAR">
+                  <Button fx:id="btnLimpiar" layoutX="14.0" layoutY="128.0" mnemonicParsing="false" onAction="#clickLimpiar" prefWidth="160.0" styleClass="btn-clean-up" text="LIMPIAR">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -109,10 +109,10 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </BorderPane.margin>
                            <children>
-                              <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tblDatos" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
-                                    <TableColumn prefWidth="75.0" text="C1" />
-                                    <TableColumn prefWidth="75.0" text="C2" />
+                                    <TableColumn fx:id="col1" prefWidth="75.0" text="ID" />
+                                    <TableColumn fx:id="col2" prefWidth="412.0" text="Genero del producto" />
                                  </columns>
                               </TableView>
                            </children>

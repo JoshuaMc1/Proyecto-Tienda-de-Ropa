@@ -5,6 +5,7 @@
  */
 package modelo.inventoryModel;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
 import javafx.beans.property.IntegerProperty;
@@ -32,20 +33,20 @@ public class generoProducto {
     public generoProducto() {
     }
 
-    public IntegerProperty getId() {
-        return id;
+    public Integer getId() {
+        return id.get();
     }
 
-    public void setId(IntegerProperty id) {
-        this.id = id;
+    public void setId(Integer id) {
+        this.id = new SimpleIntegerProperty(id);
     }
 
-    public StringProperty getGenero() {
-        return genero;
+    public String getGenero() {
+        return genero.get();
     }
 
-    public void setGenero(StringProperty genero) {
-        this.genero = genero;
+    public void setGenero(String genero) {
+        this.genero = new SimpleStringProperty(genero);
     }
     
     public String toString(){
@@ -64,6 +65,45 @@ public class generoProducto {
             con.DesconectarBasedeDatos();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, Arrays.toString(ex.getStackTrace()));
+        }
+    }
+    
+    public int guardar() {
+        try{
+            con.ConectarBasedeDatos();
+            PreparedStatement ps = con.getConnection().prepareStatement("INSERT INTO genero_producto(genero, status) VALUES (?, ?)");
+            ps.setString(1, genero.get());
+            ps.setString(2, "1");
+            return ps.executeUpdate();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return 0;
+        }
+    }
+    
+    public int actualizar(){
+        try{
+            con.ConectarBasedeDatos();
+            PreparedStatement ps = con.getConnection().prepareStatement("UPDATE genero_producto SET genero=? WHERE id_gen=?");
+            ps.setString(1, genero.get());
+            ps.setInt(2, id.get());
+            return ps.executeUpdate();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return 0;
+        }
+    }
+    
+    public int eliminar(){
+        try{
+            con.ConectarBasedeDatos();
+            PreparedStatement ps = con.getConnection().prepareStatement("UPDATE genero_producto SET status=? WHERE id_gen=?");
+            ps.setString(1, "0");
+            ps.setInt(2, id.get());
+            return ps.executeUpdate();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return 0;
         }
     }
 }

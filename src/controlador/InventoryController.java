@@ -7,10 +7,11 @@ package controlador;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -125,7 +126,7 @@ public class InventoryController implements Initializable {
     private ObservableList<tipoProducto> tipoProd;
     private ObservableList<generoProducto> genre;
     private ObservableList<descuentos> desc;
-    
+
     ConexionMySQL con = new ConexionMySQL();
     @FXML
     private TableColumn<product, Integer> col1;
@@ -172,63 +173,81 @@ public class InventoryController implements Initializable {
         tablaProd = FXCollections.observableArrayList();
         tablaProd = pdt.llenarTablaProductos();
         tblDatosProduct.setItems(tablaProd);
-        col1.setCellValueFactory(new PropertyValueFactory<>("idP"));
-        col2.setCellValueFactory(new PropertyValueFactory<>("idLote"));
-        col3.setCellValueFactory(new PropertyValueFactory<>("nombreP"));
-        col4.setCellValueFactory(new PropertyValueFactory<>("marca"));
-        col5.setCellValueFactory(new PropertyValueFactory<>("color"));
-        col6.setCellValueFactory(new PropertyValueFactory<>("talla"));
-        col7.setCellValueFactory(new PropertyValueFactory<>("tipoP"));
-        col8.setCellValueFactory(new PropertyValueFactory<>("generoP"));
-        col9.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
-        col10.setCellValueFactory(new PropertyValueFactory<>("precio"));
-        col11.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-        col12.setCellValueFactory(new PropertyValueFactory<>("descuento"));
+        col1.setCellValueFactory(new PropertyValueFactory<product, Integer>("idP"));
+        col2.setCellValueFactory(new PropertyValueFactory<product, Integer>("idLote"));
+        col3.setCellValueFactory(new PropertyValueFactory<product, String>("nombreP"));
+        col4.setCellValueFactory(new PropertyValueFactory<product, String>("marca"));
+        col5.setCellValueFactory(new PropertyValueFactory<product, String>("color"));
+        col6.setCellValueFactory(new PropertyValueFactory<product, String>("talla"));
+        col7.setCellValueFactory(new PropertyValueFactory<product, String>("tipoP"));
+        col8.setCellValueFactory(new PropertyValueFactory<product, String>("generoP"));
+        col9.setCellValueFactory(new PropertyValueFactory<product, String>("proveedor"));
+        col10.setCellValueFactory(new PropertyValueFactory<product, Double>("precio"));
+        col11.setCellValueFactory(new PropertyValueFactory<product, Integer>("cantidad"));
+        col12.setCellValueFactory(new PropertyValueFactory<product, Double>("descuento"));
+        dato();
     }
 
-    public void cargarCombos(){
+    public void dato() {
+        tblDatosProduct.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<product>() {
+            @Override
+            public void changed(ObservableValue<? extends product> observable, product oldValue, product newValue) {
+                txtIdProduct.setText(String.valueOf(newValue.getIdP()));
+                txtIdLote.setText(String.valueOf(newValue.getIdLote()));
+                txtNombreProduct.setText(newValue.getNombreP());
+                txtTalla.setText(newValue.getTalla());
+                txtPrecio.setText(String.valueOf(newValue.getPrecio()));
+                txtColor.setText(newValue.getColor());
+                txtCantidad.setText(String.valueOf(newValue.getCantidad()));
+            }
+
+        });
+    }
+
+    public void cargarCombos() {
         cargarComboProveedor();
         cargarComboMarca();
         cargarComboTipo();
         cargarComboGenre();
         cargarComboDescuentos();
     }
-    
+
     public void cargarComboProveedor() {
         prov = FXCollections.observableArrayList();
         proveedor prv = new proveedor();
         prv.cargarDatos(prov);
         slcProveedor.setItems(prov);
     }
-    
-    public void cargarComboMarca(){
+
+    public void cargarComboMarca() {
         marcas = FXCollections.observableArrayList();
         marca mrc = new marca();
         mrc.cargarDatos(marcas);
         slcMarca.setItems(marcas);
     }
-    
-    public void cargarComboTipo(){
+
+    public void cargarComboTipo() {
         tipoProd = FXCollections.observableArrayList();
         tipoProducto tp = new tipoProducto();
         tp.cargarDatos(tipoProd);
         slcTipoProduct.setItems(tipoProd);
     }
-    
-    public void cargarComboGenre(){
+
+    public void cargarComboGenre() {
         genre = FXCollections.observableArrayList();
         generoProducto gp = new generoProducto();
         gp.cargarDatos(genre);
         slcGenreProduct.setItems(genre);
     }
-    
-    public void cargarComboDescuentos(){
+
+    public void cargarComboDescuentos() {
         desc = FXCollections.observableArrayList();
         descuentos ds = new descuentos();
         ds.cargarDatos(desc);
         slcDescuento.setItems(desc);
     }
-    
+
     public void permisoCompra(int permiso) {
         if (permiso == 1) {
             tabCompra.setDisable(false);
@@ -236,7 +255,7 @@ public class InventoryController implements Initializable {
             tabCompra.setDisable(true);
         }
     }
-    
+
     public void cargarTooltip() {
         btnAgregarTipoProducto.setTooltip(new Tooltip("Agregar nuevo tipo de producto"));
         btnAgregarGenero.setTooltip(new Tooltip("Agregar un nuevo genero a los productos"));
@@ -356,6 +375,7 @@ public class InventoryController implements Initializable {
 
     @FXML
     private void clickClean(ActionEvent event) {
+        limpiar();
     }
 
     @FXML
@@ -392,5 +412,32 @@ public class InventoryController implements Initializable {
 
     @FXML
     private void abrirMarca(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/ProductOptions/marca.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void limpiar() {
+        txtIdProduct.setText("");
+        txtIdLote.setText("");
+        txtNombreProduct.setText("");
+        txtTalla.setText("");
+        txtPrecio.setText("");
+        txtColor.setText("");
+        txtCantidad.setText("");
+        slcTipoProduct.setPromptText("Seleccione una opción");
+        slcProveedor.setPromptText("Seleccione una opción");
+        slcMarca.setPromptText("Seleccione una opción");
+        slcGenreProduct.setPromptText("Seleccione una opción");
+        slcDescuento.setPromptText("Seleccione una opción");
     }
 }
